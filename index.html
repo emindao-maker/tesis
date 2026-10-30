@@ -10,6 +10,9 @@
 <meta property="og:title" content="Tesis · Asesoría académica">
 <meta property="og:description" content="Te acompañamos en tu tesis, de la propuesta a la sustentación. Atención 100 % online en todo Ecuador.">
 <meta property="og:locale" content="es_EC">
+<meta property="og:url" content="https://emindao-maker.github.io/tesis/">
+<meta property="og:image" content="https://emindao-maker.github.io/tesis/portada.webp">
+<link rel="apple-touch-icon" href="logo.webp">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F1E3A'/%3E%3Cpolygon points='22,14 56,14 53,21 23,21' fill='%23fff'/%3E%3Cpolygon points='32,21 44,21 41,46 35,54' fill='%23fff'/%3E%3Cpolygon points='14,24 27,28 27,52 14,45' fill='%23C9A15A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -120,6 +123,32 @@ nav.main a:hover{color:var(--ink);border-color:var(--gold)}
 .toc a:hover span{color:var(--gold)}
 @media (max-width:900px){.hero .wrap{grid-template-columns:1fr;gap:48px}.hero{padding:44px 0 64px}}
 @media (max-width:420px){.sheet{padding:30px 20px 24px}}
+
+/* Logo real dentro de la hoja */
+.logo-badge{display:block;width:180px;height:180px;margin:0 auto 6px;border-radius:50%;background:#fff;overflow:hidden}
+.logo-badge img{width:100%;height:100%;object-fit:contain;display:block}
+
+/* Portada (banner de Facebook) */
+.banner{padding-bottom:84px}
+.banner figure{margin:0;border-radius:var(--radius-l);overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:0 24px 48px -32px rgba(15,30,58,.45)}
+.banner img{display:block;width:100%;height:auto;max-width:100%}
+@media (max-width:760px){.banner{padding-bottom:60px}}
+
+/* Campañas */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;list-style:none;margin:0;padding:0}
+.gallery button{all:unset;cursor:zoom-in;display:block;width:100%;box-sizing:border-box;border-radius:var(--radius-s);overflow:hidden;border:1px solid var(--line);background:var(--paper);aspect-ratio:1/1;max-width:100%}
+.gallery button:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.gallery img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s}
+.gallery button:hover img{transform:scale(1.03)}
+.gallery figcaption{font:400 .88rem/1.4 "Jost",sans-serif;color:var(--muted);margin-top:10px}
+.gallery figure{margin:0}
+@media (max-width:900px){.gallery{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:420px){.gallery{grid-template-columns:1fr}}
+dialog.viewer{border:0;padding:0;background:transparent;max-width:min(92vw,900px);max-height:92vh}
+dialog.viewer::backdrop{background:rgba(8,14,28,.82)}
+dialog.viewer img{display:block;max-width:100%;max-height:86vh;border-radius:8px;margin:0 auto}
+dialog.viewer .close{position:absolute;top:8px;right:8px;width:42px;height:42px;border-radius:50%;border:0;background:#fff;color:#0F1E3A;font:500 1.4rem/1 "Jost",sans-serif;cursor:pointer}
+dialog.viewer p{color:#fff;text-align:center;font:400 .95rem/1.4 "Jost",sans-serif;margin:10px auto 0}
 
 /* Secciones */
 section.block{padding:84px 0;border-top:1px solid var(--line)}
@@ -285,10 +314,7 @@ footer .legal{grid-column:1/-1;border-top:1px solid #24375E;padding-top:22px;mar
 
     <div class="sheet" aria-label="Índice del sitio">
       <div class="sheet-head">
-        <svg viewBox="0 0 240 170" aria-hidden="true">
-          <use href="#mark" x="50" y="0" width="140" height="116" style="color:var(--ink)"/>
-          <text x="120" y="160" text-anchor="middle" font-family="Jost, sans-serif" font-size="44" font-weight="500" letter-spacing="7" fill="var(--ink)">Tesis</text>
-        </svg>
+        <span class="logo-badge"><img src="logo.webp" width="800" height="800" alt="Logo de Tesis"></span>
         <small>Asesoría académica e investigación</small>
         <div class="rule" aria-hidden="true"><i></i><b></b><i></i></div>
       </div>
@@ -299,11 +325,18 @@ footer .legal{grid-column:1/-1;border-top:1px solid #24375E;padding-top:22px;mar
           <li><a href="#proceso"><span>Cómo trabajamos</span><i></i></a></li>
           <li><a href="#niveles"><span>Niveles y carreras</span><i></i></a></li>
           <li><a href="#compromiso"><span>Nuestro compromiso</span><i></i></a></li>
+          <li><a href="#campanas"><span>Publicidad</span><i></i></a></li>
           <li><a href="#preguntas"><span>Preguntas frecuentes</span><i></i></a></li>
           <li><a href="#contacto"><span>Contacto y cotización</span><i></i></a></li>
         </ol>
       </nav>
     </div>
+  </div>
+</section>
+
+<section class="banner" aria-label="Portada de Tesis">
+  <div class="wrap">
+    <figure><img src="portada.webp" width="1640" height="683" alt="Portada de Tesis: Conocimiento que transforma. Asesoría profesional, investigación de calidad, análisis riguroso e ideas que generan impacto."></figure>
   </div>
 </section>
 
@@ -400,10 +433,28 @@ footer .legal{grid-column:1/-1;border-top:1px solid #24375E;padding-top:22px;mar
   </div>
 </section>
 
-<section class="block alt" id="preguntas">
+<section class="block alt" id="campanas">
   <div class="wrap">
     <div class="sec-head">
       <div class="num">Capítulo 5</div>
+      <div>
+        <h2>Publicidad</h2>
+        <p>Las piezas que publicamos en Facebook. Toca una para verla en grande.</p>
+      </div>
+    </div>
+    <ul class="gallery">
+      <li><figure><button type="button" data-full="flyer-tesis-ec.webp" data-cap="Tu investigación, nuestro compromiso con tu éxito"><img src="flyer-tesis-ec.webp" width="1200" height="1200" loading="lazy" alt="Publicidad de Tesis ec: tu investigación, nuestro compromiso con tu éxito. Asesoría desde 450 dólares según el servicio."></button><figcaption>Tu investigación, nuestro compromiso</figcaption></figure></li>
+      <li><figure><button type="button" data-full="flyer-tesis-grado.webp" data-cap="¿Necesitas ayuda con tu tesis o proyecto de grado?"><img src="flyer-tesis-grado.webp" width="1200" height="1200" loading="lazy" alt="Publicidad: ¿Necesitas ayuda con tu tesis o proyecto de grado? Artículos científicos, anteproyectos, análisis jurídico, proyectos de grado y exámenes de admisión."></button><figcaption>¿Necesitas ayuda con tu tesis?</figcaption></figure></li>
+      <li><figure><button type="button" data-full="flyer-tesis-grado-2.webp" data-cap="Termina tu tesis y obtén tu grado académico"><img src="flyer-tesis-grado-2.webp" width="1200" height="1200" loading="lazy" alt="Publicidad: termina tu tesis y obtén tu grado académico. Tu éxito académico empieza aquí."></button><figcaption>Tu éxito académico empieza aquí</figcaption></figure></li>
+      <li><figure><button type="button" data-full="flyer-termina-tu-tesis.webp" data-cap="¡Termina tu tesis y obtén tu grado académico!"><img src="flyer-termina-tu-tesis.webp" width="1024" height="1024" loading="lazy" alt="Publicidad del Instituto de Estudios Legales Avanzados: termina tu tesis y obtén tu grado académico. WhatsApp 098 556 8519."></button><figcaption>¡Termina tu tesis!</figcaption></figure></li>
+    </ul>
+  </div>
+</section>
+
+<section class="block" id="preguntas">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num">Capítulo 6</div>
       <div><h2>Preguntas frecuentes</h2></div>
     </div>
     <div class="faq">
@@ -417,10 +468,10 @@ footer .legal{grid-column:1/-1;border-top:1px solid #24375E;padding-top:22px;mar
   </div>
 </section>
 
-<section class="block" id="contacto">
+<section class="block alt" id="contacto">
   <div class="wrap">
     <div class="sec-head">
-      <div class="num">Capítulo 6</div>
+      <div class="num">Capítulo 7</div>
       <div>
         <h2>Contacto y cotización</h2>
         <p>Llena el formulario y se abrirá WhatsApp con tu mensaje listo para enviar. Respondemos con la cotización por el mismo chat.</p>
@@ -537,12 +588,27 @@ footer .legal{grid-column:1/-1;border-top:1px solid #24375E;padding-top:22px;mar
   </div>
 </footer>
 
+<dialog class="viewer" id="viewer" aria-label="Imagen ampliada">
+  <img id="viewer-img" src="" alt="">
+  <p id="viewer-cap"></p>
+  <button class="close" type="button" id="viewer-close" aria-label="Cerrar">×</button>
+</dialog>
+
 <a class="float-wa" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
   <svg aria-hidden="true"><use href="#i-wa"/></svg>
 </a>
 
 <script>
 (function(){
+  var dlg=document.getElementById('viewer'), vi=document.getElementById('viewer-img'), vc=document.getElementById('viewer-cap');
+  document.querySelectorAll('.gallery button').forEach(function(b){
+    b.addEventListener('click',function(){
+      vi.src=b.dataset.full; vi.alt=b.querySelector('img').alt; vc.textContent=b.dataset.cap;
+      if(dlg.showModal) dlg.showModal(); else window.open(b.dataset.full,'_blank');
+    });
+  });
+  document.getElementById('viewer-close').addEventListener('click',function(){dlg.close();});
+  dlg.addEventListener('click',function(e){ if(e.target===dlg) dlg.close(); });
   var y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();
   var f=document.getElementById('cotizar');
   var req=[['nombre','Escribe tu nombre.'],['servicio','Elige el servicio que necesitas.'],['nivel','Elige tu nivel de estudios.'],['detalle','Cuéntanos brevemente tu tema o lo que necesitas.']];
