@@ -168,6 +168,15 @@ section.alt{background:var(--paper)}
 .services ul li{display:list-item;padding:0;border:0;margin-bottom:4px}
 @media (max-width:860px){.services li{grid-template-columns:1fr;gap:10px}}
 
+/* Video */
+.video-grid{display:grid;grid-template-columns:minmax(0,440px) 1fr;gap:56px;align-items:center}
+.video-frame{margin:0;border-radius:var(--radius-l);overflow:hidden;background:#0F1E3A;border:1px solid var(--line);box-shadow:0 24px 48px -30px rgba(15,30,58,.5);aspect-ratio:1/1;max-width:100%}
+.video-frame video{display:block;width:100%;height:100%;object-fit:cover}
+.video-list{list-style:none;margin:0 0 28px;padding:0;border-top:1.5px solid var(--ink)}
+.video-list li{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);font:500 1.08rem/1.4 "Jost",sans-serif;color:var(--ink)}
+.video-list li span{font-weight:400;color:var(--muted);font-size:.92rem;text-align:right}
+@media (max-width:860px){.video-grid{grid-template-columns:1fr;gap:32px}.video-frame{max-width:440px}}
+
 /* Proceso */
 .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s}
 .steps li{counter-increment:s;padding:0 24px 0 0;position:relative}
@@ -288,6 +297,7 @@ footer .legal{grid-column:1/-1;border-top:1px solid #24375E;padding-top:22px;mar
     </a>
     <nav class="main" aria-label="Secciones">
       <a href="#servicios">Servicios</a>
+      <a href="#video">Video</a>
       <a href="#proceso">Cómo trabajamos</a>
       <a href="#niveles">Niveles</a>
       <a href="#preguntas">Preguntas</a>
@@ -322,6 +332,7 @@ footer .legal{grid-column:1/-1;border-top:1px solid #24375E;padding-top:22px;mar
         <h3>Índice</h3>
         <ol>
           <li><a href="#servicios"><span>Servicios</span><i></i></a></li>
+          <li><a href="#video"><span>Servicios académicos en video</span><i></i></a></li>
           <li><a href="#proceso"><span>Cómo trabajamos</span><i></i></a></li>
           <li><a href="#niveles"><span>Niveles y carreras</span><i></i></a></li>
           <li><a href="#compromiso"><span>Nuestro compromiso</span><i></i></a></li>
@@ -379,10 +390,40 @@ footer .legal{grid-column:1/-1;border-top:1px solid #24375E;padding-top:22px;mar
   </div>
 </section>
 
-<section class="block" id="proceso">
+<section class="block" id="video">
   <div class="wrap">
     <div class="sec-head">
       <div class="num">Capítulo 2</div>
+      <div>
+        <h2>Servicios académicos en video</h2>
+        <p>En menos de un minuto te contamos qué hacemos y cómo trabajamos contigo.</p>
+      </div>
+    </div>
+    <div class="video-grid">
+      <figure class="video-frame">
+        <video controls playsinline preload="metadata" poster="video-poster_1.webp" width="368" height="368" aria-label="Video de presentación de los servicios académicos de Tesis">
+          <source src="video-servicios_1.mp4" type="video/mp4">
+          Tu navegador no puede reproducir este video. <a href="video-servicios_1.mp4">Descárgalo aquí</a>.
+        </video>
+      </figure>
+      <div>
+        <h3>Lo que verás en el video</h3>
+        <ul class="video-list">
+          <li>Tesis <span>Grado, maestría y doctorado</span></li>
+          <li>Ensayos <span>Trabajos de semestre</span></li>
+          <li>Investigaciones <span>Anteproyectos y artículos</span></li>
+          <li>Exámenes de admisión <span>Preparación guiada</span></li>
+        </ul>
+        <a class="btn btn-wa" href="https://wa.me/593985568519?text=Hola%2C%20vi%20el%20video%20de%20Tesis%20y%20quiero%20informaci%C3%B3n." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Quiero información</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="proceso">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num">Capítulo 3</div>
       <div>
         <h2>Cómo trabajamos</h2>
         <p>Todo el proceso es online. Puedes estar en Tulcán, en Machala o fuera del país.</p>
@@ -397,10 +438,10 @@ footer .legal{grid-column:1/-1;border-top:1px solid #24375E;padding-top:22px;mar
   </div>
 </section>
 
-<section class="block alt" id="niveles">
+<section class="block" id="niveles">
   <div class="wrap">
     <div class="sec-head">
-      <div class="num">Capítulo 3</div>
+      <div class="num">Capítulo 4</div>
       <div>
         <h2>Niveles y carreras</h2>
         <p>Atendemos a estudiantes de universidades públicas y privadas, institutos, maestrías y doctorados.</p>
@@ -418,10 +459,10 @@ footer .legal{grid-column:1/-1;border-top:1px solid #24375E;padding-top:22px;mar
   </div>
 </section>
 
-<section class="block" id="compromiso">
+<section class="block alt" id="compromiso">
   <div class="wrap">
     <div class="sec-head">
-      <div class="num">Capítulo 4</div>
+      <div class="num">Capítulo 5</div>
       <div><h2>Nuestro compromiso</h2></div>
     </div>
     <div class="pledge">
@@ -433,10 +474,10 @@ footer .legal{grid-column:1/-1;border-top:1px solid #24375E;padding-top:22px;mar
   </div>
 </section>
 
-<section class="block alt" id="campanas">
+<section class="block" id="campanas">
   <div class="wrap">
     <div class="sec-head">
-      <div class="num">Capítulo 5</div>
+      <div class="num">Capítulo 6</div>
       <div>
         <h2>Publicidad</h2>
         <p>Las piezas que publicamos en Facebook. Toca una para verla en grande.</p>
@@ -451,10 +492,10 @@ footer .legal{grid-column:1/-1;border-top:1px solid #24375E;padding-top:22px;mar
   </div>
 </section>
 
-<section class="block" id="preguntas">
+<section class="block alt" id="preguntas">
   <div class="wrap">
     <div class="sec-head">
-      <div class="num">Capítulo 6</div>
+      <div class="num">Capítulo 7</div>
       <div><h2>Preguntas frecuentes</h2></div>
     </div>
     <div class="faq">
@@ -468,10 +509,10 @@ footer .legal{grid-column:1/-1;border-top:1px solid #24375E;padding-top:22px;mar
   </div>
 </section>
 
-<section class="block alt" id="contacto">
+<section class="block" id="contacto">
   <div class="wrap">
     <div class="sec-head">
-      <div class="num">Capítulo 7</div>
+      <div class="num">Capítulo 8</div>
       <div>
         <h2>Contacto y cotización</h2>
         <p>Llena el formulario y se abrirá WhatsApp con tu mensaje listo para enviar. Respondemos con la cotización por el mismo chat.</p>
