@@ -213,6 +213,29 @@ section.alt .level{background:var(--bg)}
 .faq details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
 .faq details p{color:var(--muted);padding-bottom:12px}
 
+/* Pagos */
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch}
+.pay-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-l);padding:30px;display:flex;flex-direction:column;gap:14px;min-width:0}
+section.alt .pay-card{background:var(--bg)}
+.pay-card h3{display:flex;align-items:center;gap:10px;margin:0}
+.pay-card h3 svg{width:24px;height:24px;color:var(--gold);flex:none}
+.pay-card p{margin:0;color:var(--muted);font-size:.97rem}
+.brands{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.brands li{font:500 .82rem/1 "Jost",sans-serif;padding:8px 11px;border-radius:6px;border:1px solid var(--line);color:var(--ink)}
+.pay-card .btn{align-self:flex-start;margin-top:6px}
+.pay-note{font:400 .85rem/1.5 "Jost",sans-serif!important}
+.bank{margin:0;border-top:1.5px solid var(--ink)}
+.bank div{display:grid;grid-template-columns:150px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.bank dt{font:400 .88rem/1.4 "Jost",sans-serif;color:var(--muted)}
+.bank dd{margin:0;font:500 1.05rem/1.4 "Jost",sans-serif;color:var(--ink);font-variant-numeric:tabular-nums;min-width:0;overflow-wrap:anywhere}
+.copy{font:500 .82rem/1 "Jost",sans-serif;color:var(--ink);background:transparent;border:1.5px solid var(--line);border-radius:999px;padding:8px 12px;cursor:pointer}
+.copy:hover{border-color:var(--gold)}
+.copy.ok{border-color:var(--wa);color:var(--wa)}
+.pay-steps{margin:0;padding-left:1.2em;color:var(--muted);font-size:.95rem}
+.pay-steps li{margin-bottom:4px}
+@media (max-width:900px){.pay{grid-template-columns:1fr}}
+@media (max-width:480px){.bank div{grid-template-columns:1fr auto}.bank dt{grid-column:1/-1}.pay-card{padding:22px}}
+
 /* Contacto y cotización */
 .contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
 .channels{list-style:none;margin:0 0 24px;padding:0}
@@ -285,6 +308,8 @@ footer .legal{grid-column:1/-1;border-top:1px solid #24375E;padding-top:22px;mar
     <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M3.5 5.5h17v13h-17z M3.8 6l8.2 7 8.2-7"/></symbol>
     <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.87.25-1.46 1.5-1.46h1.6V4.45c-.28-.04-1.22-.12-2.33-.12-2.3 0-3.87 1.4-3.87 3.98v2.2H7.8v3h2.6V21h3.1Z"/></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M2.5 9.5h19" stroke="currentColor" stroke-width="1.7"/><path d="M6 15h4" stroke="currentColor" stroke-width="1.7"/></symbol>
+    <symbol id="i-bank" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M3 9.5 12 4l9 5.5Z M5 10v7 M9.5 10v7 M14.5 10v7 M19 10v7 M3.5 20h17"/></symbol>
     <symbol id="i-cap" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M2.5 9 12 4.5 21.5 9 12 13.5Z M6.5 11v4.5c1.5 1.5 3.5 2.2 5.5 2.2s4-.7 5.5-2.2V11 M21.5 9v5"/></symbol>
   </defs>
 </svg>
@@ -301,6 +326,7 @@ footer .legal{grid-column:1/-1;border-top:1px solid #24375E;padding-top:22px;mar
       <a href="#proceso">Cómo trabajamos</a>
       <a href="#niveles">Niveles</a>
       <a href="#preguntas">Preguntas</a>
+      <a href="#pagos">Pagos</a>
       <a href="#contacto">Contacto</a>
     </nav>
     <a class="btn btn-wa" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener">
@@ -338,6 +364,7 @@ footer .legal{grid-column:1/-1;border-top:1px solid #24375E;padding-top:22px;mar
           <li><a href="#compromiso"><span>Nuestro compromiso</span><i></i></a></li>
           <li><a href="#campanas"><span>Publicidad</span><i></i></a></li>
           <li><a href="#preguntas"><span>Preguntas frecuentes</span><i></i></a></li>
+          <li><a href="#pagos"><span>Pagos</span><i></i></a></li>
           <li><a href="#contacto"><span>Contacto y cotización</span><i></i></a></li>
         </ol>
       </nav>
@@ -509,10 +536,47 @@ footer .legal{grid-column:1/-1;border-top:1px solid #24375E;padding-top:22px;mar
   </div>
 </section>
 
-<section class="block" id="contacto">
+<section class="block" id="pagos">
   <div class="wrap">
     <div class="sec-head">
       <div class="num">Capítulo 8</div>
+      <div>
+        <h2>Pagos</h2>
+        <p>Paga con tarjeta o por transferencia. En los dos casos, envíanos el comprobante por WhatsApp para registrar tu pago y empezar con tu trabajo.</p>
+      </div>
+    </div>
+    <div class="pay">
+      <article class="pay-card" aria-labelledby="pay-card-t">
+        <h3 id="pay-card-t"><svg aria-hidden="true"><use href="#i-card"/></svg>Pago con tarjeta</h3>
+        <p>Pago seguro con tarjeta de crédito o débito a través de Payphone. Escribes el valor acordado en tu cotización y confirmas con los datos de tu tarjeta.</p>
+        <ul class="brands" aria-label="Tarjetas aceptadas"><li>Visa</li><li>Mastercard</li><li>Diners Club</li><li>Discover</li></ul>
+        <a class="btn btn-wa" id="pay-card-btn" href="#" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-card"/></svg><span id="pay-card-label">Pagar con tarjeta</span></a>
+        <p class="pay-note" id="pay-card-note">Los datos de tu tarjeta se ingresan en la página de Payphone. Tesis no los ve ni los guarda.</p>
+      </article>
+      <article class="pay-card" aria-labelledby="pay-bank-t">
+        <h3 id="pay-bank-t"><svg aria-hidden="true"><use href="#i-bank"/></svg>Transferencia o depósito</h3>
+        <dl class="bank">
+          <div><dt>Banco</dt><dd>Banco Pichincha</dd><span></span></div>
+          <div><dt>Tipo de cuenta</dt><dd>Ahorro transaccional</dd><span></span></div>
+          <div><dt>Número de cuenta</dt><dd id="acc-num">2203624495</dd><button class="copy" type="button" data-copy="acc-num">Copiar</button></div>
+          <div><dt>Titular</dt><dd id="acc-name">Minda Ortiz Estalin Arley</dd><button class="copy" type="button" data-copy="acc-name">Copiar</button></div>
+          <div><dt>Cédula</dt><dd id="acc-id">1004702088</dd><button class="copy" type="button" data-copy="acc-id">Copiar</button></div>
+        </dl>
+        <ol class="pay-steps">
+          <li>Transfiere el valor de tu cotización a esta cuenta.</li>
+          <li>Toma una captura del comprobante.</li>
+          <li>Envíala por WhatsApp con tu nombre y el servicio.</li>
+        </ol>
+        <a class="btn btn-line" href="https://wa.me/593985568519?text=Hola%2C%20te%20env%C3%ADo%20el%20comprobante%20de%20mi%20pago%20a%20Tesis." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Enviar comprobante</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="contacto">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num">Capítulo 9</div>
       <div>
         <h2>Contacto y cotización</h2>
         <p>Llena el formulario y se abrirá WhatsApp con tu mensaje listo para enviar. Respondemos con la cotización por el mismo chat.</p>
@@ -641,6 +705,23 @@ footer .legal{grid-column:1/-1;border-top:1px solid #24375E;padding-top:22px;mar
 
 <script>
 (function(){
+  /* Pago con tarjeta: pega aquí tu enlace de cobro abierto de Payphone */
+  var PAYPHONE_LINK = '';
+  var pb=document.getElementById('pay-card-btn');
+  if(PAYPHONE_LINK){ pb.href=PAYPHONE_LINK; }
+  else {
+    pb.href='https://wa.me/593985568519?text='+encodeURIComponent('Hola, quiero pagar con tarjeta. ¿Me envías el enlace de pago?');
+    document.getElementById('pay-card-label').textContent='Pedir enlace de pago con tarjeta';
+    document.getElementById('pay-card-note').textContent='Te enviamos por WhatsApp un enlace de Payphone con el valor de tu cotización. Los datos de tu tarjeta se ingresan en la página de Payphone; Tesis no los ve ni los guarda.';
+  }
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.addEventListener('click',function(){
+      var el=document.getElementById(b.dataset.copy), txt=el.textContent.trim();
+      var done=function(){ b.textContent='Copiado'; b.classList.add('ok'); setTimeout(function(){b.textContent='Copiar'; b.classList.remove('ok');},1800); };
+      var fallback=function(){ var r=document.createRange(); r.selectNodeContents(el); var sel=window.getSelection(); sel.removeAllRanges(); sel.addRange(r); try{ if(document.execCommand('copy')) done(); }catch(e){} };
+      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done,fallback); } else { fallback(); }
+    });
+  });
   var dlg=document.getElementById('viewer'), vi=document.getElementById('viewer-img'), vc=document.getElementById('viewer-cap');
   document.querySelectorAll('.gallery button').forEach(function(b){
     b.addEventListener('click',function(){
