@@ -474,6 +474,59 @@ dialog.tr-dialog::backdrop{background:rgba(240,242,246,.7);backdrop-filter:blur(
 @media (max-width:860px){.video-2{margin-top:40px;padding-top:40px}.video-frame.vertical{max-width:320px}}
 @media (max-width:480px){.ad-list{grid-template-columns:1fr}}
 
+/* Comentarios y calificaciones */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.stars{display:inline-flex;gap:2px;color:#E2B33C}
+.stars svg{width:18px;height:18px}
+.stars .off{color:#D9DEE8}
+.rv-top{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:20px;margin-bottom:24px}
+.rv-summary,.rv-form-card{background:var(--glass-strong);border:1px solid rgba(255,255,255,.95);border-radius:var(--radius-l);box-shadow:var(--shadow);padding:26px;min-width:0}
+.rv-avg{display:grid;justify-items:start;gap:6px;margin-bottom:18px}
+.rv-avg b{font:500 3.2rem/1 "Jost",sans-serif;color:var(--ink);font-variant-numeric:tabular-nums}
+.rv-avg .stars svg{width:24px;height:24px}
+.rv-avg small{font:400 .9rem/1.4 "Jost",sans-serif;color:var(--muted)}
+.rv-bars{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rv-bars li{display:grid;grid-template-columns:62px 1fr 34px;gap:10px;align-items:center;font:400 .85rem/1 "Jost",sans-serif;color:var(--muted);font-variant-numeric:tabular-nums}
+.rv-bars i{display:block;height:8px;border-radius:99px;background:#E9ECF2;overflow:hidden}
+.rv-bars i b{display:block;height:100%;background:#E2B33C;border-radius:99px}
+.rv-bars span:last-child{text-align:right}
+.rv-form-card h3{margin-bottom:6px}
+.rv-form-card p{color:var(--muted);font-size:.96rem}
+.btn-google{background:#fff;color:var(--ink);border-color:#C9CFDA;box-shadow:0 6px 16px -12px rgba(15,30,58,.5)}
+.btn-google:hover{border-color:var(--ink)}
+.rv-me{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.rv-me img,.rv-me-ph,.rv-av{width:44px;height:44px;border-radius:50%;flex:none;object-fit:cover;background:#EEF0F4;display:grid;place-items:center;color:var(--muted)}
+.rv-me-ph svg,.rv-av svg{width:24px;height:24px}
+.rv-me b{display:block;font:500 1rem/1.3 "Jost",sans-serif;color:var(--ink)}
+.linkbtn{all:unset;cursor:pointer;font:400 .85rem/1.4 "Jost",sans-serif;color:var(--muted);text-decoration:underline}
+.linkbtn:focus-visible{outline:2px solid var(--focus)}
+.rv-pick{border:0;margin:0 0 4px;padding:0;display:flex;align-items:center;flex-wrap:wrap;gap:12px}
+.rv-pick legend{font:500 .9rem/1.3 "Jost",sans-serif;color:var(--ink);margin-bottom:6px;padding:0;width:100%}
+.rv-stars-input{display:inline-flex;flex-direction:row-reverse;gap:2px}
+.rv-stars-input input{position:absolute;opacity:0;width:1px;height:1px}
+.rv-stars-input label{cursor:pointer;color:#D9DEE8;margin:0;padding:2px;line-height:0}
+.rv-stars-input label svg{width:34px;height:34px;transition:transform .12s}
+.rv-stars-input label:hover svg{transform:scale(1.08)}
+.rv-stars-input input:checked~label,.rv-stars-input label:hover,.rv-stars-input label:hover~label{color:#E2B33C}
+.rv-stars-input input:focus-visible+label{outline:3px solid var(--focus);outline-offset:1px;border-radius:6px}
+.rv-pick-txt{font:500 .9rem/1.3 "Jost",sans-serif;color:var(--muted)}
+#rv-form textarea{min-height:110px}
+.rv-count-txt{text-align:right;font:400 .78rem/1 "Jost",sans-serif;color:var(--muted);margin-top:4px;font-variant-numeric:tabular-nums}
+.rv-del{color:#B3261E;border-color:#F0C9C5}
+.rv-del:hover{background:#B3261E;color:#fff}
+.rv-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.rv-item{background:var(--glass-strong);border:1px solid rgba(255,255,255,.95);border-radius:var(--radius-l);box-shadow:var(--shadow);padding:20px 22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.rv-head{display:flex;align-items:center;gap:12px}
+.rv-head b{display:block;font:500 1rem/1.3 "Jost",sans-serif;color:var(--ink);overflow-wrap:anywhere}
+.rv-head small{font:400 .82rem/1.3 "Jost",sans-serif;color:var(--muted)}
+.rv-item p{margin:0;color:var(--text);font-size:.97rem;white-space:pre-line;overflow-wrap:anywhere}
+.rv-mine{font:500 .68rem/1 "Jost",sans-serif;letter-spacing:.06em;color:var(--gold);border:1px solid var(--gold);border-radius:99px;padding:5px 8px;margin-left:auto;align-self:flex-start;white-space:nowrap;flex:none}
+.rv-head>div{flex:1;min-width:0}
+[hidden]{display:none!important}
+.rv-more{margin:22px auto 0;display:flex}
+@media (max-width:900px){.rv-top{grid-template-columns:1fr}}
+@media (max-width:420px){.rv-list{grid-template-columns:1fr}.rv-summary,.rv-form-card{padding:20px}}
+
 /* Único momento de movimiento: la hoja entra al cargar */
 @media (prefers-reduced-motion: no-preference){
   .sheet{animation:rise .9s cubic-bezier(.2,.7,.2,1) both .15s}
@@ -507,6 +560,8 @@ dialog.tr-dialog::backdrop{background:rgba(240,242,246,.7);backdrop-filter:blur(
     <symbol id="i-doc" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M6 2.8h8.2L19 7.6V21.2H6Z M14 3v4.8h4.8 M9 12h7 M9 15.5h7 M9 19h4"/></symbol>
     <symbol id="i-upload" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 15.5V4 M7.5 8.5 12 4l4.5 4.5 M4.5 15v4.5h15V15"/></symbol>
     <symbol id="i-eye" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.6l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.4l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4 20.5c1.3-3.8 4.4-5.6 8-5.6s6.7 1.8 8 5.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
     <symbol id="i-cap" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M2.5 9 12 4.5 21.5 9 12 13.5Z M6.5 11v4.5c1.5 1.5 3.5 2.2 5.5 2.2s4-.7 5.5-2.2V11 M21.5 9v5"/></symbol>
   </defs>
 </svg>
@@ -521,7 +576,7 @@ dialog.tr-dialog::backdrop{background:rgba(240,242,246,.7);backdrop-filter:blur(
       <a href="#servicios">Servicios</a>
       <a href="#sedes">Sedes</a>
       <a href="#proceso">Cómo trabajamos</a>
-      <a href="#niveles">Niveles</a>
+      <a href="#comentarios">Comentarios</a>
       <a href="#preguntas">Preguntas</a>
       <a href="#pagos">Pagos</a>
       <a href="#contacto">Contacto</a>
@@ -564,6 +619,7 @@ dialog.tr-dialog::backdrop{background:rgba(240,242,246,.7);backdrop-filter:blur(
           <li><a href="#compromiso"><span>Nuestro compromiso</span><i></i></a></li>
           <li><a href="#campanas"><span>Publicidad</span><i></i></a></li>
           <li><a href="#trabajos"><span>Nuestros trabajos realizados</span><i></i></a></li>
+          <li><a href="#comentarios"><span>Comentarios</span><i></i></a></li>
           <li><a href="#preguntas"><span>Preguntas frecuentes</span><i></i></a></li>
           <li><a href="#pagos"><span>Pagos</span><i></i></a></li>
           <li><a href="#contacto"><span>Contacto y cotización</span><i></i></a></li>
@@ -870,10 +926,67 @@ dialog.tr-dialog::backdrop{background:rgba(240,242,246,.7);backdrop-filter:blur(
   </form>
 </dialog>
 
-<section class="block alt" id="preguntas">
+<section class="block photo" id="comentarios" style="--img:url(fondo-biblioteca.webp)">
   <div class="wrap">
     <div class="sec-head">
       <div class="num">Capítulo 8</div>
+      <div>
+        <h2>Comentarios</h2>
+        <p>Lo que dicen los estudiantes que han trabajado con nosotros. Si ya recibiste nuestra asesoría, inicia sesión con tu cuenta de Google y califica el servicio de 1 a 5 estrellas.</p>
+      </div>
+    </div>
+    <div class="rv-top">
+      <div class="rv-summary" aria-live="polite">
+        <div class="rv-avg"><b id="rv-avg">–</b><span class="stars" id="rv-avg-stars" aria-hidden="true"></span><small id="rv-count">Cargando opiniones…</small></div>
+        <ul class="rv-bars" id="rv-bars"></ul>
+      </div>
+      <div class="rv-form-card">
+        <div id="rv-out">
+          <h3>Califica nuestro servicio</h3>
+          <p>Para que cada opinión sea de una persona real, te pedimos entrar con Google. Solo mostramos tu nombre y tu foto de perfil.</p>
+          <button class="btn btn-google" type="button" id="rv-login"><svg aria-hidden="true"><use href="#i-user"/></svg>Continuar con Google</button>
+          <div class="err" id="rv-login-err"></div>
+        </div>
+        <form id="rv-form" hidden novalidate>
+          <div class="rv-me"><img id="rv-me-img" alt="" referrerpolicy="no-referrer" hidden><span class="rv-me-ph" id="rv-me-ph"><svg aria-hidden="true"><use href="#i-user"/></svg></span><div><b id="rv-me-name"></b><button type="button" class="linkbtn" id="rv-logout">Cerrar sesión</button></div></div>
+          <fieldset class="rv-pick">
+            <legend>Tu calificación</legend>
+            <div class="rv-stars-input">
+              <input type="radio" name="estrellas" id="rv-s5" value="5"><label for="rv-s5" title="5 estrellas: excelente"><svg aria-hidden="true"><use href="#i-star"/></svg><span class="sr">5 estrellas</span></label>
+              <input type="radio" name="estrellas" id="rv-s4" value="4"><label for="rv-s4" title="4 estrellas: muy bueno"><svg aria-hidden="true"><use href="#i-star"/></svg><span class="sr">4 estrellas</span></label>
+              <input type="radio" name="estrellas" id="rv-s3" value="3"><label for="rv-s3" title="3 estrellas: bueno"><svg aria-hidden="true"><use href="#i-star"/></svg><span class="sr">3 estrellas</span></label>
+              <input type="radio" name="estrellas" id="rv-s2" value="2"><label for="rv-s2" title="2 estrellas: regular"><svg aria-hidden="true"><use href="#i-star"/></svg><span class="sr">2 estrellas</span></label>
+              <input type="radio" name="estrellas" id="rv-s1" value="1"><label for="rv-s1" title="1 estrella: malo"><svg aria-hidden="true"><use href="#i-star"/></svg><span class="sr">1 estrella</span></label>
+            </div>
+            <span class="rv-pick-txt" id="rv-pick-txt">Elige de 1 a 5 estrellas</span>
+          </fieldset>
+          <div class="err" id="rv-e-stars"></div>
+          <label for="rv-text">Tu comentario</label>
+          <textarea id="rv-text" name="comentario" maxlength="1000" placeholder="Cuéntanos cómo te fue con tu tesis, proyecto o trabajo."></textarea>
+          <div class="rv-count-txt"><span id="rv-chars">0</span>/1000</div>
+          <div class="err" id="rv-e-text"></div>
+          <div class="form-foot">
+            <button class="btn btn-gold" type="submit" id="rv-send"><svg aria-hidden="true"><use href="#i-star"/></svg><span>Publicar comentario</span></button>
+            <button class="btn btn-line rv-del" type="button" id="rv-del" hidden>Eliminar mi comentario</button>
+          </div>
+          <div class="tru-status" id="rv-status" role="status" hidden></div>
+        </form>
+      </div>
+    </div>
+    <ul class="rv-list" id="rv-list"></ul>
+    <div class="tr-empty" id="rv-empty" hidden>
+      <svg aria-hidden="true"><use href="#i-star"/></svg>
+      <h3>Todavía no hay comentarios</h3>
+      <p>Sé la primera persona en calificar nuestro servicio.</p>
+    </div>
+    <button class="btn btn-line rv-more" type="button" id="rv-more" hidden>Ver más comentarios</button>
+  </div>
+</section>
+
+<section class="block alt" id="preguntas">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num">Capítulo 9</div>
       <div><h2>Preguntas frecuentes</h2></div>
     </div>
     <div class="faq">
@@ -891,7 +1004,7 @@ dialog.tr-dialog::backdrop{background:rgba(240,242,246,.7);backdrop-filter:blur(
 <section class="block" id="pagos">
   <div class="wrap">
     <div class="sec-head">
-      <div class="num">Capítulo 9</div>
+      <div class="num">Capítulo 10</div>
       <div>
         <h2>Pagos</h2>
         <p>Paga con tarjeta, por transferencia en Ecuador o con PayPal desde cualquier país. En todos los casos, envíanos el comprobante por WhatsApp para registrar tu pago y empezar con tu trabajo.</p>
@@ -969,7 +1082,7 @@ dialog.tr-dialog::backdrop{background:rgba(240,242,246,.7);backdrop-filter:blur(
 <section class="block photo" id="contacto" style="--img:url(fondo-oficina.webp)">
   <div class="wrap">
     <div class="sec-head">
-      <div class="num">Capítulo 10</div>
+      <div class="num">Capítulo 11</div>
       <div>
         <h2>Contacto y cotización</h2>
         <p>Llena el formulario y se abrirá WhatsApp con tu mensaje listo para enviar. Respondemos con la cotización por el mismo chat.</p>
@@ -1081,7 +1194,7 @@ dialog.tr-dialog::backdrop{background:rgba(240,242,246,.7);backdrop-filter:blur(
     </div>
     <div class="legal">
       <span>© <span id="year">2026</span> Tesis. Sede principal en Quito, Ecuador · Colombia · Perú · México.</span>
-      <span>Compromiso · Calidad · Confidencialidad</span>
+      <span><a href="privacidad.html">Privacidad y condiciones</a> · Compromiso · Calidad · Confidencialidad</span>
     </div>
   </div>
 </footer>
@@ -1162,5 +1275,6 @@ dialog.tr-dialog::backdrop{background:rgba(240,242,246,.7);backdrop-filter:blur(
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
 <script src="trabajos-config.js"></script>
 <script src="trabajos.js"></script>
+<script src="resenas.js"></script>
 </body>
 </html>
