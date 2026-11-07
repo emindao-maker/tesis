@@ -462,15 +462,17 @@ dialog.tr-dialog::backdrop{background:rgba(240,242,246,.7);backdrop-filter:blur(
 .btn-line svg,.channels li:has(use[href="#i-wa"]) svg,.tr-view svg{color:var(--wa)}
 .btn-line:hover svg{color:inherit}
 
-/* Segundo video (Facebook) */
-.video-2{margin-top:56px;padding-top:56px;border-top:1px solid var(--line)}
-.fb-frame{aspect-ratio:9/16;max-height:640px;background:#fff;width:100%;max-width:360px}
-.fb-frame iframe{display:block;width:100%;height:100%;border:0}
-.video-2 .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
-.video-2 h3{font-size:1.4rem;margin-top:6px}
-.fb-copy{color:var(--muted)}
-.btn-line svg[aria-hidden] use[href="#i-fb"]{color:#1877F2}
-@media (max-width:860px){.video-2{margin-top:40px;padding-top:40px}.fb-frame{max-width:340px}}
+/* Segundo video: publicidad vertical */
+.video-2{margin-top:56px;padding-top:56px;border-top:1px solid var(--line);align-items:start}
+.video-frame.vertical{aspect-ratio:9/16;max-width:360px;width:100%}
+.ad-copy h3{font-size:1.45rem;margin-top:6px}
+.ad-copy p{color:var(--muted)}
+.ad-list{list-style:none;margin:0 0 18px;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px}
+.ad-list li{position:relative;padding-left:22px;font:500 .95rem/1.4 "Jost",sans-serif;color:var(--ink)}
+.ad-list li::before{content:"";position:absolute;left:0;top:.45em;width:10px;height:10px;border-radius:50%;border:2px solid var(--gold)}
+.ad-close{font:italic 400 1.1rem/1.5 "Literata",serif;color:var(--ink)!important}
+@media (max-width:860px){.video-2{margin-top:40px;padding-top:40px}.video-frame.vertical{max-width:320px}}
+@media (max-width:480px){.ad-list{grid-template-columns:1fr}}
 
 /* Único momento de movimiento: la hoja entra al cargar */
 @media (prefers-reduced-motion: no-preference){
@@ -662,17 +664,30 @@ dialog.tr-dialog::backdrop{background:rgba(240,242,246,.7);backdrop-filter:blur(
       </div>
     </div>
     <div class="video-grid video-2">
-      <figure class="video-frame fb-frame">
-        <iframe title="Video de Tesis publicado en Facebook" src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fshare%2Fv%2F1VrJaG6XBh%2F&amp;show_text=false&amp;width=440" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+      <figure class="video-frame vertical">
+        <video controls playsinline preload="metadata" poster="video-publicidad-portada.webp" width="720" height="1280" aria-label="Video publicitario: ¿Necesitas avanzar con tu tesis?">
+          <source src="video-publicidad.mp4" type="video/mp4">
+          Tu navegador no puede reproducir este video.
+        </video>
       </figure>
-      <div>
-        <span class="tr-cat">Publicado en nuestra página de Facebook</span>
-        <h3>Tu tesis, con quienes saben de investigación</h3>
-        <p class="fb-copy" id="fb-copy">Te acompañamos desde el tema hasta la sustentación, con asesoría 100 % online para estudiantes de Ecuador, Colombia, Perú y México. Escríbenos y recibe tu cotización hoy.</p>
-        <div class="ctas">
-          <a class="btn btn-wa" href="https://wa.me/593985568519?text=Hola%2C%20vi%20el%20video%20de%20Tesis%20en%20Facebook%20y%20quiero%20informaci%C3%B3n." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Quiero información</a>
-          <a class="btn btn-line" href="https://www.facebook.com/share/v/1VrJaG6XBh/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-fb"/></svg>Ver en Facebook</a>
-        </div>
+      <div class="ad-copy">
+        <span class="tr-cat">Publicidad</span>
+        <h3>¿Necesitas avanzar con tu tesis?</h3>
+        <p>Sabemos que desarrollar una tesis o proyecto de grado puede convertirse en un proceso complejo cuando no sabes cómo estructurar cada etapa. En Instituto de Estudios Legales Avanzados te acompañamos de manera personalizada para que puedas avanzar con mayor claridad y seguridad.</p>
+        <ul class="ad-list">
+          <li>Artículos científicos</li>
+          <li>Anteproyectos y tesis</li>
+          <li>Proyectos de grado</li>
+          <li>Análisis jurídico</li>
+          <li>Ensayos académicos</li>
+          <li>Metodología de investigación</li>
+          <li>Revisión y corrección académica</li>
+          <li>Análisis e interpretación de datos</li>
+          <li>Preparación para exámenes de admisión</li>
+        </ul>
+        <p>Trabajamos contigo desde la definición del tema hasta la estructuración y revisión de tu investigación. El acompañamiento se adapta a las exigencias de tu carrera y al enfoque metodológico de tu proyecto.</p>
+        <p class="ad-close">Tu proyecto académico merece una orientación profesional.</p>
+        <a class="btn btn-wa" href="https://wa.me/593985568519?text=Hola%2C%20vi%20el%20video%20%C2%BFNecesitas%20avanzar%20con%20tu%20tesis%3F%20y%20quiero%20informaci%C3%B3n." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Escríbenos por WhatsApp: 098 556 8519</a>
       </div>
     </div>
   </div>
