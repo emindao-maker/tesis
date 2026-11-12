@@ -1331,6 +1331,17 @@ nav.main{gap:18px}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
 <script src="trabajos-config.js"></script>
+<script>
+/* Registro de escaneos de los códigos QR y de barras (?c=CODIGO) */
+(function(){
+  try{
+    var u=new URL(location.href), c=u.searchParams.get('c'), C=window.TRABAJOS_CONFIG||{};
+    if(!c||!/^[A-Z0-9-]{3,40}$/.test(c)||!C.supabaseUrl) return;
+    fetch(C.supabaseUrl+'/rest/v1/rpc/registrar_escaneo',{method:'POST',headers:{apikey:C.supabaseKey,'Content-Type':'application/json'},body:JSON.stringify({p_codigo:c}),keepalive:true}).catch(function(){});
+    u.searchParams.delete('c'); history.replaceState(null,'',u.pathname+(u.search||'')+u.hash);
+  }catch(e){}
+})();
+</script>
 <script src="trabajos.js"></script>
 <script src="resenas.js"></script>
 </body>
