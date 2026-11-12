@@ -527,6 +527,27 @@ dialog.tr-dialog::backdrop{background:rgba(240,242,246,.7);backdrop-filter:blur(
 @media (max-width:900px){.rv-top{grid-template-columns:1fr}}
 @media (max-width:420px){.rv-list{grid-template-columns:1fr}.rv-summary,.rv-form-card{padding:20px}}
 
+/* Aula virtual */
+.btn-aula{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn-aula:hover{background:var(--gold);border-color:var(--gold)}
+.btn-aula .sm{display:none}
+.top-actions .btn{white-space:nowrap}
+.btn-aula .lg,.btn-works .lg{display:none!important}.btn-aula .sm,.btn-works .sm{display:inline!important}
+nav.main{gap:18px}
+@media (max-width:1240px){nav.main{display:none}}
+.aula-cursos{list-style:none;margin:0 0 24px;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.aula-cursos li{background:var(--glass-strong);border:1px solid rgba(255,255,255,.95);border-radius:var(--radius-l);box-shadow:var(--shadow);padding:26px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.aula-cursos h3{margin:0;font-size:1.35rem}
+.aula-cursos p{margin:0;color:var(--muted)}
+.aula-cursos .btn{align-self:flex-start;margin-top:6px}
+.aula-precio{font:400 .95rem/1 "Jost",sans-serif}
+.aula-precio b{font:600 2rem/1 "Jost",sans-serif;color:var(--ink)}
+.aula-pasos{list-style:none;counter-reset:p;margin:0 0 24px;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.aula-pasos li{counter-increment:p;position:relative;padding:18px 18px 18px 64px;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.95);border-radius:14px;font-size:.96rem;color:var(--muted)}
+.aula-pasos li::before{content:counter(p);position:absolute;left:18px;top:16px;width:32px;height:32px;border-radius:50%;border:1.5px solid var(--gold);color:var(--gold);display:grid;place-items:center;font:500 1rem/1 "Jost",sans-serif;background:#fff}
+.aula-pasos b{color:var(--ink);font-family:"Jost",sans-serif;font-weight:500}
+@media (max-width:860px){.aula-cursos,.aula-pasos{grid-template-columns:1fr}}
+
 /* Único momento de movimiento: la hoja entra al cargar */
 @media (prefers-reduced-motion: no-preference){
   .sheet{animation:rise .9s cubic-bezier(.2,.7,.2,1) both .15s}
@@ -582,6 +603,7 @@ dialog.tr-dialog::backdrop{background:rgba(240,242,246,.7);backdrop-filter:blur(
       <a href="#contacto">Contacto</a>
     </nav>
     <div class="top-actions">
+    <a class="btn btn-aula" href="https://tesis.gnomio.com" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-cap"/></svg><span class="lg">Aula virtual</span><span class="sm">Aula</span></a>
     <a class="btn btn-works" href="#trabajos"><svg aria-hidden="true"><use href="#i-doc"/></svg><span class="lg">Trabajos realizados</span><span class="sm">Trabajos</span></a>
     <a class="btn btn-wa" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener">
       <svg aria-hidden="true"><use href="#i-wa"/></svg><span>Escríbenos</span>
@@ -618,6 +640,7 @@ dialog.tr-dialog::backdrop{background:rgba(240,242,246,.7);backdrop-filter:blur(
           <li><a href="#niveles"><span>Niveles y carreras</span><i></i></a></li>
           <li><a href="#compromiso"><span>Nuestro compromiso</span><i></i></a></li>
           <li><a href="#campanas"><span>Publicidad</span><i></i></a></li>
+          <li><a href="#aula"><span>Aula virtual: cursos en línea</span><i></i></a></li>
           <li><a href="#trabajos"><span>Nuestros trabajos realizados</span><i></i></a></li>
           <li><a href="#comentarios"><span>Comentarios</span><i></i></a></li>
           <li><a href="#preguntas"><span>Preguntas frecuentes</span><i></i></a></li>
@@ -818,6 +841,40 @@ dialog.tr-dialog::backdrop{background:rgba(240,242,246,.7);backdrop-filter:blur(
       <li><figure><button type="button" data-full="flyer-tesis-grado-2.webp" data-cap="Termina tu tesis y obtén tu grado académico"><img src="flyer-tesis-grado-2.webp" width="1200" height="1200" loading="lazy" alt="Publicidad: termina tu tesis y obtén tu grado académico. Tu éxito académico empieza aquí."></button><figcaption>Tu éxito académico empieza aquí</figcaption></figure></li>
       <li><figure><button type="button" data-full="flyer-termina-tu-tesis.webp" data-cap="¡Termina tu tesis y obtén tu grado académico!"><img src="flyer-termina-tu-tesis.webp" width="1024" height="1024" loading="lazy" alt="Publicidad del Instituto de Estudios Legales Avanzados: termina tu tesis y obtén tu grado académico. WhatsApp 098 556 8519."></button><figcaption>¡Termina tu tesis!</figcaption></figure></li>
     </ul>
+  </div>
+</section>
+
+<section class="block" id="aula">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num">Aula virtual</div>
+      <div>
+        <h2>Cursos en línea</h2>
+        <p>Estudia a tu ritmo en nuestra aula virtual. Cada curso tiene 6 unidades con lecturas, actividades calificadas y un foro para tus dudas.</p>
+      </div>
+    </div>
+    <ul class="aula-cursos">
+      <li>
+        <span class="tr-cat">Curso en línea · 6 unidades</span>
+        <h3>Redacción de ensayos y tesis</h3>
+        <p>Del tema a la sustentación: problema, objetivos, marco teórico, metodología y normas APA 7.</p>
+        <p class="aula-precio"><b>$30</b> <small>pago único</small></p>
+        <a class="btn btn-wa" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20inscribirme%20en%20el%20curso%20Redacci%C3%B3n%20de%20ensayos%20y%20tesis%20(%2430)." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Inscribirme</a>
+      </li>
+      <li>
+        <span class="tr-cat">Curso en línea · Derecho · 6 unidades</span>
+        <h3>Análisis de sentencias</h3>
+        <p>Hechos, problema jurídico, motivación, ratio decidendi y precedente, con fallos reales de cortes ecuatorianas.</p>
+        <p class="aula-precio"><b>$30</b> <small>pago único</small></p>
+        <a class="btn btn-wa" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20inscribirme%20en%20el%20curso%20An%C3%A1lisis%20de%20sentencias%20(%2430)." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Inscribirme</a>
+      </li>
+    </ul>
+    <ol class="aula-pasos">
+      <li><b>Paga por WhatsApp</b> el curso que elijas.</li>
+      <li><b>Recibe tu código</b> de inscripción.</li>
+      <li><b>Crea tu cuenta</b> en el aula virtual y escribe el código en el curso.</li>
+    </ol>
+    <a class="btn btn-gold" href="https://tesis.gnomio.com" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-cap"/></svg>Entrar al aula virtual</a>
   </div>
 </section>
 
