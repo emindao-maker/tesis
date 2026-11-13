@@ -2,6 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://mgjvdvidgtlenlssiarv.supabase.co https://*.googleusercontent.com; media-src 'self'; connect-src 'self' https://mgjvdvidgtlenlssiarv.supabase.co wss://mgjvdvidgtlenlssiarv.supabase.co https://cdn.jsdelivr.net; frame-src https://view.officeapps.live.com https://docs.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="format-detection" content="telephone=no">
+<script src="escudo.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tesis · Asesoría académica</title>
 <meta name="description" content="Asesoría de tesis e investigación 100 % online para pregrado, maestría y doctorado en Ecuador, Colombia, Perú y México. Tesis, proyectos de investigación, ensayos, investigación jurídica y preparación para exámenes de admisión.">
@@ -417,6 +421,12 @@ dialog.tr-dialog::backdrop{background:rgba(240,242,246,.7);backdrop-filter:blur(
 .trd-head h3{margin:2px 0 0;font-size:1.2rem}
 .trd-close{flex:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;font:400 1.5rem/1 "Jost",sans-serif;color:var(--ink);cursor:pointer}
 .trd-foot{position:sticky;bottom:0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:16px 22px;background:rgba(255,255,255,.96);border-top:1px solid var(--line)}
+.rv-legal{font:400 .82rem/1.45 "Jost",sans-serif;color:var(--muted);margin:12px 0 0;max-width:46ch}
+.tru-hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+.trv-report{background:none;border:0;padding:6px 2px;font:500 .85rem/1.2 "Jost",sans-serif;color:var(--muted);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.trv-report:hover{color:#C0392B}
+.trv-report-msg{flex-basis:100%;font:400 .85rem/1.4 "Jost",sans-serif;color:var(--muted)}
+.trv-report-msg:empty{display:none}
 .trd-foot p{margin:0;font:400 .88rem/1.45 "Jost",sans-serif;color:var(--muted);max-width:44ch}
 .trv-body{padding:20px 22px;background:#F4F5F8;min-height:260px}
 .trv-body img{display:block;margin:0 auto;max-width:100%;border-radius:6px;box-shadow:var(--shadow)}
@@ -603,9 +613,9 @@ nav.main{gap:18px}
       <a href="#contacto">Contacto</a>
     </nav>
     <div class="top-actions">
-    <a class="btn btn-aula" href="https://tesis.gnomio.com" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-cap"/></svg><span class="lg">Aula virtual</span><span class="sm">Aula</span></a>
+    <a class="btn btn-aula" href="https://tesis.gnomio.com" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-cap"/></svg><span class="lg">Aula virtual</span><span class="sm">Aula</span></a>
     <a class="btn btn-works" href="#trabajos"><svg aria-hidden="true"><use href="#i-doc"/></svg><span class="lg">Trabajos realizados</span><span class="sm">Trabajos</span></a>
-    <a class="btn btn-wa" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener">
+    <a class="btn btn-wa" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer">
       <svg aria-hidden="true"><use href="#i-wa"/></svg><span>Escríbenos</span>
     </a>
     </div>
@@ -739,7 +749,7 @@ nav.main{gap:18px}
           <li>Investigaciones <span>Anteproyectos y artículos</span></li>
           <li>Exámenes de admisión <span>Preparación guiada</span></li>
         </ul>
-        <a class="btn btn-wa" href="https://wa.me/593985568519?text=Hola%2C%20vi%20el%20video%20de%20Tesis%20y%20quiero%20informaci%C3%B3n." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Quiero información</a>
+        <a class="btn btn-wa" href="https://wa.me/593985568519?text=Hola%2C%20vi%20el%20video%20de%20Tesis%20y%20quiero%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg>Quiero información</a>
       </div>
     </div>
     <div class="video-grid video-2">
@@ -766,7 +776,7 @@ nav.main{gap:18px}
         </ul>
         <p>Trabajamos contigo desde la definición del tema hasta la estructuración y revisión de tu investigación. El acompañamiento se adapta a las exigencias de tu carrera y al enfoque metodológico de tu proyecto.</p>
         <p class="ad-close">Tu proyecto académico merece una orientación profesional.</p>
-        <a class="btn btn-wa" href="https://wa.me/593985568519?text=Hola%2C%20vi%20el%20video%20%C2%BFNecesitas%20avanzar%20con%20tu%20tesis%3F%20y%20quiero%20informaci%C3%B3n." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Escríbenos por WhatsApp: 098 556 8519</a>
+        <a class="btn btn-wa" href="https://wa.me/593985568519?text=Hola%2C%20vi%20el%20video%20%C2%BFNecesitas%20avanzar%20con%20tu%20tesis%3F%20y%20quiero%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg>Escríbenos por WhatsApp: 098 556 8519</a>
       </div>
     </div>
   </div>
@@ -859,14 +869,14 @@ nav.main{gap:18px}
         <h3>Redacción de ensayos y tesis</h3>
         <p>Del tema a la sustentación: problema, objetivos, marco teórico, metodología y normas APA 7.</p>
         <p class="aula-precio"><b>$30</b> <small>pago único</small></p>
-        <a class="btn btn-wa" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20inscribirme%20en%20el%20curso%20Redacci%C3%B3n%20de%20ensayos%20y%20tesis%20(%2430)." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Inscribirme</a>
+        <a class="btn btn-wa" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20inscribirme%20en%20el%20curso%20Redacci%C3%B3n%20de%20ensayos%20y%20tesis%20(%2430)." target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg>Inscribirme</a>
       </li>
       <li>
         <span class="tr-cat">Curso en línea · Derecho · 6 unidades</span>
         <h3>Análisis de sentencias</h3>
         <p>Hechos, problema jurídico, motivación, ratio decidendi y precedente, con fallos reales de cortes ecuatorianas.</p>
         <p class="aula-precio"><b>$30</b> <small>pago único</small></p>
-        <a class="btn btn-wa" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20inscribirme%20en%20el%20curso%20An%C3%A1lisis%20de%20sentencias%20(%2430)." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Inscribirme</a>
+        <a class="btn btn-wa" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20inscribirme%20en%20el%20curso%20An%C3%A1lisis%20de%20sentencias%20(%2430)." target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg>Inscribirme</a>
       </li>
     </ul>
     <ol class="aula-pasos">
@@ -874,7 +884,7 @@ nav.main{gap:18px}
       <li><b>Recibe tu código</b> de inscripción.</li>
       <li><b>Crea tu cuenta</b> en el aula virtual y escribe el código en el curso.</li>
     </ol>
-    <a class="btn btn-gold" href="https://tesis.gnomio.com" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-cap"/></svg>Entrar al aula virtual</a>
+    <a class="btn btn-gold" href="https://tesis.gnomio.com" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-cap"/></svg>Entrar al aula virtual</a>
   </div>
 </section>
 
@@ -917,7 +927,9 @@ nav.main{gap:18px}
   <div class="trv-body" id="trv-body"></div>
   <div class="trd-foot">
     <p>Esto es una vista previa. Para ver el texto completo o recibir el documento, escríbenos y te enviamos el precio.</p>
-    <a class="btn btn-wa" id="trv-ask" href="https://wa.me/593985568519" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Deseo este documento · ¿cuánto cuesta?</a>
+    <a class="btn btn-wa" id="trv-ask" href="https://wa.me/593985568519" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg>Deseo este documento · ¿cuánto cuesta?</a>
+    <button class="trv-report" type="button" id="trv-report">Reportar este documento</button>
+    <span class="trv-report-msg" id="trv-report-msg" role="status"></span>
   </div>
 </dialog>
 
@@ -927,12 +939,13 @@ nav.main{gap:18px}
     <button class="trd-close" type="button" data-close aria-label="Cerrar">×</button>
   </div>
   <form id="tru-form" novalidate>
+    <div class="tru-hp" aria-hidden="true"><label for="tru-web">No llenes este campo</label><input id="tru-web" name="web" tabindex="-1" autocomplete="off"></div>
     <div class="drop" id="tru-drop">
       <input type="file" id="tru-file" name="archivo" accept=".pdf,.doc,.docx,.ppt,.pptx,.pps,.ppsx,.xls,.xlsx,.odt,.odp,.ods,.rtf,.txt,.csv,.jpg,.jpeg,.png,.webp,.gif">
       <label for="tru-file" class="drop-label">
         <svg aria-hidden="true"><use href="#i-upload"/></svg>
         <b>Elige un archivo o arrástralo aquí</b>
-        <small>PDF, Word, PowerPoint, Excel, imágenes y más · hasta 50 MB</small>
+        <small>PDF, Word, PowerPoint, Excel, imágenes y más · hasta 25 MB</small>
       </label>
       <div class="drop-preview" id="tru-preview" hidden></div>
     </div>
@@ -971,7 +984,7 @@ nav.main{gap:18px}
       </div>
       <div class="full check">
         <input type="checkbox" id="tru-ok" name="ok" required>
-        <label for="tru-ok">Confirmo que el documento no tiene nombres, cédulas ni datos personales de otras personas y que puedo compartirlo como ejemplo.</label>
+        <label for="tru-ok">Confirmo que el documento no tiene nombres, cédulas ni datos personales de otras personas, que puedo compartirlo como ejemplo y que acepto los <a href="terminos.html" target="_blank" rel="noopener">términos de uso</a> y la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a>.</label>
       </div>
       <div class="err full" id="tru-e-ok"></div>
     </div>
@@ -1003,6 +1016,7 @@ nav.main{gap:18px}
           <p>Para que cada opinión sea de una persona real, te pedimos entrar con Google. Solo mostramos tu nombre y tu foto de perfil.</p>
           <button class="btn btn-google" type="button" id="rv-login"><svg aria-hidden="true"><use href="#i-user"/></svg>Continuar con Google</button>
           <div class="err" id="rv-login-err"></div>
+          <p class="rv-legal">Al continuar aceptas los <a href="terminos.html">términos de uso</a> y la <a href="privacidad.html">política de privacidad</a>. Solo mostramos tu nombre y tu foto de Google; tu correo nunca se publica.</p>
         </div>
         <form id="rv-form" hidden novalidate>
           <div class="rv-me"><img id="rv-me-img" alt="" referrerpolicy="no-referrer" hidden><span class="rv-me-ph" id="rv-me-ph"><svg aria-hidden="true"><use href="#i-user"/></svg></span><div><b id="rv-me-name"></b><button type="button" class="linkbtn" id="rv-logout">Cerrar sesión</button></div></div>
@@ -1086,16 +1100,16 @@ nav.main{gap:18px}
             <text x="28" y="184" fill="#C9D3EC" font-family="Jost, sans-serif" font-size="11" letter-spacing="1.5">TITULAR</text>
             <text x="28" y="200" fill="#fff" font-family="Jost, sans-serif" font-size="14" letter-spacing="1.5">PAGO SEGURO · TESIS</text>
           </svg>
-          <img class="card-net" src="logos/visa.png" alt="" onerror="this.remove()">
+          <img class="card-net" src="logos/visa.png" alt="" data-si-falla="quitar">
         </div>
         <p>Pago seguro con tarjeta de crédito o débito a través de Payphone. Escribes el valor acordado en tu cotización y confirmas con los datos de tu tarjeta.</p>
-        <ul class="brands" aria-label="Tarjetas aceptadas"><li><img src="logos/visa.png" alt="" onerror="this.remove()">Visa</li><li><img src="logos/mastercard.png" alt="" onerror="this.remove()">Mastercard</li><li>Diners Club</li><li>Discover</li></ul>
-        <a class="btn btn-wa" id="pay-card-btn" href="#" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-card"/></svg><span id="pay-card-label">Pagar con tarjeta</span></a>
+        <ul class="brands" aria-label="Tarjetas aceptadas"><li><img src="logos/visa.png" alt="" data-si-falla="quitar">Visa</li><li><img src="logos/mastercard.png" alt="" data-si-falla="quitar">Mastercard</li><li>Diners Club</li><li>Discover</li></ul>
+        <a class="btn btn-wa" id="pay-card-btn" href="#" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-card"/></svg><span id="pay-card-label">Pagar con tarjeta</span></a>
         <p class="pay-note" id="pay-card-note">Los datos de tu tarjeta se ingresan en la página de Payphone. Tesis no los ve ni los guarda.</p>
       </article>
       <article class="pay-card" aria-labelledby="pay-bank-t">
         <h3 id="pay-bank-t"><svg aria-hidden="true"><use href="#i-bank"/></svg>Transferencia o depósito en Ecuador</h3>
-        <div class="pay-logo"><img src="logos/banco-pichincha.png" alt="Banco Pichincha" onerror="this.parentNode.remove()"></div>
+        <div class="pay-logo"><img src="logos/banco-pichincha.png" alt="Banco Pichincha" data-si-falla="quitar-padre"></div>
         <dl class="bank">
           <div><dt>Banco</dt><dd>Banco Pichincha</dd><span></span></div>
           <div><dt>Tipo de cuenta</dt><dd>Ahorro transaccional</dd><span></span></div>
@@ -1108,12 +1122,12 @@ nav.main{gap:18px}
           <li>Toma una captura del comprobante.</li>
           <li>Envíala por WhatsApp con tu nombre y el servicio.</li>
         </ol>
-        <a class="btn btn-line" href="https://wa.me/593985568519?text=Hola%2C%20te%20env%C3%ADo%20el%20comprobante%20de%20mi%20pago%20a%20Tesis." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Enviar comprobante</a>
+        <a class="btn btn-line" href="https://wa.me/593985568519?text=Hola%2C%20te%20env%C3%ADo%20el%20comprobante%20de%20mi%20pago%20a%20Tesis." target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg>Enviar comprobante</a>
       </article>
       <article class="pay-card pay-intl" aria-labelledby="pay-pp-t">
         <div class="pp-main">
           <h3 id="pay-pp-t"><svg aria-hidden="true"><use href="#i-wallet"/></svg>PayPal · pagos internacionales</h3>
-          <div class="pay-logo"><img src="logos/paypal.png" alt="PayPal" onerror="this.parentNode.remove()"></div>
+          <div class="pay-logo"><img src="logos/paypal.png" alt="PayPal" data-si-falla="quitar-padre"></div>
           <p>Para estudiantes de Colombia, Perú, México y cualquier otro país. Pagas en dólares desde tu cuenta PayPal o con tu tarjeta, y PayPal hace la conversión desde tu moneda.</p>
           <dl class="bank">
             <div><dt>Correo PayPal</dt><dd id="pp-mail">estalimm@gmail.com</dd><button class="copy" type="button" data-copy="pp-mail">Copiar</button></div>
@@ -1127,8 +1141,8 @@ nav.main{gap:18px}
             <li>Envía la captura del pago por WhatsApp con tu nombre y el servicio.</li>
           </ol>
           <div class="pp-actions">
-            <a class="btn btn-pp" href="https://www.paypal.com/myaccount/transfer/homepage/pay" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wallet"/></svg>Pagar con PayPal</a>
-            <a class="btn btn-line" href="https://wa.me/593985568519?text=Hola%2C%20te%20env%C3%ADo%20el%20comprobante%20de%20mi%20pago%20por%20PayPal%20a%20Tesis." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Enviar comprobante</a>
+            <a class="btn btn-pp" href="https://www.paypal.com/myaccount/transfer/homepage/pay" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wallet"/></svg>Pagar con PayPal</a>
+            <a class="btn btn-line" href="https://wa.me/593985568519?text=Hola%2C%20te%20env%C3%ADo%20el%20comprobante%20de%20mi%20pago%20por%20PayPal%20a%20Tesis." target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg>Enviar comprobante</a>
           </div>
         </div>
       </article>
@@ -1148,10 +1162,10 @@ nav.main{gap:18px}
     <div class="contact">
       <div>
         <ul class="channels">
-          <li><svg aria-hidden="true"><use href="#i-wa"/></svg><div><small>WhatsApp principal</small><a href="https://wa.me/593985568519" target="_blank" rel="noopener">098 556 8519</a></div></li>
-          <li><svg aria-hidden="true"><use href="#i-wa"/></svg><div><small>WhatsApp alterno</small><a href="https://wa.me/593967522953" target="_blank" rel="noopener">096 752 2953</a></div></li>
+          <li><svg aria-hidden="true"><use href="#i-wa"/></svg><div><small>WhatsApp principal</small><a href="https://wa.me/593985568519" target="_blank" rel="noopener noreferrer">098 556 8519</a></div></li>
+          <li><svg aria-hidden="true"><use href="#i-wa"/></svg><div><small>WhatsApp alterno</small><a href="https://wa.me/593967522953" target="_blank" rel="noopener noreferrer">096 752 2953</a></div></li>
           <li><svg aria-hidden="true"><use href="#i-mail"/></svg><div><small>Correo</small><a href="mailto:emindao@unemi.edu.ec">emindao@unemi.edu.ec</a></div></li>
-          <li><svg aria-hidden="true"><use href="#i-fb"/></svg><div><small>Facebook</small><a href="https://www.facebook.com/tesis.ecuador20" target="_blank" rel="noopener">facebook.com/tesis.ecuador20</a></div></li>
+          <li><svg aria-hidden="true"><use href="#i-fb"/></svg><div><small>Facebook</small><a href="https://www.facebook.com/tesis.ecuador20" target="_blank" rel="noopener noreferrer">facebook.com/tesis.ecuador20</a></div></li>
           <li><svg aria-hidden="true"><use href="#i-pin"/></svg><div><small>Oficina</small><span class="ui" style="font-size:1.08rem">La Carolina, Quito · atención 100 % online</span></div></li>
         </ul>
       </div>
@@ -1214,7 +1228,7 @@ nav.main{gap:18px}
         </div>
         <div class="sent" id="sent" hidden>
           <p>Tu mensaje está listo. Si WhatsApp no se abrió solo, usa este botón:</p>
-          <a class="btn btn-wa" id="sent-link" href="https://wa.me/593985568519" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Abrir WhatsApp con mi mensaje</a>
+          <a class="btn btn-wa" id="sent-link" href="https://wa.me/593985568519" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg>Abrir WhatsApp con mi mensaje</a>
         </div>
       </form>
     </div>
@@ -1243,15 +1257,15 @@ nav.main{gap:18px}
     <div>
       <h4>Contacto</h4>
       <ul>
-        <li><a href="https://wa.me/593985568519" target="_blank" rel="noopener">WhatsApp 098 556 8519</a></li>
-        <li><a href="https://wa.me/593967522953" target="_blank" rel="noopener">WhatsApp 096 752 2953</a></li>
+        <li><a href="https://wa.me/593985568519" target="_blank" rel="noopener noreferrer">WhatsApp 098 556 8519</a></li>
+        <li><a href="https://wa.me/593967522953" target="_blank" rel="noopener noreferrer">WhatsApp 096 752 2953</a></li>
         <li><a href="mailto:emindao@unemi.edu.ec">emindao@unemi.edu.ec</a></li>
-        <li><a href="https://www.facebook.com/tesis.ecuador20" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="https://www.facebook.com/tesis.ecuador20" target="_blank" rel="noopener noreferrer">Facebook</a></li>
       </ul>
     </div>
     <div class="legal">
       <span>© <span id="year">2026</span> Tesis. Sede principal en Quito, Ecuador · Colombia · Perú · México.</span>
-      <span><a href="privacidad.html">Privacidad y condiciones</a> · Compromiso · Calidad · Confidencialidad</span>
+      <span><a href="privacidad.html">Política de privacidad</a> · <a href="terminos.html">Términos de uso</a> · <a href="seguridad.html">Seguridad</a></span>
     </div>
   </div>
 </footer>
@@ -1262,86 +1276,15 @@ nav.main{gap:18px}
   <button class="close" type="button" id="viewer-close" aria-label="Cerrar">×</button>
 </dialog>
 
-<a class="float-wa" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+<a class="float-wa" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp">
   <svg aria-hidden="true"><use href="#i-wa"/></svg>
 </a>
 
-<script>
-(function(){
-  /* Pago con tarjeta: pega aquí tu enlace de cobro abierto de Payphone */
-  var PAYPHONE_LINK = '';
-  var pb=document.getElementById('pay-card-btn');
-  if(PAYPHONE_LINK){ pb.href=PAYPHONE_LINK; }
-  else {
-    pb.href='https://wa.me/593985568519?text='+encodeURIComponent('Hola, quiero pagar con tarjeta. ¿Me envías el enlace de pago?');
-    document.getElementById('pay-card-label').textContent='Pedir enlace de pago con tarjeta';
-    document.getElementById('pay-card-note').textContent='Te enviamos por WhatsApp un enlace de Payphone con el valor de tu cotización. Los datos de tu tarjeta se ingresan en la página de Payphone; Tesis no los ve ni los guarda.';
-  }
-  document.querySelectorAll('.copy').forEach(function(b){
-    b.addEventListener('click',function(){
-      var el=document.getElementById(b.dataset.copy), txt=el.textContent.trim();
-      var done=function(){ b.textContent='Copiado'; b.classList.add('ok'); setTimeout(function(){b.textContent='Copiar'; b.classList.remove('ok');},1800); };
-      var fallback=function(){ var r=document.createRange(); r.selectNodeContents(el); var sel=window.getSelection(); sel.removeAllRanges(); sel.addRange(r); try{ if(document.execCommand('copy')) done(); }catch(e){} };
-      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done,fallback); } else { fallback(); }
-    });
-  });
-  var dlg=document.getElementById('viewer'), vi=document.getElementById('viewer-img'), vc=document.getElementById('viewer-cap');
-  document.querySelectorAll('.gallery button').forEach(function(b){
-    b.addEventListener('click',function(){
-      vi.src=b.dataset.full; vi.alt=b.querySelector('img').alt; vc.textContent=b.dataset.cap;
-      if(dlg.showModal) dlg.showModal(); else window.open(b.dataset.full,'_blank');
-    });
-  });
-  document.getElementById('viewer-close').addEventListener('click',function(){dlg.close();});
-  dlg.addEventListener('click',function(e){ if(e.target===dlg) dlg.close(); });
-  var y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();
-  var f=document.getElementById('cotizar');
-  var req=[['nombre','Escribe tu nombre.'],['servicio','Elige el servicio que necesitas.'],['nivel','Elige tu nivel de estudios.'],['detalle','Cuéntanos brevemente tu tema o lo que necesitas.']];
-  f.addEventListener('submit',function(ev){
-    ev.preventDefault();
-    var ok=true, first=null;
-    req.forEach(function(r){
-      var el=f.elements[r[0]], e=document.getElementById('e-'+r[0]);
-      var bad=!el.value.trim();
-      el.setAttribute('aria-invalid',bad?'true':'false');
-      el.setAttribute('aria-describedby','e-'+r[0]);
-      e.textContent=bad?r[1]:'';
-      if(bad){ok=false; if(!first) first=el;}
-    });
-    if(!ok){first.focus();return;}
-    var v=function(n){return f.elements[n].value.trim();};
-    var fecha=v('fecha');
-    if(fecha){var p=fecha.split('-'); fecha=p[2]+'/'+p[1]+'/'+p[0];}
-    var lines=['Hola, soy '+v('nombre')+'. Quiero una cotización.','','Servicio: '+v('servicio'),'Nivel: '+v('nivel')];
-    if(v('carrera')) lines.push('Carrera y universidad: '+v('carrera'));
-    if(fecha) lines.push('Fecha de entrega: '+fecha);
-    lines.push('','Detalle: '+v('detalle'));
-    var num=(f.querySelector('input[name=numero]:checked')||{}).value||'593985568519';
-    var url='https://wa.me/'+num+'?text='+encodeURIComponent(lines.join('\n'));
-    var box=document.getElementById('sent'), link=document.getElementById('sent-link');
-    link.href=url; box.hidden=false;
-    try{ window.open(url,'_blank','noopener'); }catch(e){}
-    link.focus();
-  });
-  f.addEventListener('input',function(ev){
-    var t=ev.target; if(t.getAttribute('aria-invalid')==='true' && t.value.trim()){t.setAttribute('aria-invalid','false'); var e=document.getElementById('e-'+t.name); if(e) e.textContent='';}
-  });
-})();
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+<script src="sitio.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js" integrity="sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="trabajos-config.js"></script>
-<script>
-/* Registro de escaneos de los códigos QR y de barras (?c=CODIGO) */
-(function(){
-  try{
-    var u=new URL(location.href), c=u.searchParams.get('c'), C=window.TRABAJOS_CONFIG||{};
-    if(!c||!/^[A-Z0-9-]{3,40}$/.test(c)||!C.supabaseUrl) return;
-    fetch(C.supabaseUrl+'/rest/v1/rpc/registrar_escaneo',{method:'POST',headers:{apikey:C.supabaseKey,'Content-Type':'application/json'},body:JSON.stringify({p_codigo:c}),keepalive:true}).catch(function(){});
-    u.searchParams.delete('c'); history.replaceState(null,'',u.pathname+(u.search||'')+u.hash);
-  }catch(e){}
-})();
-</script>
+<script src="escaneo.js"></script>
 <script src="trabajos.js"></script>
 <script src="resenas.js"></script>
 </body>
