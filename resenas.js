@@ -130,6 +130,7 @@
     var n = elegida(), txt = $("rv-text").value.trim(), ok = true;
     if (!n) { $("rv-e-stars").textContent = "Elige cuántas estrellas le das al servicio."; ok = false; }
     if (txt.length < 5) { $("rv-e-text").textContent = "Escribe un comentario de al menos 5 letras."; ok = false; }
+    else if (/(https?:\/\/|www\.|<\s*[a-z\/])/i.test(txt)) { $("rv-e-text").textContent = "Por seguridad, el comentario no puede llevar enlaces ni código."; ok = false; }
     if (!ok) return;
     var btn = $("rv-send"); btn.disabled = true; aviso("", "");
     var q = mia
@@ -142,8 +143,12 @@
       aviso("ok", eraNueva ? "Gracias, tu comentario ya está publicado." : "Listo, guardamos los cambios de tu comentario.");
       return cargar();
     }).catch(function (e) {
-      var m = (e && (e.code || e.message)) || "";
-      aviso("bad", /23505|duplicate/i.test(m) ? "Ya tienes un comentario publicado. Recarga la página para editarlo." : "No se pudo guardar tu comentario. Revisa tu conexión e inténtalo otra vez.");
+      var m = ((e && e.code) || "") + " " + ((e && e.message) || "");
+      var txtErr = "No se pudo guardar tu comentario. Revisa tu conexión e inténtalo otra vez.";
+      if (/23505|duplicate/i.test(m)) txtErr = "Ya tienes un comentario publicado. Recarga la página para editarlo.";
+      else if (/BLQ:/.test(m)) txtErr = m.split("BLQ:")[1].trim();
+      else if (/429|demasiadas|too many/i.test(m)) txtErr = "Hubo demasiados intentos seguidos. Espera unos minutos y vuelve a intentarlo.";
+      aviso("bad", txtErr);
     }).then(function () { btn.disabled = false; });
   });
 
