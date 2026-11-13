@@ -2,67 +2,162 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script src="escudo.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
-<title>Tesis · Privacidad y condiciones</title>
-<meta name="description" content="Política de privacidad y condiciones de uso del sitio web de Tesis, asesoría académica.">
+<title>Tesis · Política de privacidad</title>
+<meta name="description" content="Cómo Tesis recoge, usa, protege y elimina los datos personales de quienes visitan su sitio web, conforme a la Ley Orgánica de Protección de Datos Personales del Ecuador.">
 <link rel="icon" href="logo.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&family=Literata:opsz,wght@7..72,400&display=swap" rel="stylesheet">
-<style>
-:root{--ink:#0F1E3A;--gold:#B8893B;--bg:#FAFAFB;--text:#1E2636;--muted:#5A6478;--line:#E4E7EE;color-scheme:light}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.7 "Literata",Georgia,serif}
-.wrap{max-width:760px;margin:0 auto;padding:40px max(20px,env(safe-area-inset-left,0px)) 80px}
-a{color:var(--ink)}
-.back{font:500 .95rem/1 "Jost",sans-serif;text-decoration:none;color:var(--gold)}
-h1,h2{font-family:"Jost",system-ui,sans-serif;color:var(--ink);font-weight:500;line-height:1.2;text-wrap:balance}
-h1{font-size:clamp(1.9rem,5vw,2.6rem);margin:28px 0 6px}
-h2{font-size:1.3rem;margin:36px 0 8px}
-.date{font:400 .9rem/1.4 "Jost",sans-serif;color:var(--muted);margin-bottom:28px}
-p,li{max-width:65ch}
-ul{padding-left:1.2em}
-footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font:400 .9rem/1.5 "Jost",sans-serif;color:var(--muted)}
-</style>
+<link rel="stylesheet" href="legal.css">
 </head>
 <body>
 <div class="wrap">
-  <a class="back" href="./">← Volver a la página de Tesis</a>
-  <h1>Privacidad y condiciones de uso</h1>
-  <p class="date">Última actualización: 7 de noviembre de 2026</p>
+  <div class="top">
+    <a class="back" href="./">← Volver a la página de Tesis</a>
+    <nav class="tabs" aria-label="Documentos legales">
+      <a href="privacidad.html" aria-current="page">Privacidad</a>
+      <a href="terminos.html">Términos de uso</a>
+      <a href="seguridad.html">Seguridad</a>
+    </nav>
+  </div>
 
-  <p>Esta página explica qué datos recoge el sitio web de Tesis, para qué los usamos y qué reglas aplican a quien comenta o sube documentos. Si tienes una duda, escríbenos por WhatsApp al 098 556 8519 o al correo estalimm@gmail.com.</p>
+  <h1>Política de privacidad</h1>
+  <p class="date">Vigente desde el 13 de noviembre de 2026</p>
 
-  <h2>Qué datos recogemos</h2>
+  <p>En Tesis cuidamos los datos de las personas que visitan esta página, comentan, suben documentos de ejemplo o nos escriben. Aquí explicamos qué datos recogemos, para qué, con quién los compartimos, cuánto tiempo los guardamos y cómo puedes pedirnos que los corrijamos o los borremos.</p>
+  <p>Esta política sigue la Ley Orgánica de Protección de Datos Personales del Ecuador (LOPDP) y su reglamento. También atendemos a personas de Colombia, Perú y México, así que al final indicamos qué autoridad corresponde en cada país.</p>
+
+  <div class="box gold"><p><b>En pocas palabras:</b> pedimos solo lo necesario, no vendemos datos, no usamos publicidad ni rastreadores, nunca vemos los datos de tu tarjeta y puedes borrar tu comentario tú mismo cuando quieras. Para todo lo demás, escríbenos y respondemos en un máximo de 15 días.</p></div>
+
+  <ol class="toc">
+    <li><a href="#responsable">Quién es el responsable</a></li>
+    <li><a href="#datos">Qué datos recogemos</a></li>
+    <li><a href="#fines">Para qué los usamos y con qué base legal</a></li>
+    <li><a href="#terceros">Con quién los compartimos</a></li>
+    <li><a href="#internacional">Datos guardados fuera del Ecuador</a></li>
+    <li><a href="#plazos">Cuánto tiempo los guardamos</a></li>
+    <li><a href="#navegador">Lo que se guarda en tu navegador</a></li>
+    <li><a href="#seguridad">Cómo los protegemos</a></li>
+    <li><a href="#derechos">Tus derechos y cómo ejercerlos</a></li>
+    <li><a href="#menores">Menores de edad</a></li>
+    <li><a href="#paises">Colombia, Perú y México</a></li>
+    <li><a href="#cambios">Cambios a esta política</a></li>
+  </ol>
+
+  <h2 id="responsable">1. Quién es el responsable</h2>
+  <p>El responsable del tratamiento es <b>Estalin Arley Minda Ortiz</b>, que ofrece sus servicios con el nombre comercial <b>Tesis</b>, con sede principal en Quito, Ecuador.</p>
   <ul>
-    <li><b>Inicio de sesión con Google.</b> Cuando entras para dejar un comentario, Google nos comparte tu nombre, tu foto de perfil y tu correo. En la página solo mostramos tu nombre y tu foto junto a tu comentario. El correo no se publica.</li>
-    <li><b>Comentarios y calificaciones.</b> Guardamos las estrellas que das y el texto que escribes, con la fecha.</li>
-    <li><b>Documentos de la sección de trabajos realizados.</b> Guardamos el archivo, el título, el tipo de trabajo y, si los escribes, tu nombre y tu contacto. Tu nombre y tu contacto no se publican.</li>
-    <li><b>Formulario de cotización.</b> No guarda nada en el sitio. Solo arma un mensaje que tú decides enviar por WhatsApp.</li>
+    <li>Correo para temas de datos personales: <a href="mailto:estalimm@gmail.com?subject=Protecci%C3%B3n%20de%20datos">estalimm@gmail.com</a> (asunto: «Protección de datos»)</li>
+    <li>WhatsApp: <a href="https://wa.me/593985568519" rel="noopener noreferrer">098 556 8519</a></li>
   </ul>
 
-  <h2>Para qué los usamos</h2>
-  <p>Usamos estos datos para mostrar los comentarios y los trabajos en la página y para responderte si nos dejas un contacto. No vendemos ni compartimos tus datos con otras empresas para publicidad.</p>
+  <h2 id="datos">2. Qué datos recogemos</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>Cuándo</th><th>Qué datos</th><th>Qué se publica</th></tr></thead>
+    <tbody>
+      <tr><td>Entras con Google para comentar</td><td>Nombre, foto de perfil, correo e identificador de tu cuenta de Google</td><td>Solo tu nombre y tu foto. El correo nunca se publica.</td></tr>
+      <tr><td>Dejas un comentario</td><td>Estrellas (1 a 5), texto del comentario, fecha de publicación y de edición</td><td>Todo lo que escribes, junto a tu nombre y foto</td></tr>
+      <tr><td>Subes un documento de ejemplo</td><td>El archivo, su nombre original, tamaño y tipo, el título, el tipo de trabajo, el nivel y la carrera. Si los escribes, tu nombre y tu WhatsApp o correo.</td><td>El archivo (como vista previa), el título, el tipo de trabajo, el nivel y la carrera. Tu nombre y tu contacto no se publican.</td></tr>
+      <tr><td>Reportas un documento</td><td>El documento reportado, el motivo y la dirección IP desde la que se envió el reporte</td><td>Nada</td></tr>
+      <tr><td>Escaneas nuestro código QR o de barras</td><td>El código escaneado, la fecha y la dirección IP</td><td>Nada. Solo vemos el número total de escaneos.</td></tr>
+      <tr><td>Envías algo a la página (comentar, subir, reportar, escanear)</td><td>Dirección IP y hora, para frenar ataques y abusos</td><td>Nada</td></tr>
+      <tr><td>Usas el formulario de cotización</td><td>Nada en el sitio. El formulario solo arma un mensaje que tú decides enviar por WhatsApp.</td><td>Nada</td></tr>
+      <tr><td>Nos escribes por WhatsApp, Facebook o correo</td><td>Lo que tú nos cuentes para darte la cotización o el servicio</td><td>Nada</td></tr>
+    </tbody>
+  </table></div>
+  <p>No pedimos ni guardamos contraseñas, números de cédula, datos de tarjetas ni datos sensibles (salud, religión, orientación sexual, datos biométricos, etc.). Te pedimos que no los incluyas en comentarios ni en los documentos que subas.</p>
 
-  <h2>Dónde se guardan</h2>
-  <p>Los comentarios y los documentos se guardan en Supabase, un servicio de base de datos. El inicio de sesión lo maneja Google. La página está alojada en GitHub Pages.</p>
-
-  <h2>Borrar tus datos</h2>
-  <p>Puedes editar o eliminar tu comentario cuando quieras desde la sección de comentarios, con tu misma cuenta de Google. Si quieres que borremos un documento que subiste o tu cuenta completa, escríbenos y lo hacemos.</p>
-
-  <h2>Reglas para comentar y subir documentos</h2>
+  <h2 id="fines">3. Para qué los usamos y con qué base legal</h2>
   <ul>
-    <li>Cada persona puede dejar un comentario, y debe tratarse de su experiencia real con nuestro servicio.</li>
-    <li>No se permiten insultos, publicidad de otras empresas ni datos personales de terceros.</li>
-    <li>Los documentos que subas deben ser muestras que tengas derecho a compartir y no pueden incluir nombres, cédulas ni datos de otras personas.</li>
-    <li>Podemos retirar comentarios o documentos que no cumplan estas reglas.</li>
+    <li><b>Mostrar tu comentario y tu calificación</b> y permitirte editarlo o borrarlo. Base: tu consentimiento, que das al entrar con Google y publicar.</li>
+    <li><b>Publicar el documento de ejemplo que subes</b> y, si nos dejaste un contacto, escribirte sobre ese documento. Base: tu consentimiento, que das al marcar la casilla del formulario.</li>
+    <li><b>Atender tu cotización, prestar el servicio y recibir tus pagos.</b> Base: la ejecución del acuerdo que haces con nosotros.</li>
+    <li><b>Proteger la página</b> contra ataques, spam, robots y documentos con datos de otras personas, usando la dirección IP y la hora de las solicitudes. Base: nuestro interés legítimo en mantener el sitio seguro, con datos que se borran en uno o dos días.</li>
+    <li><b>Contar los escaneos de nuestros códigos</b> para saber cuántas personas llegan por ellos. Solo usamos el total, nunca quién escaneó.</li>
+  </ul>
+  <p>No usamos tus datos para publicidad, no hacemos perfiles y no vendemos ni alquilamos datos a nadie.</p>
+  <p>Hay una sola decisión automática en el sitio: si un documento recibe reportes desde tres conexiones distintas, se oculta mientras lo revisamos. Si subiste ese documento y no estás de acuerdo, escríbenos y lo revisa una persona.</p>
+
+  <h2 id="terceros">4. Con quién los compartimos</h2>
+  <p>Para que la página funcione usamos estos proveedores. Cada uno trata los datos según su propia política de privacidad.</p>
+  <ul>
+    <li><b>Supabase</b>: guarda la base de datos de comentarios, trabajos y códigos, y los archivos que se suben.</li>
+    <li><b>GitHub</b> (Microsoft): aloja la página web.</li>
+    <li><b>Google</b>: maneja el inicio de sesión, entrega los tipos de letra de la página y muestra la vista previa de algunos documentos (OpenDocument y RTF).</li>
+    <li><b>Microsoft Office Online</b>: muestra la vista previa de documentos de Word, PowerPoint y Excel.</li>
+    <li><b>jsDelivr</b>: entrega dos librerías de código que usa la página (el lector de PDF y la conexión con la base de datos).</li>
+    <li><b>Meta</b> (WhatsApp y Facebook): cuando decides escribirnos por esos medios.</li>
+    <li><b>PayPal, Banco Pichincha y Payphone</b>: cuando haces un pago. Los datos de tu tarjeta o de tu cuenta los ingresas en la página del banco o de la plataforma de pago; Tesis no los ve ni los guarda.</li>
+    <li><b>Gnomio</b>: aloja nuestra aula virtual Moodle (tesis.gnomio.com). Al registrarte ahí, tus datos los trata esa plataforma.</li>
+  </ul>
+  <p>Solo entregaremos datos a una autoridad cuando una ley o una orden judicial lo exija.</p>
+
+  <h2 id="internacional">5. Datos guardados fuera del Ecuador</h2>
+  <p>Los proveedores de la sección anterior tienen sus servidores fuera del Ecuador, principalmente en Estados Unidos y en la Unión Europea. Al usar la página, tus datos pueden guardarse o pasar por esos países. Elegimos proveedores grandes que ofrecen cifrado, controles de acceso y cláusulas contractuales de protección de datos, y les enviamos solo lo necesario para que el servicio funcione.</p>
+
+  <h2 id="plazos">6. Cuánto tiempo los guardamos</h2>
+  <ul>
+    <li><b>Comentarios</b>: hasta que los borres o nos pidas borrarlos.</li>
+    <li><b>Documentos de ejemplo</b>: mientras sigan publicados. Los borramos cuando nos lo pides o si incumplen las reglas.</li>
+    <li><b>Dirección IP de solicitudes, subidas y escaneos</b>: entre 1 y 2 días. Luego se borra sola.</li>
+    <li><b>Reportes de documentos</b>: hasta 6 meses.</li>
+    <li><b>Conversaciones de cotización y servicio</b>: mientras dure el servicio y el tiempo que exijan las leyes tributarias y de consumo.</li>
   </ul>
 
-  <h2>Cambios</h2>
-  <p>Si cambiamos esta política, actualizaremos la fecha de arriba.</p>
+  <h2 id="navegador">7. Lo que se guarda en tu navegador</h2>
+  <p>La página no usa cookies de publicidad ni de analítica. En el almacenamiento de tu navegador solo se guardan:</p>
+  <ul>
+    <li>Tu sesión de Google, si entras para comentar. Se borra al pulsar «Cerrar sesión».</li>
+    <li>Un registro de las horas en que subiste documentos, para aplicar el límite de 3 por hora.</li>
+    <li>Los documentos que ya reportaste, mientras tengas la página abierta.</li>
+  </ul>
+  <p>Puedes borrar todo esto desde la configuración de tu navegador.</p>
 
-  <footer>Tesis · Asesoría académica e investigación · Ecuador, Colombia, Perú y México</footer>
+  <h2 id="seguridad">8. Cómo los protegemos</h2>
+  <ul>
+    <li>Toda la página funciona con conexión cifrada (HTTPS).</li>
+    <li>La base de datos tiene reglas de acceso fila por fila: desde la página nadie puede leer el nombre ni el contacto de quien subió un documento, ni editar o borrar el comentario de otra persona.</li>
+    <li>Solo se puede comentar con una cuenta de Google verificada, y el nombre y la foto salen de Google; no se pueden falsificar desde la página.</li>
+    <li>Hay límites automáticos de solicitudes y de subidas por conexión, y se revisa el contenido real de cada archivo antes de aceptarlo.</li>
+    <li>La página bloquea el código de terceros no autorizado y no puede mostrarse dentro de otras webs.</li>
+  </ul>
+  <p>Ningún sistema es invulnerable. Si ocurre una vulneración que afecte tus datos, te avisaremos y lo comunicaremos a la Superintendencia de Protección de Datos Personales en los plazos que fija la ley. Más detalles en la página de <a href="seguridad.html">seguridad</a>.</p>
+
+  <h2 id="derechos">9. Tus derechos y cómo ejercerlos</h2>
+  <p>La LOPDP te reconoce estos derechos sobre tus datos:</p>
+  <ul>
+    <li><b>Información y acceso</b>: saber qué datos tuyos tenemos y para qué.</li>
+    <li><b>Rectificación y actualización</b>: corregir datos inexactos o incompletos.</li>
+    <li><b>Eliminación</b>: pedir que borremos tus datos.</li>
+    <li><b>Oposición</b>: pedir que dejemos de usarlos para un fin determinado.</li>
+    <li><b>Portabilidad</b>: recibir tus datos en un formato que puedas llevar a otro lugar.</li>
+    <li><b>Suspensión del tratamiento</b>: pedir que pausemos su uso mientras se resuelve una duda.</li>
+    <li><b>No ser objeto de decisiones automatizadas</b> que te afecten sin que intervenga una persona.</li>
+  </ul>
+  <p><b>Cómo pedirlo:</b> escribe a <a href="mailto:estalimm@gmail.com?subject=Protecci%C3%B3n%20de%20datos">estalimm@gmail.com</a> con el asunto «Protección de datos», o por WhatsApp al 098 556 8519. Indica qué derecho quieres ejercer y cómo identificarte (por ejemplo, el correo de Google con el que comentaste o el código TR del documento). Es gratis. Respondemos en un máximo de 15 días. Si nos falta información, te la pediremos una sola vez en los primeros 5 días.</p>
+  <p>Tu comentario lo puedes editar o borrar tú mismo en cualquier momento desde la sección de comentarios.</p>
+  <p>Si no respondemos o no estás de acuerdo con la respuesta, puedes presentar una solicitud ante la <b>Superintendencia de Protección de Datos Personales</b> del Ecuador, al correo solicitudes@spdp.gob.ec (con firma electrónica) o de forma presencial en Quito.</p>
+
+  <h2 id="menores">10. Menores de edad</h2>
+  <p>Nuestros servicios están dirigidos a estudiantes de educación superior y profesionales. Si eres menor de 18 años, no inicies sesión, no comentes y no subas documentos sin la autorización de tu madre, padre o representante. Si descubrimos datos de un menor publicados sin esa autorización, los borramos.</p>
+
+  <h2 id="paises">11. Colombia, Perú y México</h2>
+  <p>Si nos contactas desde estos países, también puedes acudir a la autoridad de protección de datos de tu país:</p>
+  <ul>
+    <li><b>Colombia</b>: Ley 1581 de 2012. Autoridad: Superintendencia de Industria y Comercio (SIC).</li>
+    <li><b>Perú</b>: Ley 29733, Ley de Protección de Datos Personales. Autoridad: Autoridad Nacional de Protección de Datos Personales del Ministerio de Justicia y Derechos Humanos.</li>
+    <li><b>México</b>: Ley Federal de Protección de Datos Personales en Posesión de los Particulares, publicada el 20 de marzo de 2025. Autoridad: Secretaría Anticorrupción y Buen Gobierno. Tus derechos de acceso, rectificación, cancelación y oposición (ARCO) los ejerces por los mismos canales de la sección 9.</li>
+  </ul>
+
+  <h2 id="cambios">12. Cambios a esta política</h2>
+  <p>Si cambiamos esta política, actualizaremos la fecha de arriba. Si el cambio es importante (por ejemplo, un dato nuevo o un nuevo uso), lo avisaremos en la página principal antes de aplicarlo.</p>
+
+  <footer>Tesis · Asesoría académica e investigación · Ecuador, Colombia, Perú y México · <a href="terminos.html">Términos de uso</a> · <a href="seguridad.html">Seguridad</a></footer>
 </div>
 </body>
 </html>
