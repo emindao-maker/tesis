@@ -7,8 +7,10 @@
 <meta name="format-detection" content="telephone=no">
 <script src="escudo.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tesis · Asesoría académica</title>
-<meta name="description" content="Asesoría de tesis e investigación 100 % online para pregrado, maestría y doctorado en Ecuador, Colombia, Perú y México. Tesis, proyectos de investigación, ensayos, investigación jurídica y preparación para exámenes de admisión.">
+<title>Asesoría de tesis en Ecuador · Tesis, artículos científicos e investigación | Tesis</title>
+<meta name="description" content="Asesoría de tesis, proyectos de investigación, artículos científicos y ensayos con normas APA 7. Pregrado, maestría y doctorado, 100 % online en Ecuador, Colombia, Perú y México.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<link rel="canonical" href="https://emindao-maker.github.io/tesis/">
 <meta name="theme-color" content="#FFFFFF">
 <meta name="color-scheme" content="light">
 <meta property="og:type" content="website">
@@ -33,6 +35,9 @@
   "email": "emindao@unemi.edu.ec",
   "address": {"@type": "PostalAddress", "addressLocality": "Quito", "addressRegion": "Pichincha", "addressCountry": "EC"},
   "areaServed": ["EC", "CO", "PE", "MX"],
+  "url": "https://emindao-maker.github.io/tesis/",
+  "logo": "https://emindao-maker.github.io/tesis/logo.webp",
+  "knowsAbout": ["asesoría de tesis", "trabajo de titulación", "proyecto de investigación", "artículos científicos", "normas APA 7", "ensayos académicos", "tesis de Derecho", "examen complexivo"],
   "sameAs": ["https://www.facebook.com/tesis.ecuador20"],
   "keywords": "TesisEcuador, TesisEC, AsesoriaDeTesis, TerminaTuTesis, TesisLatam, asesoría de tesis Ecuador, tesis online"
 }
@@ -268,7 +273,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--focus);outline:none;b
 .sent p{margin:0 0 12px;font:400 .95rem/1.5 "Jost",sans-serif;color:var(--text)}
 /* Pie */
 footer{background:#0F1E3A;color:#C8D0E0;padding:56px 0 34px;font:400 .95rem/1.6 "Jost",sans-serif}
-footer .wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+footer .wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
 footer h4{color:#fff;font:500 1rem/1 "Jost",sans-serif;margin:0 0 14px}
 footer ul{list-style:none;margin:0;padding:0}
 footer li{margin-bottom:8px}
@@ -982,6 +987,15 @@ dialog.menu-dlg::backdrop{background:rgba(15,30,58,.32);backdrop-filter:blur(4px
 .cz-cerrar:hover{background:rgba(255,255,255,.18);transform:rotate(90deg)}
 html:has(.cz-dlg[open]){overflow:hidden}
 @media (max-width:760px){.cz-dlg{width:calc(100vw - 16px);border-radius:18px}.cz-dlg .cz{padding-top:56px}}
+
+/* ===== Guías gratuitas (SEO) ===== */
+.guias{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.guia{display:flex;flex-direction:column;gap:6px;padding:22px;border-radius:var(--radius-l);text-decoration:none;color:var(--text);background:var(--glass-strong);border:1px solid rgba(255,255,255,.95);box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
+.guia:hover{transform:translateY(-3px);box-shadow:0 24px 44px -24px rgba(15,30,58,.4)}
+.guia span{font:500 .72rem/1 "Jost",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.guia h3{margin:4px 0 0}
+.guia p{margin:0;color:var(--muted);font-size:.98rem;line-height:1.55}
+.guia b{margin-top:auto;padding-top:8px;font:500 .95rem/1 "Jost",sans-serif;color:var(--ink)}
 </style>
 </head>
 <body>
@@ -1027,6 +1041,7 @@ html:has(.cz-dlg[open]){overflow:hidden}
       <a href="#sedes">Sedes</a>
       <a href="#proceso">Cómo trabajamos</a>
       <a href="#comentarios">Comentarios</a>
+      <a href="#guias">Guías</a>
       <a href="#preguntas">Preguntas</a>
       <a href="#pagos">Pagos</a>
       <a href="#contacto">Contacto</a>
@@ -1055,6 +1070,7 @@ html:has(.cz-dlg[open]){overflow:hidden}
           <li><a href="#aula"><span>Aula virtual: cursos en línea</span></a></li>
           <li><a href="#trabajos"><span>Nuestros trabajos realizados</span></a></li>
           <li><a href="#comentarios"><span>Comentarios</span></a></li>
+          <li><a href="#guias"><span>Guías gratuitas</span></a></li>
           <li><a href="#preguntas"><span>Preguntas frecuentes</span></a></li>
           <li><a href="#pagos"><span>Pagos</span></a></li>
           <li><a href="#contacto"><span>Contacto y cotización</span></a></li>
@@ -1496,10 +1512,30 @@ html:has(.cz-dlg[open]){overflow:hidden}
   </div>
 </section>
 
-<section class="block alt" id="preguntas">
+<section class="block" id="guias">
   <div class="wrap">
     <div class="sec-head">
       <div class="num">Capítulo 9</div>
+      <div>
+        <h2>Guías gratuitas para tu tesis</h2>
+        <p>Lo que más nos preguntan, explicado con ejemplos: cómo armar el anteproyecto, citar en APA 7, escribir un artículo científico o elegir un tema de tesis de Derecho.</p>
+      </div>
+    </div>
+    <div class="guias">
+      <a class="guia" href="asesoria-de-tesis.html"><span>Guía</span><h3>Asesoría de tesis</h3><p>Qué incluye, cuánto toma cada etapa y cómo trabajamos contigo.</p><b>Leer guía →</b></a>
+      <a class="guia" href="tesis-de-derecho.html"><span>Guía</span><h3>Tesis de Derecho</h3><p>Temas para 2026, estructura y cómo citar leyes y sentencias.</p><b>Leer guía →</b></a>
+      <a class="guia" href="proyecto-de-investigacion.html"><span>Guía</span><h3>Proyecto de investigación</h3><p>Las partes del anteproyecto con ejemplos de objetivos.</p><b>Leer guía →</b></a>
+      <a class="guia" href="articulos-cientificos.html"><span>Guía</span><h3>Artículos científicos</h3><p>Estructura IMRyD y cómo publicar en revistas indexadas.</p><b>Leer guía →</b></a>
+      <a class="guia" href="normas-apa-7.html"><span>Guía</span><h3>Normas APA 7</h3><p>Citas, et al. y referencias de libros, revistas, leyes y tesis.</p><b>Leer guía →</b></a>
+      <a class="guia" href="ensayo-academico.html"><span>Guía</span><h3>Ensayo académico</h3><p>Introducción con tesis, desarrollo, conclusión y errores comunes.</p><b>Leer guía →</b></a>
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="preguntas">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num">Capítulo 10</div>
       <div><h2>Preguntas frecuentes</h2></div>
     </div>
     <div class="faq">
@@ -1517,7 +1553,7 @@ html:has(.cz-dlg[open]){overflow:hidden}
 <section class="block" id="pagos">
   <div class="wrap">
     <div class="sec-head">
-      <div class="num">Capítulo 10</div>
+      <div class="num">Capítulo 11</div>
       <div>
         <h2>Pagos</h2>
         <p>Paga con tarjeta, por transferencia en Ecuador o con PayPal desde cualquier país. En todos los casos, envíanos el comprobante por WhatsApp para registrar tu pago y empezar con tu trabajo.</p>
@@ -1595,7 +1631,7 @@ html:has(.cz-dlg[open]){overflow:hidden}
 <section class="block photo" id="contacto" style="--img:url(fondo-oficina.webp)">
   <div class="wrap">
     <div class="sec-head">
-      <div class="num">Capítulo 11</div>
+      <div class="num">Capítulo 12</div>
       <div>
         <h2>Contacto y cotización</h2>
         <p>Llena el formulario y se abrirá WhatsApp con tu mensaje listo para enviar. Respondemos con la cotización por el mismo chat.</p>
@@ -1736,6 +1772,17 @@ html:has(.cz-dlg[open]){overflow:hidden}
         <li><a href="#servicios">Ensayos y trabajos</a></li>
         <li><a href="#servicios">Investigación jurídica</a></li>
         <li><a href="#servicios">Exámenes de admisión</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Guías</h4>
+      <ul>
+        <li><a href="asesoria-de-tesis.html">Asesoría de tesis</a></li>
+        <li><a href="tesis-de-derecho.html">Tesis de Derecho</a></li>
+        <li><a href="proyecto-de-investigacion.html">Proyecto de investigación</a></li>
+        <li><a href="articulos-cientificos.html">Artículos científicos</a></li>
+        <li><a href="normas-apa-7.html">Normas APA 7</a></li>
+        <li><a href="ensayo-academico.html">Ensayo académico</a></li>
       </ul>
     </div>
     <div>
