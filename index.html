@@ -33,7 +33,8 @@
   "email": "emindao@unemi.edu.ec",
   "address": {"@type": "PostalAddress", "addressLocality": "Quito", "addressRegion": "Pichincha", "addressCountry": "EC"},
   "areaServed": ["EC", "CO", "PE", "MX"],
-  "sameAs": ["https://www.facebook.com/tesis.ecuador20"]
+  "sameAs": ["https://www.facebook.com/tesis.ecuador20"],
+  "keywords": "TesisEcuador, TesisEC, AsesoriaDeTesis, TerminaTuTesis, TesisLatam, asesoría de tesis Ecuador, tesis online"
 }
 </script>
 <style>
@@ -731,6 +732,242 @@ dialog.menu-dlg::backdrop{background:rgba(15,30,58,.32);backdrop-filter:blur(4px
   .float-wa{display:none}
   body{padding-bottom:calc(74px + env(safe-area-inset-bottom,0px))}
 }
+
+/* ===== Cinta de contacto: ¡Contáctanos ahora! ===== */
+.cz{position:relative;isolation:isolate;overflow:hidden;background:
+  radial-gradient(1200px 380px at 15% 0%,rgba(31,157,85,.28),transparent 60%),
+  radial-gradient(900px 420px at 95% 100%,rgba(184,137,59,.3),transparent 60%),
+  linear-gradient(160deg,#0B1730 0%,#0F1E3A 55%,#13264A 100%);
+  color:#DCE3F1;padding:72px 0 0}
+.cz::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.5;
+  background-image:radial-gradient(rgba(255,255,255,.09) 1px,transparent 1px);background-size:22px 22px;
+  -webkit-mask-image:linear-gradient(180deg,#000,transparent 75%);mask-image:linear-gradient(180deg,#000,transparent 75%)}
+.cz-chispas{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none}
+
+.cz-head{position:relative;z-index:5;display:grid;grid-template-columns:auto 1fr auto;gap:34px;align-items:center}
+.cz-pre{display:inline-flex;align-items:center;gap:10px;margin:0 0 6px;font:500 .8rem/1 "Jost",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#9FE3BC}
+.cz-pre i{width:9px;height:9px;border-radius:50%;background:#2BD46F;box-shadow:0 0 0 0 rgba(43,212,111,.7);animation:cz-vivo 1.8s infinite}
+@keyframes cz-vivo{70%{box-shadow:0 0 0 10px rgba(43,212,111,0)}100%{box-shadow:0 0 0 0 rgba(43,212,111,0)}}
+.cz h2{color:#fff;font:600 clamp(2.3rem,6.4vw,4.6rem)/1 "Jost",sans-serif;letter-spacing:-.03em;margin:0 0 12px;text-transform:none}
+.cz h2 em{font-style:normal;position:relative;display:inline-block;color:transparent;
+  background:linear-gradient(100deg,#E6CF9C 0%,#fff 20%,#F2C46B 40%,#B8893B 60%,#E6CF9C 80%,#fff 100%);background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;animation:cz-oro 3.4s linear infinite}
+.cz h2 em::after{content:"";position:absolute;left:2%;right:2%;bottom:-.08em;height:.12em;border-radius:99px;
+  background:linear-gradient(90deg,transparent,#F2C46B,#fff,#F2C46B,transparent);background-size:200% 100%;animation:cz-oro 2.2s linear infinite}
+@keyframes cz-oro{to{background-position:-220% 0}}
+.cz-head p:not(.cz-pre){margin:0;color:#B7C2D8;font:400 1.08rem/1.55 "Jost",sans-serif;max-width:44ch}
+.cz-head p b{color:#fff;font-weight:600}
+
+/* Ícono que salta */
+.cz-salto{position:relative;display:block;width:132px;height:150px;text-decoration:none;flex:none}
+.cz-bola{position:absolute;left:50%;bottom:22px;width:96px;height:96px;margin-left:-48px;border-radius:50%;display:grid;place-items:center;color:#fff;
+  background:radial-gradient(circle at 32% 28%,#4BE58B 0%,#25C267 38%,#1F9D55 70%,#167A41 100%);
+  box-shadow:0 18px 30px -12px rgba(37,211,102,.65),inset 0 -6px 14px rgba(0,0,0,.18),inset 0 4px 10px rgba(255,255,255,.35);
+  transform-origin:50% 100%;animation:cz-bote 1.25s cubic-bezier(.3,0,.3,1) infinite}
+.cz-bola svg{width:56px;height:56px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.2))}
+.cz-sombra{position:absolute;left:50%;bottom:12px;width:84px;height:14px;margin-left:-42px;border-radius:50%;background:rgba(0,0,0,.55);filter:blur(3px);animation:cz-sombra 1.25s cubic-bezier(.3,0,.3,1) infinite}
+.cz-onda{position:absolute;left:50%;bottom:22px;width:96px;height:96px;margin-left:-48px;border-radius:50%;border:2px solid rgba(43,212,111,.75);animation:cz-onda 2.5s ease-out infinite}
+.cz-onda.cz-d2{animation-delay:1.25s}
+@keyframes cz-bote{
+  0%{transform:translateY(0) scale(1.18,.8)}
+  10%{transform:translateY(-10px) scale(.88,1.14)}
+  45%{transform:translateY(-52px) scale(1,1) rotate(-8deg)}
+  55%{transform:translateY(-52px) scale(1,1) rotate(8deg)}
+  90%{transform:translateY(-6px) scale(.94,1.08) rotate(0)}
+  100%{transform:translateY(0) scale(1.18,.8)}}
+@keyframes cz-sombra{0%,100%{transform:scale(1.1);opacity:.75}50%{transform:scale(.5);opacity:.25}}
+@keyframes cz-onda{0%{transform:scale(.9);opacity:.9}100%{transform:scale(1.9);opacity:0}}
+.cz-salto:hover .cz-bola{animation-duration:.7s}
+.cz-salto:hover .cz-sombra{animation-duration:.7s}
+
+.cz-cta{position:relative;overflow:hidden;background:#1F9D55;color:#fff;border:0;font-size:1.05rem;padding:16px 26px;border-radius:999px;box-shadow:0 14px 30px -12px rgba(37,211,102,.7)}
+.cz-cta:hover{background:#25B562}
+.cz-cta::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:cz-brillo 2.8s ease-in-out infinite}
+@keyframes cz-brillo{0%,55%{left:-60%}100%{left:130%}}
+
+/* Pista con las cintas */
+.cz-pista{position:relative;z-index:2;height:250px;margin-top:26px}
+.cz-cinta{position:absolute;left:-6%;right:-6%;display:flex;align-items:center}
+.cz-cinta .cz-ventana{overflow:hidden;width:100%}
+.cz-track{display:flex;width:max-content;animation:cz-correr 38s linear infinite}
+.cz-grupo{display:flex;align-items:center;flex:none}
+@keyframes cz-correr{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.cz-a{top:122px;height:68px;transform:rotate(-2.5deg);z-index:3;
+  background:linear-gradient(180deg,#25C267,#1F9D55 55%,#178246);
+  box-shadow:0 22px 40px -18px rgba(0,0,0,.7),inset 0 2px 0 rgba(255,255,255,.35),inset 0 -2px 0 rgba(0,0,0,.2)}
+.cz-a::before,.cz-a::after{content:"";position:absolute;left:0;right:0;height:5px;
+  background:repeating-linear-gradient(90deg,#F2C46B 0 18px,#0F1E3A 18px 36px);opacity:.95}
+.cz-a::before{top:0}.cz-a::after{bottom:0}
+.cz-a .cz-item{display:inline-flex;align-items:center;gap:12px;padding:0 30px;white-space:nowrap;color:#fff;text-decoration:none;
+  font:600 1.35rem/1 "Jost",sans-serif;letter-spacing:.02em;text-shadow:0 1px 0 rgba(0,0,0,.25)}
+.cz-a .cz-item svg{width:26px;height:26px;flex:none}
+.cz-a .cz-item small{font:500 .78rem/1 "Jost",sans-serif;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.cz-a a.cz-item:hover{color:#FFF3D1}
+.cz-a .cz-sep{color:#F2C46B;font-size:1.2rem}
+
+.cz-b{top:96px;height:46px;transform:rotate(3.5deg);z-index:1;background:#E6CF9C;
+  background-image:repeating-linear-gradient(-45deg,rgba(15,30,58,.06) 0 12px,transparent 12px 24px);
+  box-shadow:0 12px 26px -14px rgba(0,0,0,.6)}
+.cz-b .cz-track{animation-duration:55s}
+.cz-b .cz-item{padding:0 26px;white-space:nowrap;color:#0F1E3A;font:600 1rem/1 "Jost",sans-serif;letter-spacing:.2em;text-transform:uppercase}
+.cz-b .cz-sep{color:#B8893B}
+.cz-pista:hover .cz-track{animation-play-state:paused}
+
+/* WhatsApp arrastrado que saca chispas (lo mueve cinta.js) */
+.cz-arrastre{position:absolute;left:0;top:0;z-index:6;display:none;align-items:center;gap:10px;padding:10px 20px 10px 12px;border-radius:999px;
+  background:linear-gradient(180deg,#fff,#E9F7EF);color:#0F1E3A;text-decoration:none;font:600 1rem/1 "Jost",sans-serif;white-space:nowrap;
+  box-shadow:0 10px 22px -8px rgba(0,0,0,.6),0 0 0 3px rgba(37,211,102,.5);transform-origin:100% 100%;will-change:transform}
+.cz-arrastre .cz-ico{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#1F9D55;color:#fff}
+.cz-arrastre .cz-ico svg{width:22px;height:22px}
+.cz-arrastre .cz-punto{position:absolute;right:4px;bottom:0;width:2px;height:2px}
+.cz.cz-js .cz-arrastre{display:inline-flex}
+
+.cz-pie{position:relative;z-index:5;text-align:center;padding:4px 20px 34px;font:500 .85rem/1.5 "Jost",sans-serif;color:#8E9AB3;letter-spacing:.04em}
+
+@media (max-width:860px){
+  .cz{padding-top:54px}
+  .cz-head{grid-template-columns:1fr;text-align:center;justify-items:center;gap:14px}
+  .cz-head p:not(.cz-pre){margin:0 auto}
+  .cz-salto{width:120px;height:136px}
+  .cz-pista{height:210px;margin-top:10px}
+  .cz-a{top:104px;height:58px}
+  .cz-a .cz-item{font-size:1.12rem;padding:0 22px}
+  .cz-b{top:80px;height:40px}
+}
+/* Salto del botón flotante cada pocos segundos */
+.float-wa{animation:cz-flota 3.6s cubic-bezier(.3,0,.3,1) infinite}
+@keyframes cz-flota{
+  0%,62%,100%{transform:translateY(0) scale(1)}
+  66%{transform:translateY(0) scale(1.15,.85)}
+  74%{transform:translateY(-22px) scale(.92,1.08)}
+  82%{transform:translateY(0) scale(1.12,.88)}
+  87%{transform:translateY(-8px) scale(1)}
+  92%{transform:translateY(0) scale(1.05,.95)}}
+@media (prefers-reduced-motion: reduce){
+  .cz-track{flex-wrap:wrap;width:auto}.cz-grupo[aria-hidden]{display:none}
+  .cz.cz-js .cz-arrastre{display:none}
+}
+
+/* ===== Chat "Asesor en línea · Arley Ortiz" (estilo WhatsApp) ===== */
+.float-wa .ch-num{position:absolute;top:-4px;right:-4px;min-width:22px;height:22px;padding:0 6px;border-radius:99px;background:#E53935;color:#fff;font:600 .78rem/22px "Jost",sans-serif;text-align:center;box-shadow:0 0 0 2px #fff;transform:scale(0);transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.float-wa.ch-con-num .ch-num{transform:scale(1)}
+.float-wa.ch-abierto{animation:none}
+
+.ch-aviso{position:fixed;right:calc(88px + env(safe-area-inset-right,0px));bottom:calc(22px + env(safe-area-inset-bottom,0px));z-index:31;display:flex;gap:12px;align-items:flex-start;
+  width:min(300px,calc(100vw - 110px));padding:12px 34px 12px 12px;border-radius:16px 16px 4px 16px;background:#fff;color:#111B21;cursor:pointer;
+  box-shadow:0 18px 40px -14px rgba(15,30,58,.45),0 0 0 1px rgba(15,30,58,.06);font:400 .92rem/1.4 "Jost",sans-serif;
+  transform-origin:100% 100%;animation:ch-pop .45s cubic-bezier(.3,1.5,.5,1)}
+.ch-aviso[hidden]{display:none}
+.ch-aviso b{display:block;color:#111B21;font-weight:600}
+.ch-aviso small{display:flex;align-items:center;gap:6px;color:#1F9D55;font-size:.78rem;margin-bottom:4px}
+.ch-aviso small::before{content:"";width:7px;height:7px;border-radius:50%;background:#25D366;box-shadow:0 0 0 0 rgba(37,211,102,.6);animation:cz-vivo 1.6s infinite}
+.ch-aviso p{margin:0;color:#3B4A54}
+.ch-aviso .ch-x{position:absolute;top:6px;right:6px;width:24px;height:24px;border:0;border-radius:50%;background:#F0F2F5;color:#54656F;font:500 16px/1 sans-serif;cursor:pointer}
+@keyframes ch-pop{from{transform:scale(.3) translateY(20px);opacity:0}to{transform:none;opacity:1}}
+
+.ch-av{position:relative;flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;font:600 1rem/1 "Jost",sans-serif;letter-spacing:.02em;
+  background:linear-gradient(135deg,#0F1E3A,#1B2F57);box-shadow:inset 0 0 0 2px #E6CF9C}
+.ch-av i{position:absolute;right:0;bottom:1px;width:12px;height:12px;border-radius:50%;background:#25D366;box-shadow:0 0 0 2px #fff}
+
+.ch{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(90px + env(safe-area-inset-bottom,0px));z-index:40;width:380px;max-width:calc(100vw - 24px);
+  height:min(590px,calc(100vh - 120px));display:flex;flex-direction:column;border-radius:18px;overflow:hidden;background:#EFEAE2;
+  box-shadow:0 30px 70px -20px rgba(11,20,26,.55),0 0 0 1px rgba(11,20,26,.08);font:400 15px/1.4 "Jost",system-ui,sans-serif;color:#111B21;
+  transform-origin:calc(100% - 30px) 100%;animation:ch-abre .42s cubic-bezier(.25,1.35,.5,1)}
+.ch[hidden]{display:none}
+.ch.ch-cierra{animation:ch-cierra .22s ease-in forwards}
+@keyframes ch-abre{from{transform:scale(.2);opacity:0;border-radius:50%}to{transform:none;opacity:1}}
+@keyframes ch-cierra{to{transform:scale(.2);opacity:0}}
+
+.ch-top{display:flex;align-items:center;gap:12px;padding:12px 12px 12px 14px;background:#008069;color:#fff}
+.ch-top .ch-av{width:42px;height:42px}
+.ch-top .ch-av i{box-shadow:0 0 0 2px #008069}
+.ch-quien{flex:1;min-width:0}
+.ch-quien b{display:block;font:600 1.02rem/1.2 "Jost",sans-serif}
+.ch-estado{display:block;font-size:.8rem;opacity:.9;min-height:1.2em}
+.ch-estado.ch-escribe{color:#C8F7DA;font-style:italic}
+.ch-top button{width:38px;height:38px;border:0;border-radius:50%;background:transparent;color:#fff;cursor:pointer;display:grid;place-items:center}
+.ch-top button:hover{background:rgba(255,255,255,.14)}
+.ch-top svg{width:22px;height:22px}
+
+.ch-cuerpo{flex:1;overflow-y:auto;padding:14px 14px 6px;display:flex;flex-direction:column;gap:4px;overscroll-behavior:contain;
+  background-color:#EFEAE2;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23C9BFAF' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round' opacity='.55'%3E%3Cpath d='M14 20l12-6 12 6-12 6z M20 23v6c4 3 8 3 12 0v-6'/%3E%3Cpath d='M78 14h18v24H78z M82 20h10 M82 25h10 M82 30h6'/%3E%3Cpath d='M20 80l20-20 5 5-20 20h-5z'/%3E%3Ccircle cx='88' cy='86' r='9'/%3E%3Cpath d='M94 92l7 7'/%3E%3Cpath d='M56 50l2 4 4 1-3 3 1 4-4-2-4 2 1-4-3-3 4-1z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:120px 120px}
+.ch-fecha{align-self:center;margin:2px 0 8px;padding:5px 12px;border-radius:8px;background:#fff;color:#54656F;font-size:.74rem;letter-spacing:.06em;box-shadow:0 1px .5px rgba(11,20,26,.13)}
+.ch-aviso-seg{align-self:center;max-width:90%;margin-bottom:8px;padding:7px 12px;border-radius:8px;background:#FFEECD;color:#54656F;font-size:.78rem;text-align:center;box-shadow:0 1px .5px rgba(11,20,26,.13)}
+
+.ch-msj{position:relative;max-width:82%;padding:7px 10px 18px;border-radius:10px;box-shadow:0 1px .5px rgba(11,20,26,.13);word-wrap:break-word;animation:ch-msj .3s cubic-bezier(.3,1.4,.5,1)}
+.ch-msj p{margin:0;max-width:none}
+.ch-msj time{position:absolute;right:8px;bottom:4px;font-size:.68rem;color:#667781;display:flex;align-items:center;gap:3px}
+.ch-msj.el{align-self:flex-start;background:#fff;border-top-left-radius:0;transform-origin:0 0}
+.ch-msj.yo{align-self:flex-end;background:#D9FDD3;border-top-right-radius:0;transform-origin:100% 0}
+.ch-msj.el.ch-cola::before,.ch-msj.yo::before{content:"";position:absolute;top:0;width:10px;height:13px}
+.ch-msj.el.ch-cola::before{left:-8px;background:#fff;clip-path:polygon(100% 0,0 0,100% 100%)}
+.ch-msj.yo::before{right:-8px;background:#D9FDD3;clip-path:polygon(0 0,100% 0,0 100%)}
+.ch-msj.el:not(.ch-cola){margin-left:0}
+.ch-msj .ch-firma{display:block;color:#B8893B;font-weight:600;font-size:.8rem;margin-bottom:2px}
+.ch-palomas{width:16px;height:11px;color:#8696A0;transition:color .3s}
+.ch-palomas.leido{color:#53BDEB}
+@keyframes ch-msj{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+.ch-msj .ch-ir{display:inline-flex;align-items:center;gap:8px;margin-top:8px;padding:8px 14px;border-radius:99px;background:#1F9D55;color:#fff;text-decoration:none;font-weight:500;font-size:.88rem}
+.ch-msj .ch-ir svg{width:18px;height:18px}
+
+.ch-puntos{align-self:flex-start;display:flex;gap:4px;padding:12px 14px;border-radius:10px;border-top-left-radius:0;background:#fff;box-shadow:0 1px .5px rgba(11,20,26,.13)}
+.ch-puntos span{width:7px;height:7px;border-radius:50%;background:#8696A0;animation:ch-pt 1.2s infinite}
+.ch-puntos span:nth-child(2){animation-delay:.15s}.ch-puntos span:nth-child(3){animation-delay:.3s}
+@keyframes ch-pt{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-5px);opacity:1}}
+
+.ch-rapidas{display:flex;gap:8px;padding:8px 10px 2px;overflow-x:auto;background:#EFEAE2;scrollbar-width:none}
+.ch-rapidas::-webkit-scrollbar{display:none}
+.ch-rapidas button{flex:none;border:1px solid #CFE9DA;background:#fff;color:#008069;border-radius:99px;padding:7px 13px;font:500 .84rem/1 "Jost",sans-serif;cursor:pointer;box-shadow:0 1px .5px rgba(11,20,26,.1);transition:transform .15s}
+.ch-rapidas button:hover{transform:translateY(-2px);background:#F2FBF5}
+.ch-rapidas[hidden]{display:none}
+
+.ch-barra{display:flex;align-items:flex-end;gap:8px;padding:8px 10px 10px;background:#EFEAE2}
+.ch-caja{flex:1;display:flex;align-items:flex-end;background:#fff;border-radius:24px;padding:4px 6px 4px 16px;box-shadow:0 1px .5px rgba(11,20,26,.13)}
+.ch-caja textarea{flex:1;border:0;outline:0;resize:none;background:transparent;font:400 15px/1.4 "Jost",sans-serif;color:#111B21;padding:8px 0;max-height:110px;min-height:22px;height:38px;box-shadow:none}
+.ch-caja textarea:focus-visible{outline:0}
+.ch-enviar{flex:none;width:48px;height:48px;border:0;border-radius:50%;background:#00A884;color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 10px -4px rgba(0,0,0,.35);transition:transform .15s,background .2s}
+.ch-enviar:hover{background:#008F72}
+.ch-enviar:active{transform:scale(.9)}
+.ch-enviar svg{width:22px;height:22px;margin-left:2px}
+.ch-enviar.ch-vuela svg{animation:ch-vuela .5s ease-in}
+@keyframes ch-vuela{50%{transform:translate(18px,-18px) rotate(-20deg);opacity:0}51%{transform:translate(-18px,18px);opacity:0}100%{transform:none;opacity:1}}
+.ch-nota{margin:0;padding:0 14px 10px;background:#EFEAE2;color:#667781;font-size:.72rem;text-align:center;max-width:none}
+
+@media (max-width:760px){
+  .ch{left:8px;right:8px;width:auto;max-width:none;bottom:calc(8px + env(safe-area-inset-bottom,0px));height:min(620px,calc(100vh - 16px));height:min(620px,calc(100dvh - 16px))}
+  .ch-aviso{right:12px;left:auto;bottom:calc(86px + env(safe-area-inset-bottom,0px));border-radius:16px 16px 4px 16px;width:min(300px,calc(100vw - 24px))}
+}
+
+/* ===== Etiquétanos en tus redes (hashtags) ===== */
+.ht{position:relative;z-index:5;margin-top:6px;padding-top:30px;padding-bottom:26px;text-align:center}
+.ht-cab h3{color:#fff;font:600 clamp(1.4rem,3vw,1.9rem)/1.2 "Jost",sans-serif;margin:0 0 6px}
+.ht-cab h3::before{content:"#";display:inline-grid;place-items:center;width:1.5em;height:1.5em;margin-right:.4em;border-radius:10px;background:linear-gradient(135deg,#F2C46B,#B8893B);color:#0F1E3A;font-size:.8em;vertical-align:.1em;transform:rotate(-8deg)}
+.ht-cab p{margin:0 auto 20px;color:#B7C2D8;font:400 1rem/1.5 "Jost",sans-serif}
+.ht-lista{list-style:none;margin:0 auto 18px;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:12px;max-width:900px}
+.ht-chip{position:relative;display:inline-flex;align-items:baseline;gap:1px;padding:12px 20px;border-radius:999px;cursor:pointer;color:#fff;
+  font:600 1.08rem/1 "Jost",sans-serif;background:rgba(255,255,255,.06);border:1px solid rgba(230,207,156,.45);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.1);transition:transform .2s cubic-bezier(.3,1.6,.5,1),background .2s,border-color .2s}
+.ht-chip span{color:#F2C46B;font-size:1.2em}
+.ht-chip i{position:absolute;left:50%;bottom:calc(100% + 8px);transform:translate(-50%,6px);opacity:0;pointer-events:none;padding:5px 9px;border-radius:6px;background:#fff;color:#0F1E3A;font:500 .72rem/1 "Jost",sans-serif;font-style:normal;transition:.2s;white-space:nowrap}
+.ht-chip:hover{transform:translateY(-3px) rotate(-1.5deg);background:rgba(242,196,107,.14);border-color:#F2C46B}
+.ht-chip:hover i,.ht-chip:focus-visible i{opacity:1;transform:translate(-50%,0)}
+.ht-chip.ok{background:#1F9D55;border-color:#25D366}
+.ht-chip.ok i{opacity:1;transform:translate(-50%,0);background:#25D366;color:#fff}
+.ht-lista li:nth-child(odd) .ht-chip{animation:ht-flota 4s ease-in-out infinite}
+.ht-lista li:nth-child(even) .ht-chip{animation:ht-flota 4s ease-in-out -2s infinite}
+@keyframes ht-flota{50%{translate:0 -4px}}
+.ht-acciones{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.ht-todos,.ht-red{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:10px;font:500 .92rem/1 "Jost",sans-serif;text-decoration:none;cursor:pointer}
+.ht-todos{border:0;background:linear-gradient(135deg,#F2C46B,#B8893B);color:#0F1E3A}
+.ht-red{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#DCE3F1}
+.ht-red:hover{background:rgba(255,255,255,.12);color:#fff}
+.ht-todos svg,.ht-red svg{width:18px;height:18px}
+.ht-red b{font-size:1.05rem;line-height:1}
+.ht-ok{min-height:1.4em;margin:12px auto 0;color:#9FE3BC;font:500 .9rem/1.4 "Jost",sans-serif}
+.cz-pie{border-top:1px solid rgba(255,255,255,.08);padding-top:16px;max-width:none;margin:0}
 </style>
 </head>
 <body>
@@ -1427,6 +1664,45 @@ dialog.menu-dlg::backdrop{background:rgba(15,30,58,.32);backdrop-filter:blur(4px
 </section>
 </main>
 
+<section class="cz" id="contactanos" aria-labelledby="cz-t">
+  <canvas class="cz-chispas" aria-hidden="true"></canvas>
+  <div class="wrap cz-head">
+    <a class="cz-salto" data-chat aria-controls="ch" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer" aria-label="Escribir ahora por WhatsApp al 098 556 8519">
+      <span class="cz-onda" aria-hidden="true"></span><span class="cz-onda cz-d2" aria-hidden="true"></span>
+      <span class="cz-sombra" aria-hidden="true"></span>
+      <span class="cz-bola" aria-hidden="true"><svg><use href="#i-wa"/></svg></span>
+    </a>
+    <div>
+      <p class="cz-pre"><i aria-hidden="true"></i>En línea ahora</p>
+      <h2 id="cz-t">¡Contáctanos <em>ahora!</em></h2>
+      <p>Cuéntanos qué trabajo necesitas y te mandamos la cotización por WhatsApp. Escríbenos al <b>098 556 8519</b> o al <b>096 752 2953</b>.</p>
+    </div>
+    <a class="btn cz-cta" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg>Escribir ahora</a>
+  </div>
+  <div class="cz-pista">
+    <div class="cz-cinta cz-b" aria-hidden="true"><div class="cz-ventana"><div class="cz-track"><div class="cz-grupo"><span class="cz-item">¡Contáctanos ahora!</span><span class="cz-sep">✦</span><span class="cz-item">Cotiza tu tesis por WhatsApp</span><span class="cz-sep">✦</span><span class="cz-item">Ecuador · Colombia · Perú · México</span><span class="cz-sep">✦</span><span class="cz-item">Atención 100 % online</span><span class="cz-sep">✦</span><span class="cz-item">¡Contáctanos ahora!</span><span class="cz-sep">✦</span><span class="cz-item">Cotiza tu tesis por WhatsApp</span><span class="cz-sep">✦</span><span class="cz-item">Ecuador · Colombia · Perú · México</span><span class="cz-sep">✦</span><span class="cz-item">Atención 100 % online</span><span class="cz-sep">✦</span><span class="cz-item">¡Contáctanos ahora!</span><span class="cz-sep">✦</span><span class="cz-item">Cotiza tu tesis por WhatsApp</span><span class="cz-sep">✦</span><span class="cz-item">Ecuador · Colombia · Perú · México</span><span class="cz-sep">✦</span><span class="cz-item">Atención 100 % online</span><span class="cz-sep">✦</span></div><div class="cz-grupo"><span class="cz-item">¡Contáctanos ahora!</span><span class="cz-sep">✦</span><span class="cz-item">Cotiza tu tesis por WhatsApp</span><span class="cz-sep">✦</span><span class="cz-item">Ecuador · Colombia · Perú · México</span><span class="cz-sep">✦</span><span class="cz-item">Atención 100 % online</span><span class="cz-sep">✦</span><span class="cz-item">¡Contáctanos ahora!</span><span class="cz-sep">✦</span><span class="cz-item">Cotiza tu tesis por WhatsApp</span><span class="cz-sep">✦</span><span class="cz-item">Ecuador · Colombia · Perú · México</span><span class="cz-sep">✦</span><span class="cz-item">Atención 100 % online</span><span class="cz-sep">✦</span><span class="cz-item">¡Contáctanos ahora!</span><span class="cz-sep">✦</span><span class="cz-item">Cotiza tu tesis por WhatsApp</span><span class="cz-sep">✦</span><span class="cz-item">Ecuador · Colombia · Perú · México</span><span class="cz-sep">✦</span><span class="cz-item">Atención 100 % online</span><span class="cz-sep">✦</span></div></div></div></div>
+    <div class="cz-cinta cz-a">
+      <div class="cz-ventana"><div class="cz-track"><div class="cz-grupo"><a class="cz-item" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg><small>WhatsApp</small>098 556 8519</a><span class="cz-sep" aria-hidden="true">✦</span><a class="cz-item" href="https://wa.me/593967522953?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg><small>WhatsApp</small>096 752 2953</a><span class="cz-sep" aria-hidden="true">✦</span><a class="cz-item" href="mailto:emindao@unemi.edu.ec"><svg aria-hidden="true"><use href="#i-mail"/></svg>emindao@unemi.edu.ec</a><span class="cz-sep" aria-hidden="true">✦</span><a class="cz-item" href="https://www.facebook.com/tesis.ecuador20" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-fb"/></svg>tesis.ecuador20</a><span class="cz-sep" aria-hidden="true">✦</span><a class="cz-item" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer" tabindex="-1"><svg aria-hidden="true"><use href="#i-wa"/></svg><small>WhatsApp</small>098 556 8519</a><span class="cz-sep" aria-hidden="true">✦</span><a class="cz-item" href="https://wa.me/593967522953?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer" tabindex="-1"><svg aria-hidden="true"><use href="#i-wa"/></svg><small>WhatsApp</small>096 752 2953</a><span class="cz-sep" aria-hidden="true">✦</span><a class="cz-item" href="mailto:emindao@unemi.edu.ec" tabindex="-1"><svg aria-hidden="true"><use href="#i-mail"/></svg>emindao@unemi.edu.ec</a><span class="cz-sep" aria-hidden="true">✦</span><a class="cz-item" href="https://www.facebook.com/tesis.ecuador20" target="_blank" rel="noopener noreferrer" tabindex="-1"><svg aria-hidden="true"><use href="#i-fb"/></svg>tesis.ecuador20</a><span class="cz-sep" aria-hidden="true">✦</span></div><div class="cz-grupo" aria-hidden="true"><a class="cz-item" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer" tabindex="-1"><svg aria-hidden="true"><use href="#i-wa"/></svg><small>WhatsApp</small>098 556 8519</a><span class="cz-sep" aria-hidden="true">✦</span><a class="cz-item" href="https://wa.me/593967522953?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer" tabindex="-1"><svg aria-hidden="true"><use href="#i-wa"/></svg><small>WhatsApp</small>096 752 2953</a><span class="cz-sep" aria-hidden="true">✦</span><a class="cz-item" href="mailto:emindao@unemi.edu.ec" tabindex="-1"><svg aria-hidden="true"><use href="#i-mail"/></svg>emindao@unemi.edu.ec</a><span class="cz-sep" aria-hidden="true">✦</span><a class="cz-item" href="https://www.facebook.com/tesis.ecuador20" target="_blank" rel="noopener noreferrer" tabindex="-1"><svg aria-hidden="true"><use href="#i-fb"/></svg>tesis.ecuador20</a><span class="cz-sep" aria-hidden="true">✦</span><a class="cz-item" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer" tabindex="-1"><svg aria-hidden="true"><use href="#i-wa"/></svg><small>WhatsApp</small>098 556 8519</a><span class="cz-sep" aria-hidden="true">✦</span><a class="cz-item" href="https://wa.me/593967522953?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer" tabindex="-1"><svg aria-hidden="true"><use href="#i-wa"/></svg><small>WhatsApp</small>096 752 2953</a><span class="cz-sep" aria-hidden="true">✦</span><a class="cz-item" href="mailto:emindao@unemi.edu.ec" tabindex="-1"><svg aria-hidden="true"><use href="#i-mail"/></svg>emindao@unemi.edu.ec</a><span class="cz-sep" aria-hidden="true">✦</span><a class="cz-item" href="https://www.facebook.com/tesis.ecuador20" target="_blank" rel="noopener noreferrer" tabindex="-1"><svg aria-hidden="true"><use href="#i-fb"/></svg>tesis.ecuador20</a><span class="cz-sep" aria-hidden="true">✦</span></div></div></div>
+      <a class="cz-arrastre" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><span class="cz-ico"><svg><use href="#i-wa"/></svg></span>WhatsApp 098 556 8519<span class="cz-punto"></span></a>
+    </div>
+  </div>
+  <div class="wrap ht" aria-labelledby="ht-t">
+    <div class="ht-cab">
+      <h3 id="ht-t">Etiquétanos en tus redes</h3>
+      <p>Usa estos hashtags cuando compartas tu experiencia con Tesis. Toca uno para copiarlo.</p>
+    </div>
+    <ul class="ht-lista"><li><button type="button" class="ht-chip" data-tag="#TesisEcuador"><span>#</span>TesisEcuador<i aria-hidden="true">Copiar</i></button></li><li><button type="button" class="ht-chip" data-tag="#TesisEC"><span>#</span>TesisEC<i aria-hidden="true">Copiar</i></button></li><li><button type="button" class="ht-chip" data-tag="#AsesoriaDeTesis"><span>#</span>AsesoriaDeTesis<i aria-hidden="true">Copiar</i></button></li><li><button type="button" class="ht-chip" data-tag="#TerminaTuTesis"><span>#</span>TerminaTuTesis<i aria-hidden="true">Copiar</i></button></li><li><button type="button" class="ht-chip" data-tag="#TesisLatam"><span>#</span>TesisLatam<i aria-hidden="true">Copiar</i></button></li></ul>
+    <div class="ht-acciones">
+      <button type="button" class="ht-todos" id="ht-todos"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M8 8h11v12H8z M5 16V4h11"/></svg>Copiar los 5 con el enlace</button>
+      <a class="ht-red" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Femindao-maker.github.io%2Ftesis%2F&amp;hashtag=%23TesisEcuador" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-fb"/></svg>Compartir en Facebook</a>
+      <a class="ht-red" href="https://wa.me/?text=Asesor%C3%ADa%20de%20tesis%20100%20%25%20online%20con%20Tesis%20%F0%9F%91%89%20https%3A//emindao-maker.github.io/tesis/%20%23TesisEcuador%20%23TesisEC%20%23AsesoriaDeTesis%20%23TerminaTuTesis%20%23TesisLatam" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg>Compartir por WhatsApp</a>
+      <a class="ht-red" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Femindao-maker.github.io%2Ftesis%2F&amp;text=Asesor%C3%ADa%20de%20tesis%20100%20%25%20online&amp;hashtags=TesisEcuador,TesisEC,AsesoriaDeTesis,TerminaTuTesis,TesisLatam" target="_blank" rel="noopener noreferrer"><b aria-hidden="true">𝕏</b>Publicar en X</a>
+    </div>
+    <p class="ht-ok" id="ht-ok" role="status" aria-live="polite"></p>
+  </div>
+  <p class="cz-pie">Toca cualquier número de la cinta y se abre el chat de WhatsApp.</p>
+</section>
+
 <footer>
   <div class="wrap">
     <div>
@@ -1469,13 +1745,44 @@ dialog.menu-dlg::backdrop{background:rgba(15,30,58,.32);backdrop-filter:blur(4px
 
 <nav class="barra-movil" aria-label="Acciones rápidas">
   <a class="btn btn-primary" href="#contacto">Cotizar mi trabajo</a>
-  <a class="btn btn-wa" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
+  <a class="btn btn-wa" data-chat aria-controls="ch" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
 </nav>
-<a class="float-wa" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp">
-  <svg aria-hidden="true"><use href="#i-wa"/></svg>
+<a class="float-wa" data-chat aria-controls="ch" aria-expanded="false" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer" aria-label="Chatear con el asesor en línea">
+  <svg aria-hidden="true"><use href="#i-wa"/></svg><span class="ch-num" aria-hidden="true">1</span>
 </a>
 
+<div class="ch-aviso" id="ch-aviso" hidden>
+  <span class="ch-av" aria-hidden="true">AO<i></i></span>
+  <div><small>Asesor en línea</small><b>Arley Ortiz</b><p>¿Te ayudo con tu tesis o tu trabajo? Escríbeme aquí. 👋</p></div>
+  <button class="ch-x" type="button" aria-label="Cerrar aviso">×</button>
+</div>
+
+<section class="ch" id="ch" role="dialog" aria-modal="false" aria-labelledby="ch-nombre" hidden>
+  <div class="ch-top">
+    <span class="ch-av" aria-hidden="true">AO<i></i></span>
+    <div class="ch-quien"><b id="ch-nombre">Arley Ortiz</b><span class="ch-estado" id="ch-estado">en línea</span></div>
+    <button type="button" id="ch-cerrar" aria-label="Cerrar chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div class="ch-cuerpo" id="ch-cuerpo" aria-live="polite">
+    <div class="ch-fecha">HOY</div>
+    <div class="ch-aviso-seg">🔒 Lo que escribas aquí se abre en WhatsApp con el 098 556 8519. Esta página no guarda tus mensajes.</div>
+  </div>
+  <div class="ch-rapidas" id="ch-rapidas" hidden>
+    <button type="button" data-msj="Hola Arley, quiero cotizar mi tesis.">📘 Cotizar mi tesis</button>
+    <button type="button" data-msj="Hola Arley, necesito ayuda con un ensayo.">✍️ Un ensayo</button>
+    <button type="button" data-msj="Hola Arley, quiero inscribirme en un curso del aula virtual.">🎓 Cursos</button>
+    <button type="button" data-msj="Hola Arley, necesito redactar una demanda.">⚖️ Demanda</button>
+    <button type="button" data-msj="Hola Arley, ¿cuáles son las formas de pago?">💳 Formas de pago</button>
+  </div>
+  <form class="ch-barra" id="ch-form">
+    <label class="ch-caja"><span class="skip">Tu mensaje</span><textarea id="ch-texto" rows="1" maxlength="1000" placeholder="Escribe un mensaje"></textarea></label>
+    <button class="ch-enviar" type="submit" aria-label="Enviar por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.4 20.4 21 12 3.4 3.6 3.4 10.1 15 12 3.4 13.9z"/></svg></button>
+  </form>
+</section>
+
 <script src="sitio.js"></script>
+<script src="cinta.js"></script>
+<script src="chat-asesor.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js" integrity="sha384-/1qUCSGwTur9vjf/z9lmu/eCUYbpOTgSjmpbMQZ1/CtX2v/WcAIKqRv+U1DUCG6e" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js" integrity="sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="trabajos-config.js"></script>
