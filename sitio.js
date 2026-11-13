@@ -68,3 +68,17 @@
     var t=ev.target; if(t.getAttribute('aria-invalid')==='true' && t.value.trim()){t.setAttribute('aria-invalid','false'); var e=document.getElementById('e-'+t.name); if(e) e.textContent='';}
   });
 })();
+/* Índice lateral (menú en tabletas y celulares) */
+(function () {
+  var dlg = document.getElementById("menu");
+  if (!dlg) return;
+  var abrir = document.querySelectorAll('[aria-controls="menu"]');
+  abrir.forEach(function (b) {
+    b.addEventListener("click", function () { if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", ""); b.setAttribute("aria-expanded", "true"); });
+  });
+  function cerrar() { if (dlg.close) dlg.close(); else dlg.removeAttribute("open"); }
+  dlg.addEventListener("close", function () { abrir.forEach(function (b) { b.setAttribute("aria-expanded", "false"); }); });
+  dlg.addEventListener("click", function (e) {
+    if (e.target === dlg || e.target.closest("[data-cerrar-menu]") || e.target.closest(".menu-toc a")) cerrar();
+  });
+})();
