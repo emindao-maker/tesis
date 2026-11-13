@@ -1,3 +1,30 @@
+/* Ventana "¡Contáctanos!": solo se abre con el botón "Escríbenos" de la barra de arriba */
+(function () {
+  var dlg = document.getElementById("cz-dlg");
+  if (!dlg || !dlg.showModal) return;
+  var audio = null;
+  function campana() {
+    try {
+      var C = window.AudioContext || window.webkitAudioContext; if (!C) return;
+      audio = audio || new C(); if (audio.state === "suspended") audio.resume();
+      [[660, 0, 0.12, 0.12], [990, 0.08, 0.3, 0.12], [1320, 0.16, 0.45, 0.1]].forEach(function (n) {
+        var o = audio.createOscillator(), g = audio.createGain(), t = audio.currentTime + n[1];
+        o.type = "sine"; o.frequency.setValueAtTime(n[0], t);
+        g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(n[3], t + 0.015); g.gain.exponentialRampToValueAtTime(0.0001, t + n[2]);
+        o.connect(g); g.connect(audio.destination); o.start(t); o.stop(t + n[2] + 0.02);
+      });
+    } catch (e) {}
+  }
+  document.querySelectorAll("[data-cz]").forEach(function (b) {
+    b.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (!dlg.open) { dlg.showModal(); campana(); dlg.querySelector(".cz").scrollTop = 0; document.dispatchEvent(new Event("cz-abierta")); }
+    });
+  });
+  dlg.querySelector(".cz-cerrar").addEventListener("click", function () { dlg.close(); });
+  dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
+})();
+
 /* Cinta de contacto: el WhatsApp que se arrastra sacando chispas */
 (function () {
   var zona = document.querySelector(".cz");
@@ -21,7 +48,8 @@
 
   function medir() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
-    ancho = zona.clientWidth; alto = zona.clientHeight;
+    ancho = zona.clientWidth; alto = Math.max(zona.scrollHeight, zona.clientHeight);
+    lienzo.style.height = alto + "px";
     lienzo.width = Math.round(ancho * dpr); lienzo.height = Math.round(alto * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
@@ -48,7 +76,7 @@
   function cuadro(t) {
     if (!visible) { corriendo = false; return; }
     var dt = Math.min((t - (ultimo || t)) / 16.67, 3); ultimo = t;
-    var caja = zona.getBoundingClientRect();
+    var caja = lienzo.getBoundingClientRect();
 
     /* Movimiento de la pieza de derecha a izquierda */
     if (pausa > 0) { pausa -= dt; }
@@ -108,11 +136,12 @@
   /* Cada vez que el ícono grande toca el piso, salta un puñado de chispas */
   if (bola) bola.addEventListener("animationiteration", function () {
     if (!visible) return;
-    var r = bola.getBoundingClientRect(), caja = zona.getBoundingClientRect();
+    var r = bola.getBoundingClientRect(), caja = lienzo.getBoundingClientRect();
     soltar(r.left - caja.left + r.width / 2, r.bottom - caja.top, 14, "golpe");
   });
 
-  function arrancar() { if (visible && !corriendo) { corriendo = true; ultimo = 0; requestAnimationFrame(cuadro); } }
+  function arrancar() { if (visible && !corriendo) { medir(); reiniciar(); corriendo = true; ultimo = 0; requestAnimationFrame(cuadro); } }
+  document.addEventListener("cz-abierta", function () { setTimeout(function () { medir(); reiniciar(); }, 60); });
 
   medir(); reiniciar();
   window.addEventListener("resize", function () { medir(); });

@@ -85,28 +85,38 @@
   }
 
   /* ---------- Abrir y cerrar ---------- */
-  function abrir(e) {
-    if (e) e.preventDefault();
-    sonido.abrir();
-    if (abierto) { campo.focus(); return; }
-    abierto = true; ultimoFoco = document.activeElement;
+  var reloj = null, sonidoPendiente = false, ESPERA = 60000;
+  /* Si en 1 minuto no escriben nada, el chat se cierra solo */
+  function vigilar() {
+    clearTimeout(reloj);
+    if (!abierto) return;
+    reloj = setTimeout(function () { if (abierto && !campo.value.trim()) cerrar(true); else vigilar(); }, ESPERA);
+  }
+  function abrir(e, auto) {
+    if (e && e.preventDefault) e.preventDefault();
+    if (auto) {
+      /* el navegador no deja sonar nada antes del primer toque: suena en cuanto el visitante toque la página */
+      var a = ac(); if (a && a.state === "running") sonido.abrir(); else sonidoPendiente = true;
+    } else { sonidoPendiente = false; sonido.abrir(); }
+    if (abierto) { campo.focus(); vigilar(); return; }
+    abierto = true; ultimoFoco = auto ? null : document.activeElement;
     aviso.hidden = true;
     chat.classList.remove("ch-cierra"); chat.hidden = false;
     if (botonFlotante) botonFlotante.classList.remove("ch-con-num"), botonFlotante.classList.add("ch-abierto"), botonFlotante.setAttribute("aria-expanded", "true");
-    try { sessionStorage.setItem("ch-visto", "1"); } catch (err) {}
     saludar();
-    setTimeout(function () { if (window.innerWidth > 760) campo.focus(); }, 300);
+    vigilar();
+    if (!auto) setTimeout(function () { if (window.innerWidth > 760) campo.focus(); }, 300);
   }
-  function cerrar() {
-    if (!abierto) return; abierto = false;
+  function cerrar(auto) {
+    if (!abierto) return; abierto = false; clearTimeout(reloj); sonidoPendiente = false;
     chat.classList.add("ch-cierra");
     setTimeout(function () { chat.hidden = true; chat.classList.remove("ch-cierra"); }, 220);
     if (botonFlotante) botonFlotante.classList.remove("ch-abierto"), botonFlotante.setAttribute("aria-expanded", "false");
-    if (ultimoFoco && ultimoFoco.focus) ultimoFoco.focus();
+    if (auto !== true && ultimoFoco && ultimoFoco.focus) ultimoFoco.focus();
   }
 
   document.querySelectorAll("[data-chat]").forEach(function (b) { b.addEventListener("click", function (e) { if (abierto && b === botonFlotante) { e.preventDefault(); cerrar(); } else abrir(e); }); });
-  document.getElementById("ch-cerrar").addEventListener("click", cerrar);
+  document.getElementById("ch-cerrar").addEventListener("click", function () { cerrar(); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && abierto) cerrar(); });
   aviso.addEventListener("click", function (e) { if (e.target.closest(".ch-x")) { aviso.hidden = true; return; } abrir(e); });
 
@@ -136,42 +146,17 @@
     enviar(b.getAttribute("data-msj"));
   });
 
-  /* ---------- Aviso "Asesor en línea" a los pocos segundos ---------- */
-  var visto = false;
-  try { visto = sessionStorage.getItem("ch-visto") === "1"; } catch (err) {}
-  if (!visto) setTimeout(function () {
-    if (abierto) return;
-    aviso.hidden = false;
-    if (botonFlotante) botonFlotante.classList.add("ch-con-num");
-  }, 4000);
-})();
+  /* ---------- Cualquier movimiento dentro del chat reinicia el minuto ---------- */
+  ["input", "keydown", "pointerdown", "wheel", "touchstart"].forEach(function (ev) {
+    chat.addEventListener(ev, vigilar, { passive: true });
+  });
+  ["pointerdown", "keydown", "touchstart"].forEach(function (ev) {
+    document.addEventListener(ev, function () {
+      if (sonidoPendiente && abierto) { sonidoPendiente = false; sonido.abrir(); }
+    }, { passive: true });
+  });
 
-/* Etiquétanos en tus redes: copiar hashtags */
-(function () {
-  var aviso = document.getElementById("ht-ok");
-  if (!aviso) return;
-  function copiar(texto, listo) {
-    var plan = function () {
-      var t = document.createElement("textarea"); t.value = texto; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
-      document.body.appendChild(t); t.select(); try { document.execCommand("copy"); listo(); } catch (e) {} t.remove();
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(texto).then(listo, plan); else plan();
-  }
-  document.querySelectorAll(".ht-chip").forEach(function (b) {
-    b.addEventListener("click", function () {
-      var tag = b.getAttribute("data-tag");
-      copiar(tag, function () {
-        b.classList.add("ok"); b.querySelector("i").textContent = "¡Copiado!";
-        aviso.textContent = tag + " copiado. Pégalo en tu publicación.";
-        setTimeout(function () { b.classList.remove("ok"); b.querySelector("i").textContent = "Copiar"; }, 1600);
-      });
-    });
-  });
-  var todos = document.getElementById("ht-todos");
-  if (todos) todos.addEventListener("click", function () {
-    var tags = [].map.call(document.querySelectorAll(".ht-chip"), function (b) { return b.getAttribute("data-tag"); }).join(" ");
-    copiar("Asesoría de tesis 100 % online con Tesis 👉 https://emindao-maker.github.io/tesis/ " + tags, function () {
-      aviso.textContent = "Listo: copiaste los 5 hashtags con el enlace de la página.";
-    });
-  });
+  /* ---------- El chat se abre solo al iniciar la página ---------- */
+  function autoAbrir() { setTimeout(function () { if (!abierto) abrir(null, true); }, 1500); }
+  if (document.readyState === "complete") autoAbrir(); else window.addEventListener("load", autoAbrir);
 })();

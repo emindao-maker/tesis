@@ -968,6 +968,20 @@ dialog.menu-dlg::backdrop{background:rgba(15,30,58,.32);backdrop-filter:blur(4px
 .ht-red b{font-size:1.05rem;line-height:1}
 .ht-ok{min-height:1.4em;margin:12px auto 0;color:#9FE3BC;font:500 .9rem/1.4 "Jost",sans-serif}
 .cz-pie{border-top:1px solid rgba(255,255,255,.08);padding-top:16px;max-width:none;margin:0}
+
+/* ===== ¡Contáctanos! ahora es una ventana que abre "Escríbenos" ===== */
+.cz-dlg{padding:0;border:0;width:min(1100px,calc(100vw - 24px));max-width:none;height:auto;max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);
+  border-radius:22px;overflow:hidden;background:#0F1E3A;color:#DCE3F1;box-shadow:0 40px 90px -30px rgba(0,0,0,.8),0 0 0 1px rgba(230,207,156,.25)}
+.cz-dlg[open]{animation:cz-dlg-in .5s cubic-bezier(.2,1.25,.4,1)}
+@keyframes cz-dlg-in{from{transform:translateY(40px) scale(.9);opacity:0}to{transform:none;opacity:1}}
+.cz-dlg::backdrop{background:rgba(6,12,26,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.cz-dlg .cz{max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;padding-top:64px}
+.cz-dlg .cz-chispas{bottom:auto}
+.cz-cerrar{position:absolute;top:14px;right:14px;z-index:10;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.08);color:#fff;font:300 28px/1 "Jost",sans-serif;cursor:pointer;display:grid;place-items:center;transition:transform .2s,background .2s}
+.cz-cerrar:hover{background:rgba(255,255,255,.18);transform:rotate(90deg)}
+html:has(.cz-dlg[open]){overflow:hidden}
+@media (max-width:760px){.cz-dlg{width:calc(100vw - 16px);border-radius:18px}.cz-dlg .cz{padding-top:56px}}
 </style>
 </head>
 <body>
@@ -1021,7 +1035,7 @@ dialog.menu-dlg::backdrop{background:rgba(15,30,58,.32);backdrop-filter:blur(4px
     <button class="btn btn-menu" type="button" aria-haspopup="dialog" aria-controls="menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Índice</span></button>
     <a class="btn btn-aula" href="https://tesis.gnomio.com" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-cap"/></svg><span class="lg">Aula virtual</span><span class="sm">Aula</span></a>
     <a class="btn btn-works" href="#trabajos"><svg aria-hidden="true"><use href="#i-doc"/></svg><span class="lg">Trabajos realizados</span><span class="sm">Trabajos</span></a>
-    <a class="btn btn-wa" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer">
+    <a class="btn btn-wa" data-cz aria-haspopup="dialog" aria-controls="cz-dlg" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer">
       <svg aria-hidden="true"><use href="#i-wa"/></svg><span>Escríbenos</span>
     </a>
     </div>
@@ -1664,10 +1678,12 @@ dialog.menu-dlg::backdrop{background:rgba(15,30,58,.32);backdrop-filter:blur(4px
 </section>
 </main>
 
-<section class="cz" id="contactanos" aria-labelledby="cz-t">
+<dialog class="cz-dlg" id="cz-dlg" aria-labelledby="cz-t">
+<button class="cz-cerrar" type="button" aria-label="Cerrar ventana de contacto">×</button>
+<section class="cz" id="contactanos">
   <canvas class="cz-chispas" aria-hidden="true"></canvas>
   <div class="wrap cz-head">
-    <a class="cz-salto" data-chat aria-controls="ch" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer" aria-label="Escribir ahora por WhatsApp al 098 556 8519">
+    <a class="cz-salto" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer" aria-label="Escribir ahora por WhatsApp al 098 556 8519">
       <span class="cz-onda" aria-hidden="true"></span><span class="cz-onda cz-d2" aria-hidden="true"></span>
       <span class="cz-sombra" aria-hidden="true"></span>
       <span class="cz-bola" aria-hidden="true"><svg><use href="#i-wa"/></svg></span>
@@ -1702,6 +1718,7 @@ dialog.menu-dlg::backdrop{background:rgba(15,30,58,.32);backdrop-filter:blur(4px
   </div>
   <p class="cz-pie">Toca cualquier número de la cinta y se abre el chat de WhatsApp.</p>
 </section>
+</dialog>
 
 <footer>
   <div class="wrap">
