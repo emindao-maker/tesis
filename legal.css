@@ -1,0 +1,29 @@
+:root{--ink:#0F1E3A;--gold:#B8893B;--bg:#FAFAFB;--text:#1E2636;--muted:#5A6478;--line:#E4E7EE;--soft:#F3F0E8;color-scheme:light}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.7 "Literata",Georgia,serif}
+.wrap{max-width:780px;margin:0 auto;padding:36px 20px 80px}
+a{color:var(--ink);text-underline-offset:3px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.back{font:500 .95rem/1 "Jost",sans-serif;text-decoration:none;color:var(--gold)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;font:500 .85rem/1 "Jost",sans-serif}
+.tabs a{padding:8px 12px;border:1px solid var(--line);border-radius:999px;text-decoration:none;background:#fff}
+.tabs a[aria-current]{background:var(--ink);color:#fff;border-color:var(--ink)}
+h1,h2,h3{font-family:"Jost",system-ui,sans-serif;color:var(--ink);font-weight:500;line-height:1.2;text-wrap:balance}
+h1{font-size:clamp(1.9rem,5vw,2.6rem);margin:30px 0 6px}
+h2{font-size:1.3rem;margin:40px 0 8px;padding-top:6px}
+h3{font-size:1.05rem;margin:22px 0 4px}
+.date{font:400 .9rem/1.4 "Jost",sans-serif;color:var(--muted);margin-bottom:24px}
+p,li{max-width:68ch}
+ul,ol{padding-left:1.2em}
+li{margin:4px 0}
+.box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:18px 0}
+.box.gold{background:var(--soft);border-color:#E9DFC9}
+.box p{margin:0}
+.toc{font:400 .95rem/1.5 "Jost",sans-serif;columns:2;column-gap:28px;padding-left:1.2em}
+@media (max-width:560px){.toc{columns:1}}
+table{width:100%;border-collapse:collapse;font:400 .92rem/1.45 "Jost",sans-serif;margin:12px 0}
+th,td{text-align:left;vertical-align:top;padding:10px 8px;border-bottom:1px solid var(--line)}
+th{color:var(--ink);font-weight:500}
+.scroll{overflow-x:auto}
+footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font:400 .9rem/1.5 "Jost",sans-serif;color:var(--muted)}
