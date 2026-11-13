@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script src="escudo.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Tesis · Seguridad</title>
+<meta name="description" content="Cómo protege Tesis su sitio web, cómo reconocer a los estafadores que se hacen pasar por nosotros y cómo reportar una falla de seguridad.">
+<link rel="icon" href="logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&family=Literata:opsz,wght@7..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="legal.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="back" href="./">← Volver a la página de Tesis</a>
+    <nav class="tabs" aria-label="Documentos legales">
+      <a href="privacidad.html">Privacidad</a>
+      <a href="terminos.html">Términos de uso</a>
+      <a href="seguridad.html" aria-current="page">Seguridad</a>
+    </nav>
+  </div>
+
+  <h1>Seguridad</h1>
+  <p class="date">Actualizado el 13 de noviembre de 2026</p>
+
+  <h2>Cuidado con quien se hace pasar por Tesis</h2>
+  <div class="box gold"><p>Solo atendemos y cobramos por <b>WhatsApp 098 556 8519 y 096 752 2953</b>, la página <b>emindao-maker.github.io/tesis</b>, <b>facebook.com/tesis.ecuador20</b>, el aula <b>tesis.gnomio.com</b> y el correo <b>estalimm@gmail.com</b>. Cualquier otro número, perfil o página que use nuestro nombre no es nuestro.</p></div>
+  <p>Tesis nunca te va a pedir:</p>
+  <ul>
+    <li>Contraseñas, ni los códigos de verificación que te llegan por SMS, correo o WhatsApp.</li>
+    <li>El número completo, la fecha de vencimiento o el código de seguridad de tu tarjeta por chat.</li>
+    <li>Que pegues un código en tu navegador para «ver un documento gratis» o «activar» algo.</li>
+    <li>Pagos a cuentas que no estén a nuestro nombre o al correo estalimm@gmail.com en PayPal.</li>
+  </ul>
+  <p>Si te pasó algo de esto, no envíes nada y avísanos al 098 556 8519.</p>
+
+  <h2>Cómo protegemos la página</h2>
+  <ul>
+    <li><b>Conexión cifrada</b>: toda la página funciona con HTTPS.</li>
+    <li><b>Bloqueo de código ajeno</b>: la página solo ejecuta código propio y dos librerías verificadas con huella digital (integridad SRI). Si alguien alterara esas librerías, el navegador no las cargaría.</li>
+    <li><b>Protección contra engaños por marco</b>: la página no se deja mostrar dentro de otra web, para que nadie la use como cebo.</li>
+    <li><b>Base de datos con reglas fila por fila</b>: cada persona solo puede editar o borrar su propio comentario, y los datos de contacto de quien sube un documento no son visibles para nadie desde la página.</li>
+    <li><b>Comentarios solo con Google</b>: el nombre y la foto salen de la cuenta de Google y no se pueden falsificar. Los comentarios con enlaces o código se rechazan.</li>
+    <li><b>Archivos revisados</b>: solo se aceptan PDF, Office, OpenDocument, RTF, texto e imágenes, de hasta 25 MB. Se revisa el contenido real de cada archivo, así que no sirve cambiarle la extensión a un archivo peligroso. No se aceptan HTML, SVG, ejecutables ni formatos de Office con macros (.docm, .xlsm, .pptm).</li>
+    <li><b>Límites contra ataques y robots</b>: frenos automáticos de solicitudes por conexión, límites de subidas por hora y por día, campos trampa para robots y reportes de la comunidad que ocultan solos un documento sospechoso.</li>
+    <li><b>Sin contraseñas guardadas</b>: no manejamos contraseñas de visitantes ni datos de tarjetas.</li>
+  </ul>
+
+  <h2>¿Encontraste una falla de seguridad?</h2>
+  <p>Si crees que encontraste una vulnerabilidad en la página, te pedimos que nos la cuentes antes de hacerla pública:</p>
+  <ol>
+    <li>Escribe a <a href="mailto:estalimm@gmail.com?subject=Seguridad%20-%20p%C3%A1gina%20de%20Tesis">estalimm@gmail.com</a> con el asunto «Seguridad - página de Tesis».</li>
+    <li>Explica qué encontraste y cómo reproducirlo.</li>
+    <li>No accedas, cambies ni borres datos de otras personas, no sobrecargues el sitio y no compartas la falla hasta que la corrijamos.</li>
+  </ol>
+  <p>Respondemos en un máximo de 5 días hábiles. Si actúas de buena fe y sigues estas pautas, no tomaremos acciones en tu contra y te agradeceremos públicamente si así lo quieres.</p>
+
+  <footer>Tesis · Asesoría académica e investigación · <a href="privacidad.html">Política de privacidad</a> · <a href="terminos.html">Términos de uso</a></footer>
+</div>
+</body>
+</html>
