@@ -82,3 +82,38 @@
     if (e.target === dlg || e.target.closest("[data-cerrar-menu]") || e.target.closest(".menu-toc a")) cerrar();
   });
 })();
+/* Buscador de carreras */
+(function () {
+  var input = document.getElementById("buscar-carrera");
+  if (!input) return;
+  var areas = [].slice.call(document.querySelectorAll("#areas .area"));
+  var total = document.getElementById("carreras-total"), vacio = document.getElementById("carreras-vacio"), vacioWa = document.getElementById("carreras-vacio-wa");
+  var textoTotal = total.textContent;
+  function norm(t) { return t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); }
+  var items = [];
+  areas.forEach(function (a) {
+    a.querySelectorAll(".carrera-list a").forEach(function (l) { items.push({ area: a, li: l.parentNode, a: l, texto: l.textContent, n: norm(l.textContent + " " + a.querySelector("h3").textContent) }); });
+  });
+  function marcar(el, texto, q) {
+    el.textContent = "";
+    if (!q) { el.textContent = texto; return; }
+    var i = norm(texto).indexOf(q);
+    if (i < 0) { el.textContent = texto; return; }
+    el.appendChild(document.createTextNode(texto.slice(0, i)));
+    var m = document.createElement("mark"); m.textContent = texto.slice(i, i + q.length); el.appendChild(m);
+    el.appendChild(document.createTextNode(texto.slice(i + q.length)));
+  }
+  input.addEventListener("input", function () {
+    var q = norm(input.value.trim()), n = 0;
+    areas.forEach(function (a) { a.hidden = true; });
+    items.forEach(function (it) {
+      var ok = !q || it.n.indexOf(q) >= 0;
+      it.li.hidden = !ok;
+      if (ok) { n++; it.area.hidden = false; }
+      marcar(it.a, it.texto, q && norm(it.texto).indexOf(q) >= 0 ? q : "");
+    });
+    total.textContent = !q ? textoTotal : n === 0 ? "Sin resultados" : n + (n === 1 ? " carrera encontrada" : " carreras encontradas");
+    vacio.hidden = n > 0;
+    if (n === 0) vacioWa.href = "https://wa.me/593985568519?text=" + encodeURIComponent("Hola, estudio " + input.value.trim() + ". ¿Trabajan con mi carrera? Quiero una cotización.");
+  });
+})();
