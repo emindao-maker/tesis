@@ -113,7 +113,8 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 .galeria{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:12px}
 .galeria figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--paper)}
 .galeria img{display:block;width:100%;height:auto}
-.galeria figcaption{padding:10px 14px;font-weight:500;color:var(--ink-2);font-size:15px}
+.galeria figcaption{padding:10px 14px;font-weight:500;color:var(--ink-2);font-size:15px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.dl{font-size:14px;color:var(--gold-text);font-weight:600}
 @media (max-width:820px){.galeria{grid-template-columns:1fr}}
 .msg{padding:12px 14px;border-radius:8px;margin-top:14px;font-size:15px}
 .msg.ok{background:#EFFAF4;border:1px solid #A9D9BF;color:#14583A}
@@ -178,6 +179,7 @@ footer{border-top:1px solid var(--line-2);padding:26px 0 90px;color:var(--muted)
     <button role="tab" aria-selected="false" data-tab="cuenta" id="t-cuenta">Banca virtual</button>
     <button role="tab" aria-selected="false" data-tab="prestamos" id="t-prestamos">Préstamos</button>
     <button role="tab" aria-selected="false" data-tab="resultados" id="t-resultados">Resultados</button>
+    <button role="tab" aria-selected="false" data-tab="publicidad" id="t-publicidad">Publicidad</button>
     <button role="tab" aria-selected="false" data-tab="admin" id="t-admin" hidden>Administración</button>
   </div>
 
@@ -207,15 +209,6 @@ footer{border-top:1px solid var(--line-2);padding:26px 0 90px;color:var(--muted)
           Los resultados pasados no aseguran resultados futuros. Aporta solo dinero que puedas mantener invertido durante todo el plazo. La liquidación depende de que la empresa genere utilidad en esos meses.
         </div>
         <p class="muted" style="margin-top:12px;font-size:15px">Antes de aportar firmarás un contrato de participación. Si tienes dudas, consúltalas por WhatsApp o con tu propio asesor.</p>
-      </div>
-    </div>
-    <div class="card" style="margin-top:18px">
-      <h2>Capital Investment en imágenes</h2>
-      <p class="muted">Material para compartir. Los ejemplos de cifras son ilustrativos.</p>
-      <div class="galeria">
-        <figure><img loading="lazy" src="ci-anuncio-invierte.webp" width="1080" height="1080" alt="Anuncio: invierte desde $10 con Capital Investment"><figcaption>Invierte desde $10</figcaption></figure>
-        <figure><img loading="lazy" src="ci-anuncio-prestamos.webp" width="1080" height="1080" alt="Anuncio: préstamos de $50 a $5.000 con cuota fija"><figcaption>Préstamos de $50 a $5.000</figcaption></figure>
-        <figure><img loading="lazy" src="ci-anuncio-banca.webp" width="1080" height="1350" alt="Anuncio: tu banca virtual en tu bolsillo"><figcaption>Tu banca virtual</figcaption></figure>
       </div>
     </div>
   </section>
@@ -438,6 +431,20 @@ footer{border-top:1px solid var(--line-2);padding:26px 0 90px;color:var(--muted)
       <div style="height:30px"></div>
       <div class="tw"><table><thead><tr><th>Mes</th><th class="num">Resultado</th><th>Nota</th></tr></thead><tbody id="res"></tbody></table></div>
       <p class="muted" id="res-vacio" hidden>Aún no hay resultados publicados.</p>
+    </div>
+  </section>
+
+  <!-- PUBLICIDAD -->
+  <section class="panel" id="p-publicidad" role="tabpanel" aria-labelledby="t-publicidad" hidden>
+    <div class="card">
+      <h2>Publicidad de Capital Investment</h2>
+      <p class="muted">Descarga los anuncios y compártelos en tus redes. Para informes y consultas, el contacto es el WhatsApp corporativo <b>098 556 8519</b>.</p>
+      <div class="galeria">
+        <figure><img loading="lazy" src="ci-anuncio-invierte.webp" width="1080" height="1080" alt="Anuncio: invierte desde $10 con Capital Investment"><figcaption>Invierte desde $10<a class="dl" href="ci-anuncio-invierte.webp" download="capital-investment-invierte.webp">Descargar</a></figcaption></figure>
+        <figure><img loading="lazy" src="ci-anuncio-prestamos.webp" width="1080" height="1080" alt="Anuncio: préstamos de $50 a $5.000 con cuota fija"><figcaption>Préstamos de $50 a $5.000<a class="dl" href="ci-anuncio-prestamos.webp" download="capital-investment-prestamos.webp">Descargar</a></figcaption></figure>
+        <figure><img loading="lazy" src="ci-anuncio-banca.webp" width="1080" height="1350" alt="Anuncio: tu banca virtual en tu bolsillo"><figcaption>Tu banca virtual<a class="dl" href="ci-anuncio-banca.webp" download="capital-investment-banca.webp">Descargar</a></figcaption></figure>
+      </div>
+      <p style="margin-top:16px"><a class="btn gold" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Capital%20Investment." target="_blank" rel="noopener noreferrer">Escribir al WhatsApp corporativo</a></p>
     </div>
   </section>
 

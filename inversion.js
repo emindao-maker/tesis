@@ -531,6 +531,6 @@
   }
 
   var inicial = (location.hash || "").replace("#", "");
-  abrir(["info", "sim", "cuenta", "prestamos", "resultados", "admin"].indexOf(inicial) > -1 && inicial !== "admin" ? inicial : "info");
+  abrir(["info", "sim", "cuenta", "prestamos", "resultados", "publicidad", "admin"].indexOf(inicial) > -1 && inicial !== "admin" ? inicial : "info");
   iniciar();
 })();
