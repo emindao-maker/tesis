@@ -37,7 +37,6 @@
             <li class="menu-item"><a href="#mis" class="menu-link" data-sub="mis"><i class="menu-icon tf-icons bx bx-wallet"></i><div class="text-truncate">Mis inversiones</div></a></li>
             <li class="menu-item"><a href="#ganancias" class="menu-link" data-sub="ganancias"><i class="menu-icon tf-icons bx bx-line-chart"></i><div class="text-truncate">Ganancias</div></a></li>
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Servicios</span></li>
-            <li class="menu-item"><a href="#prestamos" class="menu-link" data-sub="prestamos"><i class="menu-icon tf-icons bx bx-credit-card"></i><div class="text-truncate">Préstamos</div></a></li>
             <li class="menu-item"><a href="#sim" class="menu-link" data-sub="sim"><i class="menu-icon tf-icons bx bx-calculator"></i><div class="text-truncate">Simulador</div></a></li>
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Información</span></li>
             <li class="menu-item"><a href="#resultados" class="menu-link" data-sub="resultados"><i class="menu-icon tf-icons bx bx-bar-chart-alt-2"></i><div class="text-truncate">Resultados</div></a></li>
@@ -91,9 +90,6 @@
         <div class="col-6 col-xl-3"><div class="card h-100"><div class="card-body">
           <div class="avatar mb-3"><span class="avatar-initial rounded bg-label-info"><i class="bx bx-coin-stack"></i></span></div>
           <span class="d-block text-body-secondary mb-1">Valor actual</span><h4 class="card-title mb-0" id="rs-val">$0.00</h4></div></div></div>
-        <div class="col-6 col-xl-3"><div class="card h-100"><div class="card-body">
-          <div class="avatar mb-3"><span class="avatar-initial rounded bg-label-warning"><i class="bx bx-credit-card"></i></span></div>
-          <span class="d-block text-body-secondary mb-1">Préstamos solicitados</span><h4 class="card-title mb-0" id="rs-pre">0</h4></div></div></div>
   </div>
   <div class="row g-4">
     <div class="col-lg-8"><div class="card h-100">
@@ -144,7 +140,7 @@
 <div class="sp" id="sp-mis" hidden>
   <div class="card">
     <h5 class="card-header">Mis inversiones</h5>
-    <div class="table-responsive text-nowrap"><table class="table"><thead><tr><th>Fecha</th><th class="num">Monto</th><th>Plazo</th><th>Estado</th><th class="num">Ganancia real</th><th class="num">Valor actual</th></tr></thead><tbody id="mis" class="table-border-bottom-0"></tbody></table></div>
+    <div class="table-responsive text-nowrap"><table class="table"><thead><tr><th>Fecha</th><th class="num">Monto</th><th>Plazo</th><th>Estado</th><th class="num">Ganancia real</th><th class="num">Valor actual</th><th>Certificado</th></tr></thead><tbody id="mis" class="table-border-bottom-0"></tbody></table></div>
     <div class="card-body pt-3"><p class="muted mb-1" id="mis-vacio" hidden>Todavía no has registrado inversiones.</p>
     <p class="muted small mb-0">La ganancia real se calcula con los resultados mensuales publicados, desde el mes en que se confirma tu pago. Puede ser negativa.</p></div>
   </div>
@@ -180,42 +176,6 @@
   </div></div>
 </div>
 
-<!-- PRÉSTAMOS -->
-<div class="sp" id="sp-prestamos" hidden>
-  <div class="row g-4">
-    <div class="col-lg-6"><div class="card h-100"><div class="card-body">
-      <h5 class="card-title">Simulador de préstamo</h5>
-      <p class="muted">Calcula tu cuota mensual fija (sistema francés). Es una simulación: la aprobación depende de la evaluación de Tesis.</p>
-      <label class="form-label" for="l-monto">Monto (USD, de $50 a $5.000)</label><input class="form-control mb-3" id="l-monto" type="number" min="50" max="5000" step="10" value="1000" inputmode="decimal">
-      <label class="form-label" for="l-plazo">Plazo (meses, hasta 36)</label><input class="form-control mb-3" id="l-plazo" type="number" min="1" max="36" step="1" value="12" inputmode="numeric">
-      <div class="row g-3" aria-live="polite">
-        <div class="col-4"><div class="out"><small>Cuota mensual</small><b id="l-cuota">–</b></div></div>
-        <div class="col-4"><div class="out"><small>Total a pagar</small><b id="l-total">–</b></div></div>
-        <div class="col-4"><div class="out"><small>Intereses</small><b id="l-int">–</b></div></div>
-      </div>
-      <details class="mt-3"><summary class="fw-medium" style="cursor:pointer">Ver tabla de pagos</summary><div class="table-responsive" style="max-height:280px;overflow:auto"><table class="table table-sm"><thead><tr><th>Cuota</th><th class="num">Capital</th><th class="num">Interés</th><th class="num">Saldo</th></tr></thead><tbody id="l-amort"></tbody></table></div></details>
-      <p class="muted small mt-3 mb-0">Tasa de referencia: <b id="l-tasa">18</b>% anual. La tasa final queda fijada en el contrato.</p>
-    </div></div></div>
-    <div class="col-lg-6">
-      <form class="card mb-4" id="f-pre" novalidate><div class="card-body">
-        <h5 class="card-title">Solicitar préstamo</h5>
-        <div id="l-form">
-          <label class="form-label" for="l-nombre">Nombre completo</label><input class="form-control mb-3" id="l-nombre" maxlength="120" autocomplete="name">
-          <label class="form-label" for="l-contacto">WhatsApp o correo</label><input class="form-control mb-3" id="l-contacto" maxlength="120">
-          <label class="form-label" for="l-destino">¿Para qué usarás el dinero?</label><input class="form-control mb-3" id="l-destino" maxlength="200">
-          <div class="form-check"><input class="form-check-input" type="checkbox" id="l-acepto"><label class="form-check-label" for="l-acepto">Entiendo que esto es una solicitud, que no garantiza la aprobación y que el préstamo se formaliza con un contrato.</label></div>
-          <div class="mt-4"><button class="btn btn-primary" type="submit" id="l-enviar">Enviar solicitud</button></div>
-        </div>
-        <div id="l-msg" aria-live="polite"></div>
-      </div></form>
-      <div class="card" id="l-mis-card" hidden>
-        <h5 class="card-header">Mis solicitudes</h5>
-        <div class="table-responsive text-nowrap"><table class="table"><thead><tr><th>Fecha</th><th class="num">Monto</th><th class="num">Cuota</th><th>Estado</th></tr></thead><tbody id="l-mis" class="table-border-bottom-0"></tbody></table></div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- RESULTADOS -->
 <div class="sp" id="sp-resultados" hidden>
   <div class="card"><div class="card-body">
@@ -234,9 +194,8 @@
     <h5 class="card-title">Publicidad de Capital Investment</h5>
     <p class="muted">Descarga los anuncios y compártelos en tus redes. Para informes y consultas, el contacto es el WhatsApp corporativo <b>098 556 8519</b>.</p>
     <div class="row g-4">
-      <div class="col-md-4"><figure class="galeria"><img loading="lazy" src="ci-anuncio-invierte.webp" width="1080" height="1080" alt="Anuncio: invierte desde $10 con Capital Investment"><figcaption>Invierte desde $10<a class="dl" href="ci-anuncio-invierte.webp" download="capital-investment-invierte.webp"><i class="bx bx-download"></i> Descargar</a></figcaption></figure></div>
-      <div class="col-md-4"><figure class="galeria"><img loading="lazy" src="ci-anuncio-prestamos.webp" width="1080" height="1080" alt="Anuncio: préstamos de $50 a $5.000 con cuota fija"><figcaption>Préstamos de $50 a $5.000<a class="dl" href="ci-anuncio-prestamos.webp" download="capital-investment-prestamos.webp"><i class="bx bx-download"></i> Descargar</a></figcaption></figure></div>
-      <div class="col-md-4"><figure class="galeria"><img loading="lazy" src="ci-anuncio-banca.webp" width="1080" height="1350" alt="Anuncio: tu banca virtual en tu bolsillo"><figcaption>Tu banca virtual<a class="dl" href="ci-anuncio-banca.webp" download="capital-investment-banca.webp"><i class="bx bx-download"></i> Descargar</a></figcaption></figure></div>
+      <div class="col-md-6"><figure class="galeria"><img loading="lazy" src="ci-anuncio-invierte.webp" width="1080" height="1080" alt="Anuncio: invierte desde $10 con Capital Investment"><figcaption>Invierte desde $10<a class="dl" href="ci-anuncio-invierte.webp" download="capital-investment-invierte.webp"><i class="bx bx-download"></i> Descargar</a></figcaption></figure></div>
+      <div class="col-md-6"><figure class="galeria"><img loading="lazy" src="ci-anuncio-banca.webp" width="1080" height="1350" alt="Anuncio: tu banca virtual en tu bolsillo"><figcaption>Tu banca virtual<a class="dl" href="ci-anuncio-banca.webp" download="capital-investment-banca.webp"><i class="bx bx-download"></i> Descargar</a></figcaption></figure></div>
     </div>
     <p class="mt-4 mb-0"><a class="btn btn-primary" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Capital%20Investment." target="_blank" rel="noopener noreferrer">Escribir al WhatsApp corporativo</a></p>
   </div></div>
@@ -258,7 +217,7 @@
     </div>
     <div class="col-lg-5"><div class="card"><div class="card-body">
       <h5 class="card-title">Estado de cuenta</h5>
-      <p class="muted">Imprime o guarda en PDF un resumen con tus inversiones, ganancias y préstamos.</p>
+      <p class="muted">Imprime o guarda en PDF un resumen con tus inversiones, y ganancias.</p>
       <button class="btn btn-outline-primary" type="button" id="p-imprimir"><i class="bx bx-printer me-1"></i>Imprimir estado de cuenta</button>
       <hr>
       <button class="btn btn-outline-secondary" type="button" id="p-salir"><i class="bx bx-log-out me-1"></i>Cerrar sesión</button>
@@ -280,6 +239,6 @@
 <script src="sneat-bootstrap.js"></script>
 <script src="sneat-ps.js"></script>
 <script src="sneat-menu.js"></script>
-<script src="banca.js?v=4"></script>
+<script src="banca.js?v=6"></script>
 </body>
 </html>

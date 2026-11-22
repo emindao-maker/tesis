@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Certificado de inversión · Capital Investment</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="logo-ci.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Great+Vibes&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--rosa:#C4126B;--vino:#4A0E3A;--oro:#B8892B;--papel:#FFFDF8}
+*{box-sizing:border-box}
+body{margin:0;background:#e9e4ea;font-family:'Public Sans',system-ui,sans-serif;color:#2b1a26}
+.barra{display:flex;gap:.75rem;align-items:center;justify-content:center;padding:14px;flex-wrap:wrap}
+.barra a,.barra button{font:600 14px 'Public Sans',sans-serif;border:0;border-radius:8px;padding:10px 18px;cursor:pointer;text-decoration:none;background:var(--rosa);color:#fff}
+.barra a.sec{background:#fff;color:var(--rosa);border:1px solid var(--rosa)}
+#estado{max-width:640px;margin:40px auto;background:#fff;border-radius:12px;padding:24px;text-align:center}
+.hoja{width:297mm;height:210mm;margin:0 auto 30px;background:var(--papel);position:relative;overflow:hidden;box-shadow:0 8px 30px rgba(74,14,58,.25);transform-origin:top center}
+.marco{position:absolute;inset:8mm;border:2.2mm double var(--vino);outline:.4mm solid var(--oro);outline-offset:-5mm}
+.marco2{position:absolute;inset:15mm;border:.35mm solid var(--oro);background:
+ repeating-linear-gradient(45deg,rgba(196,18,107,.035) 0 .6mm,transparent .6mm 3mm),
+ repeating-linear-gradient(-45deg,rgba(184,137,43,.05) 0 .6mm,transparent .6mm 3mm)}
+.marca{position:absolute;left:50%;top:50%;width:120mm;height:120mm;transform:translate(-50%,-50%);opacity:.06;pointer-events:none}
+.cont{position:absolute;inset:20mm 24mm 18mm;display:flex;flex-direction:column;align-items:center;text-align:center}
+.emisor{display:flex;align-items:center;gap:10px;margin-top:2mm}
+.emisor img{width:13mm;height:13mm}
+.emisor b{font:700 6.2mm 'Cormorant Garamond',serif;letter-spacing:.8mm;color:var(--vino);text-transform:uppercase}
+.emisor small{display:block;font:500 2.7mm 'Public Sans',sans-serif;letter-spacing:.5mm;color:var(--oro);text-transform:uppercase;text-align:left}
+h1{font:700 10.5mm 'Cormorant Garamond',serif;color:var(--rosa);margin:4mm 0 0;letter-spacing:1mm;text-transform:uppercase}
+.sub{font:italic 500 4.2mm 'Cormorant Garamond',serif;color:var(--vino);margin:1mm 0 3mm}
+.otorga{font:500 3.6mm 'Public Sans',sans-serif;color:#6b5160;letter-spacing:.4mm;text-transform:uppercase}
+.nombre{font:400 14mm 'Great Vibes',cursive;color:var(--vino);margin:1mm 0 0;line-height:1.1}
+.linea{width:140mm;height:.4mm;background:linear-gradient(90deg,transparent,var(--oro),transparent);margin:1mm 0 3mm}
+.texto{font:500 4.1mm/1.55 'Cormorant Garamond',serif;color:#2b1a26;max-width:205mm}
+.texto b{color:var(--vino)}
+.datos{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:4mm 0 0;width:215mm;border:.3mm solid var(--oro)}
+.datos div{padding:2mm 1mm;border-right:.3mm solid var(--oro)}.datos div:last-child{border-right:0}
+.datos small{display:block;font:600 2.3mm 'Public Sans',sans-serif;letter-spacing:.4mm;color:var(--oro);text-transform:uppercase}
+.datos span{font:700 4.6mm 'Cormorant Garamond',serif;color:var(--vino)}
+.pie{position:absolute;left:0;right:0;bottom:0;display:grid;grid-template-columns:68mm 1fr 74mm;align-items:end;gap:6mm}
+.firma{text-align:center;font:500 3mm 'Public Sans',sans-serif;color:#4a3a45}
+.firma .tr{border-top:.35mm solid var(--vino);margin:0 4mm;padding-top:1.2mm}
+.firma b{display:block;font:700 4mm 'Cormorant Garamond',serif;color:var(--vino)}
+.sello{width:34mm;height:34mm;margin:0 auto}
+.ver{display:flex;gap:3mm;align-items:center;justify-content:flex-end;text-align:left}
+.ver svg,.ver canvas{width:24mm;height:24mm}
+.ver div{font:500 2.5mm/1.35 'Public Sans',sans-serif;color:#4a3a45}
+.ver b{display:block;font:700 3.3mm 'Public Sans',sans-serif;color:var(--vino);letter-spacing:.3mm}
+.legal{font:400 2.5mm/1.4 'Public Sans',sans-serif;color:#6b5160;max-width:230mm;margin-top:3mm}
+.micro{position:absolute;left:17mm;right:17mm;bottom:16.2mm;font:500 1.5mm 'Public Sans',sans-serif;color:var(--oro);white-space:nowrap;overflow:hidden;letter-spacing:.2mm;text-transform:uppercase;opacity:.8}
+@media print{@page{size:A4 landscape;margin:0}html,body{background:#fff}.barra,#estado{display:none!important}.hoja{margin:0;box-shadow:none;transform:none!important}}
+</style>
+</head>
+<body>
+<div class="barra" id="barra" hidden><button type="button" id="imp">Imprimir o guardar en PDF</button><a class="sec" href="banca.html?vista=usuario#mis">Volver a mi banca</a></div>
+<div id="estado">Cargando certificado…</div>
+<section class="hoja" id="hoja" hidden aria-label="Certificado de inversión">
+  <div class="marco"></div><div class="marco2"></div>
+  <svg class="marca" viewBox="0 0 128 128" aria-hidden="true"><image href="logo-ci.svg" width="128" height="128"/></svg>
+  <div class="micro" id="micro"></div>
+  <div class="cont">
+    <div class="emisor"><img src="logo-ci.svg" alt=""><div><b>Capital Investment</b><small>Tesis · Ibarra, Ecuador</small></div></div>
+    <h1>Certificado de participación</h1>
+    <div class="sub">en inversión de capital</div>
+    <div class="otorga">Se certifica que</div>
+    <div class="nombre" id="c-nombre"></div>
+    <div class="linea"></div>
+    <p class="texto" id="c-texto"></p>
+    <div class="datos">
+      <div><small>Código</small><span id="c-cod"></span></div>
+      <div><small>Monto aportado</small><span id="c-monto"></span></div>
+      <div><small>Fecha de confirmación</small><span id="c-fecha"></span></div>
+      <div><small>Liquidación prevista</small><span id="c-liq"></span></div>
+    </div>
+    <p class="legal">La utilidad es variable y depende de los resultados mensuales publicados por la empresa; no existe rendimiento garantizado y el aportante puede perder parte o todo lo aportado. Este certificado acredita la participación y no constituye depósito bancario ni producto financiero regulado. Rige el contrato de participación aceptado por el inversionista.</p>
+    <div class="pie">
+      <div class="firma"><div class="tr"><b>Estalin Arley Minda Ortiz</b>Representante · Capital Investment</div></div>
+      <div><svg class="sello" viewBox="0 0 200 200" aria-hidden="true">
+        <defs><path id="arco" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs>
+        <circle cx="100" cy="100" r="94" fill="none" stroke="#C4126B" stroke-width="3"/><circle cx="100" cy="100" r="88" fill="none" stroke="#C4126B" stroke-width="1"/>
+        <circle cx="100" cy="100" r="50" fill="none" stroke="#C4126B" stroke-width="1.5"/>
+        <text font-family="Public Sans,sans-serif" font-size="14" font-weight="700" letter-spacing="3" fill="#C4126B"><textPath href="#arco" startOffset="2%">CAPITAL INVESTMENT · TESIS · IBARRA · ECUADOR ·</textPath></text>
+        <text x="100" y="96" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="30" font-weight="700" fill="#C4126B">CI</text>
+        <text x="100" y="118" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="9.5" letter-spacing="2" fill="#C4126B">CERTIFICADO</text></svg></div>
+      <div class="ver"><div id="c-qr"></div><div><b id="c-cod2"></b>Emitido el <span id="c-emi"></span><br>Verifica su autenticidad en<br><span id="c-url"></span></div></div>
+    </div>
+  </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js" integrity="sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="trabajos-config.js"></script>
+<script src="qr.js"></script>
+<script src="certificado.js?v=2"></script>
+</body>
+</html>

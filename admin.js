@@ -4,7 +4,7 @@
   "use strict";
   var C = window.TRABAJOS_CONFIG || {};
   var $ = function (id) { return document.getElementById(id); };
-  var sb = null, resultados = [], inversiones = [], prestamos = [], perfiles = [];
+  var sb = null, resultados = [], inversiones = [], perfiles = [];
   var MESES_ES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
   function usd(n) { return "$" + Number(n || 0).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
   function pct(n) { return (n >= 0 ? "+" : "") + Number(n).toLocaleString("en-US", { maximumFractionDigits: 2 }) + "%"; }
@@ -40,7 +40,7 @@
   }
 
   /* ---------- Menú ---------- */
-  var TITULOS = { panel: "Panel general", inversiones: "Inversiones", prestamos: "Préstamos", clientes: "Clientes", resultados: "Resultados del mes", pagos: "Datos de pago y tasa" };
+  var TITULOS = { panel: "Panel general", inversiones: "Inversiones", clientes: "Clientes", resultados: "Resultados del mes", pagos: "Datos de pago" };
   var raiz = document.documentElement;
   function menu(a) { raiz.classList.toggle("layout-menu-expanded", a); }
   function abrir(n) {
@@ -77,6 +77,7 @@
   function accionesInv(acc, i) {
     if (i.estado === "pendiente") { botonInv(acc, i, "Confirmar pago", "confirmada"); botonInv(acc, i, "Rechazar", "rechazada"); }
     if (i.estado === "confirmada") botonInv(acc, i, "Liquidar", "liquidada");
+    if (i.estado === "confirmada" || i.estado === "liquidada") acc.appendChild(el("a", { cls: "btn btn-sm btn-outline-secondary", href: "certificado.html?id=" + i.id, target: "_blank", rel: "noopener", text: "Certificado", style: "margin:0 4px 4px 0" }));
   }
   function cambiarInv(i, estado) {
     var cambios = { estado: estado };
@@ -107,43 +108,13 @@
     if (!tb.firstChild) tb.appendChild(el("tr", {}, [el("td", { colspan: "6", cls: "muted", text: "No hay inversiones en esta vista." })]));
   }
 
-  /* ---------- Préstamos ---------- */
-  function botonPre(acc, p, txt, est) {
-    var b = el("button", { cls: "btn btn-sm btn-outline-primary", type: "button", text: txt, style: "margin:0 4px 4px 0" });
-    b.addEventListener("click", function () {
-      sb.from("inv_prestamos").update({ estado: est }).eq("id", p.id).then(function (r) {
-        if (r.error) return aviso("a-pre-msg", "err", "No se pudo actualizar.");
-        aviso("a-pre-msg", "ok", "Actualizado."); cargarTodo();
-      });
-    });
-    acc.appendChild(b);
-  }
-  function accionesPre(acc, p) {
-    if (p.estado === "solicitada") { botonPre(acc, p, "Aprobar", "aprobada"); botonPre(acc, p, "Rechazar", "rechazada"); }
-    if (p.estado === "aprobada") botonPre(acc, p, "Marcar desembolsado", "desembolsada");
-    if (p.estado === "desembolsada") botonPre(acc, p, "Marcar pagado", "pagada");
-  }
-  function pintarPrestamos() {
-    var f = $("fp-estado").value, tb = $("a-pre"); limpiar(tb);
-    prestamos.filter(function (p) { return !f || p.estado === f; }).forEach(function (p) {
-      var acc = el("td", {}); accionesPre(acc, p);
-      tb.appendChild(el("tr", {}, [
-        contactoCel(p.nombre, p.contacto, fecha(p.creada_en)),
-        el("td", { cls: "num", text: usd(p.monto) }),
-        el("td", { text: p.plazo_meses + " m · cuota " + usd(p.cuota) + " · " + p.tasa_anual + "% anual · total " + usd(p.cuota * p.plazo_meses) }),
-        el("td", { text: p.destino }), el("td", {}, [el("span", { cls: "pill " + pillPre(p.estado), text: p.estado })]), acc
-      ]));
-    });
-    if (!tb.firstChild) tb.appendChild(el("tr", {}, [el("td", { colspan: "6", cls: "muted", text: "No hay préstamos en esta vista." })]));
-  }
   $("fi-estado").addEventListener("change", pintarInversiones);
-  $("fp-estado").addEventListener("change", pintarPrestamos);
 
   /* ---------- Panel general y clientes ---------- */
   function pintarPanel() {
-    var cap = 0, pend = [], pre = prestamos.filter(function (p) { return p.estado === "solicitada"; });
+    var cap = 0, pend = [];
     inversiones.forEach(function (i) { if (i.estado === "confirmada") cap += Number(i.monto); if (i.estado === "pendiente") pend.push(i); });
-    $("k-cap").textContent = usd(cap); $("k-pend").textContent = String(pend.length); $("k-pre").textContent = String(pre.length);
+    $("k-cap").textContent = usd(cap); $("k-pend").textContent = String(pend.length);
     $("k-cli").textContent = String(perfiles.length);
     var bi = $("p-inv"); limpiar(bi);
     if (!pend.length) bi.appendChild(el("p", { cls: "muted mb-0", text: "No hay inversiones por confirmar." }));
@@ -152,30 +123,20 @@
       while (a2.firstChild) acc.appendChild(a2.firstChild);
       bi.appendChild(el("div", { cls: "border-bottom py-3" }, [el("b", { text: i.nombre + " · " + usd(i.monto) }), el("div", { cls: "muted small", text: i.metodo + " · ref. " + i.referencia + " · " + i.meses + " m · " + fecha(i.creada_en) + " · " + i.contacto }), acc]));
     });
-    var bp = $("p-pre"); limpiar(bp);
-    if (!pre.length) bp.appendChild(el("p", { cls: "muted mb-0", text: "No hay préstamos por revisar." }));
-    pre.forEach(function (p) {
-      var a2 = el("td", {}); accionesPre(a2, p); var acc = el("div", { cls: "mt-2" });
-      while (a2.firstChild) acc.appendChild(a2.firstChild);
-      var kids = [el("b", { text: p.nombre + " · " + usd(p.monto) }), el("div", { cls: "muted small", text: p.plazo_meses + " m · cuota " + usd(p.cuota) + " · " + p.destino + " · " + p.contacto })];
-      var w = waLink(p.contacto); if (w) kids.push(el("a", { href: w, target: "_blank", rel: "noopener noreferrer", cls: "small", text: "Abrir WhatsApp" }));
-      kids.push(acc); bp.appendChild(el("div", { cls: "border-bottom py-3" }, kids));
-    });
   }
   function pintarClientes() {
     var tb = $("a-cli"); limpiar(tb);
     perfiles.forEach(function (c) {
-      var inv = 0, np = 0;
+      var inv = 0;
       inversiones.forEach(function (i) { if (i.user_id === c.user_id && (i.estado === "confirmada" || i.estado === "pendiente")) inv += Number(i.monto); });
-      prestamos.forEach(function (p) { if (p.user_id === c.user_id) np++; });
       var w = waLink(c.telefono);
       tb.appendChild(el("tr", {}, [
         el("td", {}, [el("b", { text: c.nombre || "(sin nombre)" })]),
         el("td", {}, w ? [el("a", { href: w, target: "_blank", rel: "noopener noreferrer", text: c.telefono })] : [el("span", { cls: "muted", text: c.telefono || "-" })]),
-        el("td", { text: c.ciudad || "-" }), el("td", { cls: "num", text: usd(inv) }), el("td", { cls: "num", text: String(np) })
+        el("td", { text: c.ciudad || "-" }), el("td", { cls: "num", text: usd(inv) })
       ]));
     });
-    if (!tb.firstChild) tb.appendChild(el("tr", {}, [el("td", { colspan: "5", cls: "muted", text: "Aún no hay clientes con perfil." })]));
+    if (!tb.firstChild) tb.appendChild(el("tr", {}, [el("td", { colspan: "4", cls: "muted", text: "Aún no hay clientes con perfil." })]));
   }
 
   /* ---------- Resultados, datos de pago y tasa ---------- */
@@ -203,31 +164,22 @@
       aviso("g-msg", r.error ? "err" : "ok", r.error ? "No se pudo guardar." : "Datos guardados.");
     });
   });
-  $("g-tasa-b").addEventListener("click", function () {
-    var t = parseFloat($("g-tasa").value);
-    if (isNaN(t) || t < 0 || t > 100) return aviso("t-msg", "err", "Escribe una tasa entre 0 y 100.");
-    sb.from("inv_config").update({ tasa_prestamo_anual: t }).eq("id", 1).then(function (r) {
-      aviso("t-msg", r.error ? "err" : "ok", r.error ? "No se pudo guardar la tasa." : "Tasa guardada.");
-    });
-  });
-
   /* ---------- Carga ---------- */
   function cargarTodo() {
     return Promise.all([
       sb.from("inv_inversiones").select("*").order("creada_en", { ascending: false }),
-      sb.from("inv_prestamos").select("*").order("creada_en", { ascending: false }),
       sb.from("inv_resultados").select("*").order("mes", { ascending: false }),
       sb.from("inv_perfiles").select("*").order("nombre", { ascending: true })
     ]).then(function (r) {
-      inversiones = r[0].data || []; prestamos = r[1].data || []; resultados = r[2].data || []; perfiles = r[3].data || [];
-      pintarPanel(); pintarInversiones(); pintarPrestamos(); pintarClientes(); pintarResultados();
+      inversiones = r[0].data || []; resultados = r[1].data || []; perfiles = r[2].data || [];
+      pintarPanel(); pintarInversiones(); pintarClientes(); pintarResultados();
     });
   }
   function cargarConfig() {
     return sb.from("inv_config").select("*").eq("id", 1).maybeSingle().then(function (r) {
       var c = r.data; if (!c) return;
       $("g-banco").value = c.banco || ""; $("g-tipo").value = c.tipo_cuenta || ""; $("g-num").value = c.numero_cuenta || "";
-      $("g-tit").value = c.titular || ""; $("g-id").value = c.identificacion || ""; $("g-pp").value = c.paypal || ""; $("g-tasa").value = c.tasa_prestamo_anual;
+      $("g-tit").value = c.titular || ""; $("g-id").value = c.identificacion || ""; $("g-pp").value = c.paypal || "";
     });
   }
   function irA(url) { location.replace(url); }

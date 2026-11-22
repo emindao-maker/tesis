@@ -32,6 +32,21 @@
     var box = $(id); box.textContent = "";
     if (texto) box.appendChild(el("div", { cls: "msg " + tipo, text: texto }));
   }
+  function waLink(txt) {
+    var d = String(txt || "").replace(/\D/g, "");
+    if (d.length < 9) return "";
+    if (d.charAt(0) === "0") d = "593" + d.slice(1);
+    return "https://wa.me/" + d;
+  }
+  /* Aviso por correo al administrador (FormSubmit). Si falla, la solicitud igual queda guardada en el panel. */
+  function avisarCorreo(asunto, campos) {
+    try {
+      var cuerpo = Object.assign({ _subject: asunto, _template: "table", _captcha: "false" }, campos);
+      fetch("https://formsubmit.co/ajax/" + CORREO_BASE + "@" + CORREO_DOMINIO, {
+        method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(cuerpo)
+      }).catch(function () {});
+    } catch (x) {}
+  }
   function limpiar(n) { while (n.firstChild) n.removeChild(n.firstChild); }
 
 
@@ -159,7 +174,10 @@
         el("td", { text: i.meses + (i.meses === 1 ? " mes" : " meses") + (i.renovar ? " · renueva" : "") }),
         el("td", {}, [el("span", { cls: "pill " + i.estado, text: i.estado })]),
         el("td", { cls: "num " + ucls, text: util }),
-        el("td", { cls: "num", text: valor })
+        el("td", { cls: "num", text: valor }),
+        el("td", {}, (i.estado === "confirmada" || i.estado === "liquidada")
+          ? [el("a", { cls: "btn btn-sm btn-primary", href: "certificado.html?id=" + i.id, target: "_blank", rel: "noopener", text: "Ver certificado" })]
+          : [el("span", { cls: "muted small", text: i.estado === "pendiente" ? "Se emite al confirmar tu pago" : "–" })])
       ]));
     });
     $("cupo").textContent = usd(Math.max(0, 10000 - vigente));
@@ -177,7 +195,6 @@
       if (i.liquidada_en) ev.push({ f: i.liquidada_en, t: "Liquidación recibida", v: Number(i.monto_liquidado), c: "pos" });
       if (i.estado === "rechazada") ev.push({ f: i.creada_en, t: "Inversión rechazada", v: 0, c: "neg" });
     });
-    misPre.forEach(function (p) { ev.push({ f: p.creada_en, t: "Préstamo " + p.estado, v: Number(p.monto), c: "" }); });
     ev.sort(function (a, b) { return a.f < b.f ? 1 : -1; });
     var tb = $("mov"); limpiar(tb);
     $("mov-vacio").hidden = ev.length > 0;
@@ -234,6 +251,15 @@
         return aviso("f-msg", "err", t);
       }
       aviso("f-msg", "ok", "Inversión registrada. Queda pendiente hasta que confirmemos tu pago; te contactaremos para firmar el contrato.");
+      avisarCorreo("Nueva inversión por confirmar: " + datos.nombre + " · " + usd(datos.monto), {
+        "Inversionista": datos.nombre, "Usuario": usuarioDe(sesion.user.email), "Contacto": datos.contacto,
+        "WhatsApp / teléfono": (waLink(datos.contacto) ? datos.contacto : ($("p-tel").value || datos.contacto)),
+        "Abrir WhatsApp": waLink(datos.contacto) || waLink($("p-tel").value) || "-", "Ciudad": $("p-ciudad").value || "-",
+        "Monto": usd(datos.monto), "Plazo": datos.meses + " meses", "Renovar": datos.renovar ? "Sí" : "No",
+        "Forma de pago": datos.metodo, "Comprobante / referencia": datos.referencia,
+        "Fecha": new Date().toLocaleString("es-EC", { timeZone: "America/Guayaquil" }),
+        "Revisar y confirmar": "https://emindao-maker.github.io/tesis/admin.html#inversiones"
+      });
       $("f-monto").value = ""; $("f-ref").value = ""; $("f-acepto").checked = false;
       cargarMis();
     });
@@ -244,84 +270,6 @@
       .then(function (r) { mis = r.data || []; pintarMis(); });
   }
 
-  /* ---------- Préstamos ---------- */
-  var tasa = 18, misPre = [], todasPre = [];
-  function cuotaFrancesa(m, n, t) {
-    var i = t / 100 / 12;
-    return i === 0 ? m / n : m * i / (1 - Math.pow(1 + i, -n));
-  }
-  function simPre() {
-    var m = Math.min(5000, Math.max(50, parseFloat($("l-monto").value) || 50));
-    var n = Math.min(36, Math.max(1, parseInt($("l-plazo").value, 10) || 1));
-    var c = cuotaFrancesa(m, n, tasa);
-    $("l-cuota").textContent = usd(c); $("l-total").textContent = usd(c * n); $("l-int").textContent = usd(c * n - m);
-    $("l-tasa").textContent = String(tasa);
-    var ta = $("l-amort"); limpiar(ta); var saldo = m, i = tasa / 100 / 12;
-    for (var k = 1; k <= n; k++) {
-      var int = saldo * i, cap = c - int; saldo = Math.max(0, saldo - cap);
-      ta.appendChild(el("tr", {}, [el("td", { text: String(k) }), el("td", { cls: "num", text: usd(cap) }), el("td", { cls: "num", text: usd(int) }), el("td", { cls: "num", text: usd(saldo) })]));
-    }
-  }
-  ["l-monto", "l-plazo"].forEach(function (id) { $(id).addEventListener("input", simPre); });
-  simPre();
-
-  function pintarPre() {
-    $("rs-pre").textContent = String(misPre.length);
-    pintarMov();
-    $("l-mis-card").hidden = !misPre.length;
-    var tb = $("l-mis"); limpiar(tb);
-    misPre.forEach(function (p) {
-      tb.appendChild(el("tr", {}, [
-        el("td", { text: new Date(p.creada_en).toLocaleDateString("es-EC") }),
-        el("td", { cls: "num", text: usd(p.monto) }), el("td", { cls: "num", text: usd(p.cuota) }),
-        el("td", {}, [el("span", { cls: "pill " + (p.estado === "solicitada" ? "pendiente" : p.estado === "rechazada" ? "rechazada" : "confirmada"), text: p.estado })])
-      ]));
-    });
-  }
-  function waLink(txt) {
-    var d = String(txt || "").replace(/\D/g, "");
-    if (d.length < 9) return "";
-    if (d.charAt(0) === "0") d = "593" + d.slice(1);
-    return "https://wa.me/" + d;
-  }
-  /* Aviso por correo al administrador (FormSubmit). Si falla, la solicitud igual queda guardada en el panel. */
-  function avisarCorreo(asunto, campos) {
-    try {
-      var cuerpo = Object.assign({ _subject: asunto, _template: "table", _captcha: "false" }, campos);
-      fetch("https://formsubmit.co/ajax/" + CORREO_BASE + "@" + CORREO_DOMINIO, {
-        method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(cuerpo)
-      }).catch(function () {});
-    } catch (x) {}
-  }
-  $("f-pre").addEventListener("submit", function (ev) {
-    ev.preventDefault();
-    if (!sesion) return aviso("l-msg", "err", "Primero entra a la Banca virtual con tu cuenta.");
-    var m = Math.round(parseFloat($("l-monto").value) * 100) / 100, n = parseInt($("l-plazo").value, 10);
-    var d = { nombre: $("l-nombre").value.trim(), contacto: $("l-contacto").value.trim(), monto: m, plazo_meses: n,
-      tasa_anual: tasa, cuota: Math.round(cuotaFrancesa(m, n, tasa) * 100) / 100, destino: $("l-destino").value.trim() };
-    if (d.nombre.length < 3 || d.contacto.length < 5 || d.destino.length < 3) return aviso("l-msg", "err", "Completa nombre, contacto y destino del préstamo.");
-    if (!(m >= 50 && m <= 5000) || !(n >= 1 && n <= 36)) return aviso("l-msg", "err", "El monto va de $50 a $5.000 y el plazo de 1 a 36 meses.");
-    if (!$("l-acepto").checked) return aviso("l-msg", "err", "Debes aceptar las condiciones para enviar la solicitud.");
-    var b = $("l-enviar"); b.disabled = true;
-    sb.from("inv_prestamos").insert(d).then(function (r) {
-      b.disabled = false;
-      if (r.error) return aviso("l-msg", "err", "No se pudo enviar. Revisa los datos e inténtalo de nuevo.");
-      aviso("l-msg", "ok", "Solicitud enviada. Te contactaremos para evaluarla; no implica aprobación.");
-      avisarCorreo("Nueva solicitud de préstamo: " + d.nombre + " · " + usd(d.monto), {
-        "Solicitante": d.nombre, "Usuario": usuarioDe(sesion.user.email), "Contacto": d.contacto,
-        "WhatsApp / teléfono": (waLink(d.contacto) ? d.contacto : ($("p-tel").value || d.contacto)), "Abrir WhatsApp": waLink(d.contacto) || waLink($("p-tel").value) || "-", "Teléfono del perfil": $("p-tel").value || "-", "Ciudad": $("p-ciudad").value || "-",
-        "Monto": usd(d.monto), "Plazo": d.plazo_meses + " meses", "Tasa anual": d.tasa_anual + "%",
-        "Cuota mensual": usd(d.cuota), "Total a pagar": usd(d.cuota * d.plazo_meses), "Destino": d.destino,
-        "Fecha": new Date().toLocaleString("es-EC", { timeZone: "America/Guayaquil" }),
-        "Revisar": "https://emindao-maker.github.io/tesis/banca.html#admin"
-      });
-      $("l-acepto").checked = false; cargarPre();
-    });
-  });
-  function cargarPre() {
-    return sb.from("inv_prestamos").select("*").eq("user_id", sesion.user.id).order("creada_en", { ascending: false })
-      .then(function (r) { misPre = r.data || []; pintarPre(); });
-  }
   /* ---------- Perfil ---------- */
   function cargarPerfil() {
     return sb.from("inv_perfiles").select("*").eq("user_id", sesion.user.id).maybeSingle().then(function (r) {
@@ -329,8 +277,8 @@
       var nombre = p.nombre || (sesion.user.user_metadata && sesion.user.user_metadata.full_name) || "";
       $("p-nombre").value = nombre; $("p-tel").value = p.telefono || ""; $("p-ciudad").value = p.ciudad || "";
       $("saludo").textContent = "Hola" + (nombre ? ", " + nombre.split(" ")[0] : "") + ". Este es el estado de tu cuenta.";
-      if (nombre) { $("f-nombre").value = nombre; $("l-nombre").value = nombre; }
-      if (p.telefono) { $("f-contacto").value = p.telefono; $("l-contacto").value = p.telefono; }
+      if (nombre) { $("f-nombre").value = nombre; }
+      if (p.telefono) { $("f-contacto").value = p.telefono; }
     });
   }
   $("f-perfil").addEventListener("submit", function (ev) {
@@ -354,8 +302,7 @@
       sb.from("inv_config").select("*").eq("id", 1).maybeSingle()
     ]).then(function (r) {
       resultados = (r[0].data || []); cfg = r[1].data || null;
-      if (cfg && cfg.tasa_prestamo_anual != null) { tasa = Number(cfg.tasa_prestamo_anual); simPre(); }
-      pintarResultados(); pintarBanco();
+            pintarResultados(); pintarBanco();
       if (sesion) pintarMis();
     });
   }
@@ -365,11 +312,11 @@
     sesion = s; esAdmin = false;
     var usu = usuarioDe(s.user.email);
     $("quien").textContent = usu; $("avatar-ini").textContent = (usu.charAt(0) || "·").toUpperCase(); $("p-email").textContent = "Usuario: " + usu;
-    if (!$("f-nombre").value && s.user.user_metadata) { $("f-nombre").value = s.user.user_metadata.full_name || ""; $("l-nombre").value = s.user.user_metadata.full_name || ""; }
+    if (!$("f-nombre").value && s.user.user_metadata) { $("f-nombre").value = s.user.user_metadata.full_name || ""; }
     sb.from("inv_admins").select("user_id").eq("user_id", s.user.id).maybeSingle().then(function (r) {
       esAdmin = !!(r.data);
       if (esAdmin && !/vista=usuario/.test(location.search)) { location.replace("admin.html"); return new Promise(function () {}); }
-      return Promise.all([cargarPerfil(), cargarPublico(), cargarMis(), cargarPre()]);
+      return Promise.all([cargarPerfil(), cargarPublico(), cargarMis()]);
     }).then(function () {
       $("c-cargando").hidden = true; $("c-app").hidden = false;
       var h = (location.hash || "").replace("#", "");

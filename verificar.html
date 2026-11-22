@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Verificar certificado · Capital Investment</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="logo-ci.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#fdf0f7;font-family:'Public Sans',system-ui,sans-serif;color:#2b1a26;min-height:100vh;display:grid;place-items:center;padding:16px}
+.c{background:#fff;max-width:480px;width:100%;border-radius:14px;padding:28px;box-shadow:0 6px 24px rgba(74,14,58,.12)}
+h1{font-size:1.25rem;margin:.6rem 0 .2rem;color:#4A0E3A}.m{color:#6b5160;font-size:.9rem}
+.ok{background:#e8fadf;color:#2f8a1a;border-radius:10px;padding:12px 14px;font-weight:600;margin:16px 0}
+.no{background:#ffe0db;color:#c0321a;border-radius:10px;padding:12px 14px;font-weight:600;margin:16px 0}
+dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0}dt{color:#6b5160}dd{margin:0;font-weight:600}
+form{display:flex;gap:8px;margin-top:14px}input{flex:1;padding:10px;border:1px solid #d7c2cf;border-radius:8px;font:inherit;text-transform:uppercase}
+button{background:#C4126B;color:#fff;border:0;border-radius:8px;padding:10px 16px;font:600 14px inherit;cursor:pointer}
+img{width:44px;height:44px}
+</style>
+</head>
+<body>
+<main class="c">
+  <img src="logo-ci.svg" alt="">
+  <h1>Verificar certificado de inversión</h1>
+  <p class="m">Escribe el código impreso en el certificado (o escanea su QR) para confirmar que fue emitido por Capital Investment.</p>
+  <form id="f"><input id="cod" placeholder="CI-XXXXXXXXXXXX" maxlength="20" aria-label="Código del certificado" autocomplete="off"><button type="submit">Verificar</button></form>
+  <div id="r" aria-live="polite"></div>
+  <p class="m" style="margin-top:18px">Por privacidad solo se muestran el nombre abreviado, el monto y las fechas. Capital Investment no es un banco. Consultas: WhatsApp 098 556 8519.</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js" integrity="sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="trabajos-config.js"></script>
+<script>
+(function(){
+  var C=window.TRABAJOS_CONFIG||{}, $=function(i){return document.getElementById(i)};
+  var M=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+  function fl(s){var d=new Date(s);return d.getDate()+" de "+M[d.getMonth()]+" de "+d.getFullYear()}
+  function usd(n){return "$"+Number(n).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})}
+  function caja(cls,t){var d=document.createElement("div");d.className=cls;d.textContent=t;return d}
+  var sb=(C.supabaseUrl&&window.supabase)?window.supabase.createClient(C.supabaseUrl,C.supabaseKey):null;
+  function ver(c){
+    var r=$("r"); r.textContent="";
+    c=(c||"").trim().toUpperCase(); if(!/^CI-[0-9A-F]{12}$/.test(c)){r.appendChild(caja("no","El código no tiene el formato correcto."));return}
+    if(!sb){r.appendChild(caja("no","Servicio no disponible ahora."));return}
+    sb.rpc("inv_verificar",{p_codigo:c}).then(function(x){
+      var d=x.data&&x.data[0];
+      if(x.error||!d){r.appendChild(caja("no","No encontramos un certificado con ese código. Si tienes uno impreso, escríbenos por WhatsApp."));return}
+      r.appendChild(caja("ok","Certificado auténtico, emitido por Capital Investment."));
+      var dl=document.createElement("dl");
+      [["Titular",d.titular],["Monto",usd(d.monto)],["Plazo",d.meses+(d.meses==1?" mes":" meses")],["Confirmado",fl(d.confirmada_en||d.creada_en)],["Estado",d.estado==="liquidada"?"Liquidada":"Vigente"]].forEach(function(p){
+        var a=document.createElement("dt");a.textContent=p[0];var b=document.createElement("dd");b.textContent=p[1];dl.appendChild(a);dl.appendChild(b)});
+      r.appendChild(dl);
+    });
+  }
+  $("f").addEventListener("submit",function(e){e.preventDefault();ver($("cod").value)});
+  var q=new URLSearchParams(location.search).get("c"); if(q){$("cod").value=q;ver(q)}
+})();
+</script>
+</body>
+</html>

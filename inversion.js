@@ -93,34 +93,11 @@
     }
   }
 
-  var tasa = 18;
-  function cuotaFrancesa(m, n, t) {
-    var i = t / 100 / 12;
-    return i === 0 ? m / n : m * i / (1 - Math.pow(1 + i, -n));
-  }
-  function simPre() {
-    var m = Math.min(5000, Math.max(50, parseFloat($("l-monto").value) || 50));
-    var n = Math.min(36, Math.max(1, parseInt($("l-plazo").value, 10) || 1));
-    var c = cuotaFrancesa(m, n, tasa);
-    $("l-cuota").textContent = usd(c); $("l-total").textContent = usd(c * n); $("l-int").textContent = usd(c * n - m);
-    $("l-tasa").textContent = String(tasa);
-    var ta = $("l-amort"); limpiar(ta); var saldo = m, i = tasa / 100 / 12;
-    for (var k = 1; k <= n; k++) {
-      var int = saldo * i, cap = c - int; saldo = Math.max(0, saldo - cap);
-      ta.appendChild(el("tr", {}, [el("td", { text: String(k) }), el("td", { cls: "num", text: usd(cap) }), el("td", { cls: "num", text: usd(int) }), el("td", { cls: "num", text: usd(saldo) })]));
-    }
-  }
-  ["l-monto", "l-plazo"].forEach(function (id) { $(id).addEventListener("input", simPre); });
-  simPre();
-
   function cargarPublico() {
     return Promise.all([
-      sb.from("inv_resultados").select("*").order("mes", { ascending: false }),
-      sb.from("inv_config").select("tasa_prestamo_anual").eq("id", 1).maybeSingle()
+      sb.from("inv_resultados").select("*").order("mes", { ascending: false })
     ]).then(function (r) {
       resultados = r[0].data || [];
-      var c = r[1].data;
-      if (c && c.tasa_prestamo_anual != null) { tasa = Number(c.tasa_prestamo_anual); simPre(); }
       pintarResultados();
     });
   }
@@ -184,6 +161,6 @@
   }
 
   var inicial = (location.hash || "").replace("#", "");
-  abrir(["info", "sim", "cuenta", "prestamos", "resultados", "publicidad"].indexOf(inicial) > -1 ? inicial : "info");
+  abrir(["info", "sim", "cuenta", "resultados", "publicidad"].indexOf(inicial) > -1 ? inicial : "info");
   iniciar();
 })();

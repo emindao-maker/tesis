@@ -157,3 +157,18 @@ grant select, insert, update on public.inv_perfiles to authenticated;
 --   select id from auth.users where email = 'estalimm@gmail.com'   -- si entras con Google
 --   -- o, si creaste tu cuenta con usuario (ej. admin): where email = 'estalimm+ci.admin@gmail.com'
 --   on conflict do nothing;
+
+-- ============ Certificados de inversión: verificación pública (sin datos sensibles) ============
+create or replace function public.inv_verificar(p_codigo text)
+returns table (titular text, monto numeric, meses int, estado text, creada_en timestamptz, confirmada_en timestamptz)
+language sql stable security definer set search_path = public as $$
+  select split_part(trim(i.nombre), ' ', 1) || ' ' ||
+         regexp_replace(trim(substr(trim(i.nombre), length(split_part(trim(i.nombre), ' ', 1)) + 1)), '(\S)\S*', '\1.', 'g'),
+         i.monto, i.meses, i.estado, i.creada_en, i.confirmada_en
+  from public.inv_inversiones i
+  where i.estado in ('confirmada','liquidada')
+    and 'CI-' || upper(substr(replace(i.id::text, '-', ''), 1, 12)) = upper(trim(p_codigo))
+  limit 1;
+$$;
+revoke all on function public.inv_verificar(text) from public;
+grant execute on function public.inv_verificar(text) to anon, authenticated;
