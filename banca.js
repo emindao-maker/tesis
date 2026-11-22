@@ -36,12 +36,12 @@
 
 
   /* ---------- Menú lateral ---------- */
-  var TITULOS = { resumen: "Resumen", invertir: "Invertir", mis: "Mis inversiones", ganancias: "Ganancias", sim: "Simulador", prestamos: "Préstamos", resultados: "Resultados", publicidad: "Publicidad", perfil: "Mi perfil", admin: "Administración" };
+  var TITULOS = { resumen: "Resumen", invertir: "Invertir", mis: "Mis inversiones", ganancias: "Ganancias", sim: "Simulador", prestamos: "Préstamos", resultados: "Resultados", publicidad: "Publicidad", perfil: "Mi perfil" };
   var subs = Array.prototype.slice.call(document.querySelectorAll("[data-sub]"));
   var raiz = document.documentElement;
   function menu(abierto) { raiz.classList.toggle("layout-menu-expanded", abierto); }
   function abrirSub(n) {
-    if (!TITULOS[n] || (n === "admin" && !esAdmin)) n = "resumen";
+    if (!TITULOS[n]) n = "resumen";
     subs.forEach(function (b) {
       if (!b.classList.contains("menu-link")) return;
       var on = b.getAttribute("data-sub") === n;
@@ -235,7 +235,7 @@
       }
       aviso("f-msg", "ok", "Inversión registrada. Queda pendiente hasta que confirmemos tu pago; te contactaremos para firmar el contrato.");
       $("f-monto").value = ""; $("f-ref").value = ""; $("f-acepto").checked = false;
-      cargarMis(); if (esAdmin) cargarAdmin();
+      cargarMis();
     });
   });
 
@@ -243,78 +243,6 @@
     return sb.from("inv_inversiones").select("*").eq("user_id", sesion.user.id).order("creada_en", { ascending: false })
       .then(function (r) { mis = r.data || []; pintarMis(); });
   }
-
-  /* ---------- Administración ---------- */
-  var todas = [];
-  function pintarAdmin() {
-    var cap = 0, pend = 0, ids = {};
-    todas.forEach(function (i) {
-      if (i.estado === "confirmada") { cap += Number(i.monto); ids[i.user_id] = 1; }
-      if (i.estado === "pendiente") pend++;
-    });
-    $("a-cap").textContent = usd(cap); $("a-pend").textContent = String(pend); $("a-inv").textContent = String(Object.keys(ids).length);
-    var tb = $("a-tabla"); limpiar(tb);
-    todas.forEach(function (i) {
-      var acc = el("td", {});
-      function boton(txt, estado, extra) {
-        var b = el("button", { cls: "btn btn-sm btn-outline-primary", type: "button", text: txt, style: "margin:0 4px 4px 0" });
-        b.addEventListener("click", function () { cambiar(i, estado, extra); });
-        acc.appendChild(b);
-      }
-      if (i.estado === "pendiente") { boton("Confirmar pago", "confirmada"); boton("Rechazar", "rechazada"); }
-      if (i.estado === "confirmada") boton("Liquidar", "liquidada");
-      tb.appendChild(el("tr", {}, [
-        el("td", {}, [el("b", { text: i.nombre }), el("br"), el("span", { cls: "muted", text: i.contacto })]),
-        el("td", { cls: "num", text: usd(i.monto) }),
-        el("td", { text: i.metodo + " · " + i.referencia }),
-        el("td", { text: i.meses + " m" }),
-        el("td", {}, [el("span", { cls: "pill " + i.estado, text: i.estado })]),
-        acc
-      ]));
-    });
-  }
-  function cambiar(i, estado) {
-    var cambios = { estado: estado };
-    if (estado === "confirmada") cambios.confirmada_en = new Date().toISOString();
-    if (estado === "liquidada") {
-      var s = sumaUtilidad(Number(i.monto), i.confirmada_en || i.creada_en, null);
-      var sugerido = Math.max(0, Number(i.monto) + s.valor).toFixed(2);
-      var v = window.prompt("Monto a liquidar para " + i.nombre + " (USD). Sugerido con los resultados publicados:", sugerido);
-      if (v === null) return;
-      var num = parseFloat(v);
-      if (isNaN(num) || num < 0) return aviso("a-msg", "err", "Monto de liquidación no válido.");
-      cambios.monto_liquidado = Math.round(num * 100) / 100; cambios.liquidada_en = new Date().toISOString();
-    }
-    sb.from("inv_inversiones").update(cambios).eq("id", i.id).then(function (r) {
-      if (r.error) return aviso("a-msg", "err", "No se pudo actualizar.");
-      aviso("a-msg", "ok", "Actualizado.");
-      cargarAdmin(); cargarMis();
-    });
-  }
-  function cargarAdmin() {
-    return sb.from("inv_inversiones").select("*").order("creada_en", { ascending: false }).then(function (r) {
-      todas = r.data || []; pintarAdmin();
-    });
-  }
-  $("f-res").addEventListener("submit", function (ev) {
-    ev.preventDefault();
-    var mes = $("r-mes").value, p = parseFloat($("r-pct").value);
-    if (!mes || isNaN(p)) return aviso("r-msg", "err", "Elige el mes y escribe el porcentaje.");
-    sb.from("inv_resultados").upsert({ mes: mes + "-01", utilidad_pct: p, nota: $("r-nota").value.trim() }).then(function (r) {
-      if (r.error) return aviso("r-msg", "err", "No se pudo publicar.");
-      aviso("r-msg", "ok", "Resultado publicado.");
-      cargarPublico();
-    });
-  });
-  $("f-cfg").addEventListener("submit", function (ev) {
-    ev.preventDefault();
-    var datos = { banco: $("g-banco").value.trim(), tipo_cuenta: $("g-tipo").value.trim(), numero_cuenta: $("g-num").value.trim(),
-      titular: $("g-tit").value.trim(), identificacion: $("g-id").value.trim(), paypal: $("g-pp").value.trim() };
-    sb.from("inv_config").update(datos).eq("id", 1).then(function (r) {
-      if (r.error) return aviso("g-msg", "err", "No se pudo guardar.");
-      aviso("g-msg", "ok", "Datos guardados."); cargarPublico();
-    });
-  });
 
   /* ---------- Préstamos ---------- */
   var tasa = 18, misPre = [], todasPre = [];
@@ -387,50 +315,13 @@
         "Fecha": new Date().toLocaleString("es-EC", { timeZone: "America/Guayaquil" }),
         "Revisar": "https://emindao-maker.github.io/tesis/banca.html#admin"
       });
-      $("l-acepto").checked = false; cargarPre(); if (esAdmin) cargarAdminPre();
+      $("l-acepto").checked = false; cargarPre();
     });
   });
   function cargarPre() {
     return sb.from("inv_prestamos").select("*").eq("user_id", sesion.user.id).order("creada_en", { ascending: false })
       .then(function (r) { misPre = r.data || []; pintarPre(); });
   }
-  function pintarAdminPre() {
-    var tb = $("a-pre"); limpiar(tb);
-    todasPre.forEach(function (p) {
-      var acc = el("td", {});
-      function bt(txt, est) {
-        var b = el("button", { cls: "btn btn-sm btn-outline-primary", type: "button", text: txt, style: "margin:0 4px 4px 0" });
-        b.addEventListener("click", function () {
-          sb.from("inv_prestamos").update({ estado: est }).eq("id", p.id).then(function (r) {
-            if (r.error) return aviso("a-pre-msg", "err", "No se pudo actualizar.");
-            aviso("a-pre-msg", "ok", "Actualizado."); cargarAdminPre(); cargarPre();
-          });
-        });
-        acc.appendChild(b);
-      }
-      if (p.estado === "solicitada") { bt("Aprobar", "aprobada"); bt("Rechazar", "rechazada"); }
-      if (p.estado === "aprobada") bt("Marcar desembolsado", "desembolsada");
-      if (p.estado === "desembolsada") bt("Marcar pagado", "pagada");
-      tb.appendChild(el("tr", {}, [
-        el("td", {}, [el("b", { text: p.nombre }), el("br"), el("span", { cls: "muted", text: p.contacto }), el("br"), (waLink(p.contacto) ? el("a", { href: waLink(p.contacto), target: "_blank", rel: "noopener noreferrer", text: "Abrir WhatsApp" }) : el("span")), el("br"), el("span", { cls: "muted small", text: new Date(p.creada_en).toLocaleDateString("es-EC") })]),
-        el("td", { cls: "num", text: usd(p.monto) }), el("td", { text: p.plazo_meses + " m · cuota " + usd(p.cuota) + " · " + p.tasa_anual + "% anual" }),
-        el("td", { text: p.destino }), el("td", {}, [el("span", { cls: "pill " + (p.estado === "solicitada" ? "pendiente" : p.estado === "rechazada" ? "rechazada" : "confirmada"), text: p.estado })]), acc
-      ]));
-    });
-  }
-  function cargarAdminPre() {
-    return sb.from("inv_prestamos").select("*").order("creada_en", { ascending: false }).then(function (r) { todasPre = r.data || []; pintarAdminPre(); });
-  }
-  $("g-tasa-b").addEventListener("click", function () {
-    var t = parseFloat($("g-tasa").value);
-    if (isNaN(t) || t < 0 || t > 100) return aviso("a-pre-msg", "err", "Escribe una tasa entre 0 y 100.");
-    sb.from("inv_config").update({ tasa_prestamo_anual: t }).eq("id", 1).then(function (r) {
-      if (r.error) return aviso("a-pre-msg", "err", "No se pudo guardar la tasa.");
-      aviso("a-pre-msg", "ok", "Tasa guardada."); cargarPublico();
-    });
-  });
-
-
   /* ---------- Perfil ---------- */
   function cargarPerfil() {
     return sb.from("inv_perfiles").select("*").eq("user_id", sesion.user.id).maybeSingle().then(function (r) {
@@ -465,10 +356,6 @@
       resultados = (r[0].data || []); cfg = r[1].data || null;
       if (cfg && cfg.tasa_prestamo_anual != null) { tasa = Number(cfg.tasa_prestamo_anual); simPre(); }
       pintarResultados(); pintarBanco();
-      if (cfg && esAdmin) {
-        $("g-banco").value = cfg.banco; $("g-tipo").value = cfg.tipo_cuenta; $("g-num").value = cfg.numero_cuenta;
-        $("g-tasa").value = cfg.tasa_prestamo_anual; $("g-tit").value = cfg.titular; $("g-id").value = cfg.identificacion; $("g-pp").value = cfg.paypal;
-      }
       if (sesion) pintarMis();
     });
   }
@@ -481,8 +368,8 @@
     if (!$("f-nombre").value && s.user.user_metadata) { $("f-nombre").value = s.user.user_metadata.full_name || ""; $("l-nombre").value = s.user.user_metadata.full_name || ""; }
     sb.from("inv_admins").select("user_id").eq("user_id", s.user.id).maybeSingle().then(function (r) {
       esAdmin = !!(r.data);
-      $("n-admin").hidden = !esAdmin;
-      return Promise.all([cargarPerfil(), cargarPublico(), cargarMis(), cargarPre(), esAdmin ? cargarAdmin() : null, esAdmin ? cargarAdminPre() : null]);
+      if (esAdmin && !/vista=usuario/.test(location.search)) { location.replace("admin.html"); return new Promise(function () {}); }
+      return Promise.all([cargarPerfil(), cargarPublico(), cargarMis(), cargarPre()]);
     }).then(function () {
       $("c-cargando").hidden = true; $("c-app").hidden = false;
       var h = (location.hash || "").replace("#", "");

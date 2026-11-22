@@ -44,7 +44,6 @@
             <li class="menu-item"><a href="#publicidad" class="menu-link" data-sub="publicidad"><i class="menu-icon tf-icons bx bx-broadcast"></i><div class="text-truncate">Publicidad</div></a></li>
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Configuración</span></li>
             <li class="menu-item"><a href="#perfil" class="menu-link" data-sub="perfil"><i class="menu-icon tf-icons bx bx-user"></i><div class="text-truncate">Mi perfil</div></a></li>
-            <li class="menu-item" id="n-admin" hidden><a href="#admin" class="menu-link" data-sub="admin"><i class="menu-icon tf-icons bx bx-shield-quarter"></i><div class="text-truncate">Administración</div></a></li>
             <li class="menu-item"><a href="#salir" class="menu-link" id="salir"><i class="menu-icon tf-icons bx bx-log-out"></i><div class="text-truncate">Cerrar sesión</div></a></li>
       </ul>
     </aside>
@@ -267,46 +266,6 @@
   </div>
 </div>
 
-<!-- ADMINISTRACIÓN -->
-<div class="sp" id="sp-admin" hidden>
-  <div class="row g-4 mb-4">
-    <div class="col-md-4"><div class="card"><div class="card-body"><small class="muted">Capital confirmado</small><h4 class="mb-0" id="a-cap">–</h4></div></div></div>
-    <div class="col-md-4"><div class="card"><div class="card-body"><small class="muted">Pendientes de confirmar</small><h4 class="mb-0" id="a-pend">–</h4></div></div></div>
-    <div class="col-md-4"><div class="card"><div class="card-body"><small class="muted">Inversionistas</small><h4 class="mb-0" id="a-inv">–</h4></div></div></div>
-  </div>
-  <div class="card mb-4">
-    <h5 class="card-header">Inversiones</h5>
-    <div class="table-responsive"><table class="table"><thead><tr><th>Inversionista</th><th class="num">Monto</th><th>Pago</th><th>Plazo</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="a-tabla"></tbody></table></div>
-    <div class="px-4 pb-3" id="a-msg" aria-live="polite"></div>
-  </div>
-  <div class="card mb-4">
-    <h5 class="card-header">Solicitudes de préstamo</h5>
-    <div class="table-responsive"><table class="table"><thead><tr><th>Solicitante</th><th class="num">Monto</th><th>Plazo</th><th>Destino</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="a-pre"></tbody></table></div>
-    <div class="px-4" id="a-pre-msg" aria-live="polite"></div>
-    <div class="card-body"><label class="form-label" for="g-tasa">Tasa anual de referencia (%)</label>
-      <div class="input-group" style="max-width:260px"><input class="form-control" id="g-tasa" type="number" min="0" max="100" step="0.5" inputmode="decimal"><button class="btn btn-primary" type="button" id="g-tasa-b">Guardar</button></div></div>
-  </div>
-  <div class="row g-4">
-    <div class="col-lg-6"><form class="card h-100" id="f-res" novalidate><div class="card-body">
-      <h5 class="card-title">Publicar resultado del mes</h5>
-      <label class="form-label" for="r-mes">Mes</label><input class="form-control mb-3" id="r-mes" type="month" required>
-      <label class="form-label" for="r-pct">Utilidad del mes (%), negativa si hubo pérdida</label><input class="form-control mb-3" id="r-pct" type="number" step="0.001" min="-100" max="1000" inputmode="decimal" required>
-      <label class="form-label" for="r-nota">Nota para los inversionistas</label><input class="form-control mb-3" id="r-nota" maxlength="200">
-      <button class="btn btn-primary" type="submit">Publicar</button><div id="r-msg" aria-live="polite"></div>
-    </div></form></div>
-    <div class="col-lg-6"><form class="card h-100" id="f-cfg" novalidate><div class="card-body">
-      <h5 class="card-title">Datos de pago</h5>
-      <label class="form-label" for="g-banco">Banco</label><input class="form-control mb-3" id="g-banco" maxlength="80">
-      <label class="form-label" for="g-tipo">Tipo de cuenta</label><input class="form-control mb-3" id="g-tipo" maxlength="30">
-      <label class="form-label" for="g-num">Número de cuenta</label><input class="form-control mb-3" id="g-num" maxlength="40">
-      <label class="form-label" for="g-tit">Titular</label><input class="form-control mb-3" id="g-tit" maxlength="100">
-      <label class="form-label" for="g-id">Cédula o RUC</label><input class="form-control mb-3" id="g-id" maxlength="20">
-      <label class="form-label" for="g-pp">PayPal</label><input class="form-control mb-3" id="g-pp" maxlength="100">
-      <button class="btn btn-primary" type="submit">Guardar</button><div id="g-msg" aria-live="polite"></div>
-    </div></form></div>
-  </div>
-</div>
-
 </div>
           <p class="muted small mt-5"><b>Aviso.</b> Capital Investment no es un banco: es una invitación a participar en un negocio. Los aportes no son depósitos ni están garantizados; la utilidad es variable y puede ser negativa. <a href="terminos.html">Contrato y términos</a> · <a href="privacidad.html">Privacidad</a> · Diseño basado en <a href="https://github.com/themeselection/sneat-bootstrap-html-admin-template-free" target="_blank" rel="noopener noreferrer">Sneat</a> (MIT).</p>
         </div>
@@ -321,6 +280,6 @@
 <script src="sneat-bootstrap.js"></script>
 <script src="sneat-ps.js"></script>
 <script src="sneat-menu.js"></script>
-<script src="banca.js?v=3"></script>
+<script src="banca.js?v=4"></script>
 </body>
 </html>
