@@ -176,7 +176,7 @@
       sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: base + "banca.html" } });
     });
     sb.auth.getSession().then(function (r) {
-      if (r.data.session) { $("ir-banca").hidden = false; if (location.hash === "#cuenta") irABanca(); }
+      if (r.data.session && location.hash === "#cuenta") irABanca();
       $("c-login").hidden = !!r.data.session;
       if (r.data.session) $("c-sesion").hidden = false;
     });
