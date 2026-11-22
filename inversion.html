@@ -143,8 +143,7 @@ footer{border-top:1px solid var(--line-2);padding:26px 0 90px;color:var(--muted)
   <div class="wrap">
     <a class="brand" href="#info" aria-label="Capital Investment, inicio"><img src="logo-ci.svg" alt=""><span>Capital Investment<small>by Tesis</small></span></a>
     <div style="display:flex;gap:8px;align-items:center">
-      <span id="quien" class="muted" style="font-size:14px" hidden></span>
-      <button class="btn small sec" id="salir" type="button" hidden>Salir</button>
+      <a class="btn small" id="ir-banca" href="banca.html" hidden>Mi banca virtual</a>
       <a class="btn small sec" href="index.html">Sitio de Tesis</a>
     </div>
   </div>
@@ -180,7 +179,6 @@ footer{border-top:1px solid var(--line-2);padding:26px 0 90px;color:var(--muted)
     <button role="tab" aria-selected="false" data-tab="prestamos" id="t-prestamos">Préstamos</button>
     <button role="tab" aria-selected="false" data-tab="resultados" id="t-resultados">Resultados</button>
     <button role="tab" aria-selected="false" data-tab="publicidad" id="t-publicidad">Publicidad</button>
-    <button role="tab" aria-selected="false" data-tab="admin" id="t-admin" hidden>Administración</button>
   </div>
 
   <!-- CÓMO FUNCIONA -->
@@ -235,6 +233,11 @@ footer{border-top:1px solid var(--line-2);padding:26px 0 90px;color:var(--muted)
 
   <!-- BANCA VIRTUAL -->
   <section class="panel" id="p-cuenta" role="tabpanel" aria-labelledby="t-cuenta" hidden>
+    <div id="c-sesion" class="card" hidden>
+      <h2>Ya iniciaste sesión</h2>
+      <p class="muted">Tu banca virtual se abre en su propia página, con el menú para ir a tus inversiones, ganancias, préstamos y perfil.</p>
+      <p style="margin-top:14px"><a class="btn gold" href="banca.html">Abrir mi banca virtual</a></p>
+    </div>
     <div id="c-login" hidden>
       <div class="grid2">
         <div class="card">
@@ -266,123 +269,12 @@ footer{border-top:1px solid var(--line-2);padding:26px 0 90px;color:var(--muted)
             <li>Solicitar un préstamo y seguir su aprobación.</li>
             <li>Descargar tu estado de cuenta.</li>
           </ul>
+          <p class="muted" style="font-size:14px">Al ingresar se abre tu banca virtual en su propia página, con un menú para moverte entre secciones.</p>
           <p class="muted" style="font-size:14px">Tu contraseña se guarda cifrada en el sistema de cuentas; nadie de Tesis puede verla.</p>
         </div>
       </div>
     </div>
 
-    <div id="c-app" hidden>
-      <div class="subnav" role="tablist" aria-label="Banca virtual">
-        <button type="button" data-sub="resumen" aria-selected="true">Resumen</button>
-        <button type="button" data-sub="invertir" aria-selected="false">Invertir</button>
-        <button type="button" data-sub="mis" aria-selected="false">Mis inversiones</button>
-        <button type="button" data-sub="ganancias" aria-selected="false">Ganancias</button>
-        <button type="button" data-sub="bprestamos" aria-selected="false">Mis préstamos</button>
-        <button type="button" data-sub="perfil" aria-selected="false">Mi perfil</button>
-      </div>
-
-      <div class="sp" id="sp-resumen">
-        <p class="saludo" id="saludo"></p>
-        <div class="resumen" aria-label="Resumen de tu cuenta">
-          <div><small>Capital invertido</small><b id="rs-inv">$0.00</b></div>
-          <div><small>Ganancias acumuladas</small><b id="rs-util">$0.00</b></div>
-          <div><small>Valor actual</small><b id="rs-val">$0.00</b></div>
-          <div><small>Préstamos solicitados</small><b id="rs-pre">0</b></div>
-        </div>
-        <div class="grid2">
-          <div class="card">
-            <h3>Movimientos recientes</h3>
-            <div class="tw"><table><thead><tr><th>Fecha</th><th>Detalle</th><th class="num">Monto</th></tr></thead><tbody id="mov"></tbody></table></div>
-            <p class="muted" id="mov-vacio" hidden>Aún no tienes movimientos. Empieza en la pestaña Invertir.</p>
-          </div>
-          <div class="card">
-            <h3>Cupo disponible</h3>
-            <p style="margin:0"><b id="cupo" style="font:500 28px "Playfair Display",Georgia,serif">–</b> <span class="muted">de $10.000</span></p>
-            <div class="medidor" aria-hidden="true"><i id="cupo-b" style="width:0"></i></div>
-            <div style="margin-top:16px"><button class="btn gold" type="button" data-ir="invertir">Nueva inversión</button></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="sp" id="sp-invertir" hidden>
-        <div class="grid2">
-          <form class="card" id="f-inv" novalidate>
-            <h2>Nueva inversión</h2>
-            <label for="f-nombre">Nombre completo</label>
-            <input id="f-nombre" autocomplete="name" maxlength="120" required>
-            <label for="f-contacto">WhatsApp o correo de contacto</label>
-            <input id="f-contacto" autocomplete="email" maxlength="120" required>
-            <div class="grid2" style="gap:12px">
-              <div><label for="f-monto">Monto (USD)</label><input id="f-monto" type="number" min="10" max="10000" step="0.01" inputmode="decimal" required></div>
-              <div><label for="f-meses">Plazo hasta liquidar</label><select id="f-meses"></select></div>
-            </div>
-            <p class="muted" id="f-fecha" style="margin:6px 0 0;font-size:14px"></p>
-            <label for="f-metodo">Forma de pago</label>
-            <select id="f-metodo"><option value="transferencia">Transferencia bancaria</option><option value="deposito">Depósito en ventanilla</option><option value="paypal">PayPal</option></select>
-            <label for="f-ref">Número de comprobante o referencia</label>
-            <input id="f-ref" maxlength="80" required placeholder="Lo registras después de pagar">
-            <div class="check"><input type="checkbox" id="f-renovar"><label for="f-renovar">Al terminar el plazo, renovar por otro periodo igual</label></div>
-            <div class="check"><input type="checkbox" id="f-acepto" required><label for="f-acepto">Entiendo que la utilidad es variable, que no hay rendimiento garantizado y que puedo perder parte o todo lo aportado. Acepto firmar el contrato de participación.</label></div>
-            <div style="margin-top:18px"><button class="btn gold" id="f-enviar" type="submit">Registrar inversión</button></div>
-            <div id="f-msg" aria-live="polite"></div>
-          </form>
-          <div class="card">
-            <h2>Dónde pagar</h2>
-            <p class="muted" style="margin:0">Paga primero y luego registra el comprobante en el formulario.</p>
-            <dl class="bank" id="banco"><dt>Cargando</dt><dd>…</dd></dl>
-            <p class="muted" id="banco-aviso" style="font-size:14px;margin-top:12px"></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="sp" id="sp-mis" hidden>
-        <div class="card">
-          <h2>Mis inversiones</h2>
-          <div class="tw"><table><thead><tr><th>Fecha</th><th class="num">Monto</th><th>Plazo</th><th>Estado</th><th class="num">Ganancia real</th><th class="num">Valor actual</th></tr></thead><tbody id="mis"></tbody></table></div>
-          <p class="muted" id="mis-vacio" hidden>Todavía no has registrado inversiones.</p>
-          <p class="muted" style="font-size:14px;margin-top:10px">La ganancia real se calcula con los resultados mensuales publicados, desde el mes en que se confirma tu pago. Puede ser negativa.</p>
-        </div>
-      </div>
-
-      <div class="sp" id="sp-ganancias" hidden>
-        <div class="card">
-          <h2>Ganancias mes a mes</h2>
-          <p class="muted">Resultado publicado de cada mes aplicado a tu capital confirmado en ese momento.</p>
-          <div class="tw"><table><thead><tr><th>Mes</th><th class="num">Capital activo</th><th class="num">Resultado</th><th class="num">Ganancia</th><th class="num">Acumulado</th></tr></thead><tbody id="gan"></tbody></table></div>
-          <p class="muted" id="gan-vacio" hidden>Todavía no hay ganancias que mostrar. Aparecen cuando confirmemos tu pago y se publique el resultado del mes.</p>
-        </div>
-      </div>
-
-      <div class="sp" id="sp-bprestamos" hidden>
-        <div class="card">
-          <h2>Mis préstamos</h2>
-          <div class="tw"><table><thead><tr><th>Fecha</th><th class="num">Monto</th><th>Plazo</th><th class="num">Cuota</th><th>Estado</th></tr></thead><tbody id="bp-mis"></tbody></table></div>
-          <p class="muted" id="bp-vacio" hidden>No tienes solicitudes de préstamo.</p>
-          <div style="margin-top:14px"><button class="btn gold" type="button" id="bp-nuevo">Solicitar un préstamo</button></div>
-        </div>
-      </div>
-
-      <div class="sp" id="sp-perfil" hidden>
-        <div class="grid2">
-          <form class="card" id="f-perfil" novalidate>
-            <h2>Mi perfil</h2>
-            <p class="muted" id="p-email" style="margin:0"></p>
-            <label for="p-nombre">Nombre completo</label><input id="p-nombre" maxlength="120" autocomplete="name">
-            <label for="p-tel">Teléfono / WhatsApp</label><input id="p-tel" maxlength="30" autocomplete="tel" inputmode="tel">
-            <label for="p-ciudad">Ciudad</label><input id="p-ciudad" maxlength="80" autocomplete="address-level2">
-            <div style="margin-top:18px"><button class="btn" type="submit">Guardar perfil</button></div>
-            <div id="p-msg" aria-live="polite"></div>
-          </form>
-          <div class="card">
-            <h2>Estado de cuenta</h2>
-            <p class="muted">Imprime o guarda en PDF un resumen con tus inversiones, ganancias y préstamos.</p>
-            <button class="btn sec" type="button" id="p-imprimir">Imprimir estado de cuenta</button>
-            <hr style="border:0;border-top:1px solid var(--line);margin:20px 0">
-            <button class="btn sec" type="button" id="p-salir">Cerrar sesión</button>
-          </div>
-        </div>
-      </div>
-    </div>
   </section>
 
   <!-- PRÉSTAMOS -->
@@ -401,23 +293,10 @@ footer{border-top:1px solid var(--line-2);padding:26px 0 90px;color:var(--muted)
         <details style="margin-top:14px"><summary style="cursor:pointer;font-weight:500">Ver tabla de pagos</summary><div class="tw" style="max-height:280px;overflow:auto"><table><thead><tr><th>Cuota</th><th class="num">Capital</th><th class="num">Interés</th><th class="num">Saldo</th></tr></thead><tbody id="l-amort"></tbody></table></div></details>
         <p class="muted" style="font-size:14px;margin-top:10px">Tasa de referencia: <b id="l-tasa">18</b>% anual. La tasa final queda fijada en el contrato.</p>
       </div>
-      <div>
-        <form class="card" id="f-pre" novalidate>
-          <h2>Solicitar préstamo</h2>
-          <p class="muted" id="l-login" hidden>Entra a la pestaña <b>Banca virtual</b>, crea tu cuenta o ingresa, y vuelve aquí para enviar tu solicitud.</p>
-          <div id="l-form">
-            <label for="l-nombre">Nombre completo</label><input id="l-nombre" maxlength="120" autocomplete="name">
-            <label for="l-contacto">WhatsApp o correo</label><input id="l-contacto" maxlength="120">
-            <label for="l-destino">¿Para qué usarás el dinero?</label><input id="l-destino" maxlength="200">
-            <div class="check"><input type="checkbox" id="l-acepto"><label for="l-acepto">Entiendo que esto es una solicitud, que no garantiza la aprobación y que el préstamo se formaliza con un contrato.</label></div>
-            <div style="margin-top:16px"><button class="btn gold" type="submit" id="l-enviar">Enviar solicitud</button></div>
-          </div>
-          <div id="l-msg" aria-live="polite"></div>
-        </form>
-        <div class="card" id="l-mis-card" hidden>
-          <h3>Mis solicitudes</h3>
-          <div class="tw"><table><thead><tr><th>Fecha</th><th class="num">Monto</th><th class="num">Cuota</th><th>Estado</th></tr></thead><tbody id="l-mis"></tbody></table></div>
-        </div>
+      <div class="card">
+        <h2>Solicitar préstamo</h2>
+        <p class="muted">Las solicitudes se envían desde tu banca virtual. Ingresa o crea tu cuenta y te llevamos directo a ella. La solicitud no garantiza la aprobación: cada caso se evalúa y se formaliza con un contrato.</p>
+        <p style="margin-top:16px"><button class="btn gold" type="button" data-go="cuenta">Entrar a mi banca virtual</button></p>
       </div>
     </div>
   </section>
@@ -448,47 +327,6 @@ footer{border-top:1px solid var(--line-2);padding:26px 0 90px;color:var(--muted)
     </div>
   </section>
 
-  <!-- ADMIN -->
-  <section class="panel" id="p-admin" role="tabpanel" aria-labelledby="t-admin" hidden>
-    <div class="grid3" style="margin-bottom:18px">
-      <div class="card" style="margin:0"><small class="muted">Capital confirmado</small><div id="a-cap" style="font:500 26px "Playfair Display",Georgia,serif">–</div></div>
-      <div class="card" style="margin:0"><small class="muted">Pendientes de confirmar</small><div id="a-pend" style="font:500 26px "Playfair Display",Georgia,serif">–</div></div>
-      <div class="card" style="margin:0"><small class="muted">Inversionistas</small><div id="a-inv" style="font:500 26px "Playfair Display",Georgia,serif">–</div></div>
-    </div>
-    <div class="card">
-      <h2>Inversiones</h2>
-      <div class="tw"><table><thead><tr><th>Inversionista</th><th class="num">Monto</th><th>Pago</th><th>Plazo</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="a-tabla"></tbody></table></div>
-      <div id="a-msg" aria-live="polite"></div>
-    </div>
-    <div class="card">
-      <h2>Solicitudes de préstamo</h2>
-      <div class="tw"><table><thead><tr><th>Solicitante</th><th class="num">Monto</th><th>Plazo</th><th>Destino</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="a-pre"></tbody></table></div>
-      <div id="a-pre-msg" aria-live="polite"></div>
-      <label for="g-tasa" style="max-width:260px">Tasa anual de referencia (%)</label>
-      <div style="display:flex;gap:8px;max-width:260px"><input id="g-tasa" type="number" min="0" max="100" step="0.5" inputmode="decimal"><button class="btn small" type="button" id="g-tasa-b">Guardar</button></div>
-    </div>
-    <div class="grid2">
-      <form class="card" id="f-res" novalidate>
-        <h3>Publicar resultado del mes</h3>
-        <label for="r-mes">Mes</label><input id="r-mes" type="month" required>
-        <label for="r-pct">Utilidad del mes (%), negativa si hubo pérdida</label><input id="r-pct" type="number" step="0.001" min="-100" max="1000" inputmode="decimal" required>
-        <label for="r-nota">Nota para los inversionistas</label><input id="r-nota" maxlength="200">
-        <div style="margin-top:16px"><button class="btn" type="submit">Publicar</button></div>
-        <div id="r-msg" aria-live="polite"></div>
-      </form>
-      <form class="card" id="f-cfg" novalidate>
-        <h3>Datos de pago</h3>
-        <label for="g-banco">Banco</label><input id="g-banco" maxlength="80">
-        <label for="g-tipo">Tipo de cuenta</label><input id="g-tipo" maxlength="30">
-        <label for="g-num">Número de cuenta</label><input id="g-num" maxlength="40">
-        <label for="g-tit">Titular</label><input id="g-tit" maxlength="100">
-        <label for="g-id">Cédula o RUC</label><input id="g-id" maxlength="20">
-        <label for="g-pp">PayPal</label><input id="g-pp" maxlength="100">
-        <div style="margin-top:16px"><button class="btn" type="submit">Guardar</button></div>
-        <div id="g-msg" aria-live="polite"></div>
-      </form>
-    </div>
-  </section>
 </main>
 
 <footer>
