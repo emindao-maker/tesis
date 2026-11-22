@@ -6,6 +6,14 @@
   var C = window.TRABAJOS_CONFIG || {};
   var $ = function (id) { return document.getElementById(id); };
   var sb = null, sesion = null, esAdmin = false, cfg = null, resultados = [], mis = [];
+  // Acceso con usuario y contraseña: el sistema de cuentas exige un correo, así que cada usuario
+  // se guarda como un alias del correo del administrador (sin enviar nada a nadie).
+  var CORREO_BASE = "estalimm", CORREO_DOMINIO = "gmail.com";
+  function correoDe(u) { return CORREO_BASE + "+ci." + u + "@" + CORREO_DOMINIO; }
+  function usuarioDe(email) {
+    var m = String(email || "").toLowerCase().match(new RegExp("^" + CORREO_BASE + "\\+ci\\.(.+)@" + CORREO_DOMINIO.replace(".", "\\.") + "$"));
+    return m ? m[1] : (email || "");
+  }
   var MESES_ES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
 
   function usd(n) { return "$" + Number(n || 0).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
@@ -37,6 +45,24 @@
     if (location.hash !== "#" + nombre) history.replaceState(null, "", "#" + nombre);
   }
   tabs.forEach(function (b) { b.addEventListener("click", function () { abrir(b.getAttribute("data-tab")); }); });
+  Array.prototype.slice.call(document.querySelectorAll("[data-go]")).forEach(function (b) {
+    b.addEventListener("click", function () { abrir(b.getAttribute("data-go")); window.scrollTo({ top: 0, behavior: "smooth" }); });
+  });
+
+  /* ---------- Subpestañas de la banca ---------- */
+  var subs = Array.prototype.slice.call(document.querySelectorAll("[data-sub]"));
+  function abrirSub(n) {
+    subs.forEach(function (b) {
+      var on = b.getAttribute("data-sub") === n;
+      b.setAttribute("aria-selected", on ? "true" : "false");
+      $("sp-" + b.getAttribute("data-sub")).hidden = !on;
+    });
+  }
+  subs.forEach(function (b) { b.addEventListener("click", function () { abrirSub(b.getAttribute("data-sub")); }); });
+  Array.prototype.slice.call(document.querySelectorAll("[data-ir]")).forEach(function (b) {
+    b.addEventListener("click", function () { abrirSub(b.getAttribute("data-ir")); });
+  });
+  $("bp-nuevo").addEventListener("click", function () { abrir("prestamos"); });
 
   /* ---------- Cálculo ---------- */
   function sumaUtilidad(monto, desdeIso, hastaIso) {
@@ -141,7 +167,53 @@
       ]));
     });
     $("cupo").textContent = usd(Math.max(0, 10000 - vigente));
+    pintarMov(); pintarGan();
+    var vig = Math.min(10000, vigente); $("cupo-b").style.width = (vig / 100) + "%";
     $("rs-inv").textContent = usd(rInv); $("rs-util").textContent = (rUtil >= 0 ? "+" : "−") + usd(Math.abs(rUtil)); $("rs-val").textContent = usd(Math.max(0, rInv + rUtil));
+  }
+
+  /* ---------- Movimientos y ganancias de la banca ---------- */
+  function pintarMov() {
+    var ev = [];
+    mis.forEach(function (i) {
+      ev.push({ f: i.creada_en, t: "Inversión registrada (" + i.metodo + ")", v: Number(i.monto), c: "" });
+      if (i.confirmada_en) ev.push({ f: i.confirmada_en, t: "Pago confirmado", v: Number(i.monto), c: "pos" });
+      if (i.liquidada_en) ev.push({ f: i.liquidada_en, t: "Liquidación recibida", v: Number(i.monto_liquidado), c: "pos" });
+      if (i.estado === "rechazada") ev.push({ f: i.creada_en, t: "Inversión rechazada", v: 0, c: "neg" });
+    });
+    misPre.forEach(function (p) { ev.push({ f: p.creada_en, t: "Préstamo " + p.estado, v: Number(p.monto), c: "" }); });
+    ev.sort(function (a, b) { return a.f < b.f ? 1 : -1; });
+    var tb = $("mov"); limpiar(tb);
+    $("mov-vacio").hidden = ev.length > 0;
+    ev.slice(0, 10).forEach(function (e) {
+      tb.appendChild(el("tr", {}, [
+        el("td", { text: new Date(e.f).toLocaleDateString("es-EC") }), el("td", { text: e.t }),
+        el("td", { cls: "num " + e.c, text: e.v ? usd(e.v) : "–" })
+      ]));
+    });
+  }
+  function pintarGan() {
+    var tb = $("gan"); limpiar(tb);
+    var filas = [], acum = 0;
+    resultados.slice().sort(function (a, b) { return a.mes < b.mes ? -1 : 1; }).forEach(function (r) {
+      var m = r.mes.slice(0, 7), cap = 0;
+      mis.forEach(function (i) {
+        if (!(i.estado === "confirmada" || i.estado === "liquidada") || !i.confirmada_en) return;
+        if (i.confirmada_en.slice(0, 7) > m) return;
+        if (i.liquidada_en && i.liquidada_en.slice(0, 7) < m) return;
+        cap += Number(i.monto);
+      });
+      if (cap > 0) { var g = cap * Number(r.utilidad_pct) / 100; acum += g; filas.push({ m: r.mes, cap: cap, p: Number(r.utilidad_pct), g: g, a: acum }); }
+    });
+    $("gan-vacio").hidden = filas.length > 0;
+    filas.reverse().forEach(function (f) {
+      tb.appendChild(el("tr", {}, [
+        el("td", { text: mesTexto(f.m) }), el("td", { cls: "num", text: usd(f.cap) }),
+        el("td", { cls: "num " + clase(f.p), text: pct(f.p) }),
+        el("td", { cls: "num " + clase(f.g), text: (f.g >= 0 ? "+" : "−") + usd(Math.abs(f.g)) }),
+        el("td", { cls: "num " + clase(f.a), text: (f.a >= 0 ? "+" : "−") + usd(Math.abs(f.a)) })
+      ]));
+    });
   }
 
   /* ---------- Registrar inversión ---------- */
@@ -271,6 +343,15 @@
 
   function pintarPre() {
     $("rs-pre").textContent = String(misPre.length);
+    var bp = $("bp-mis"); limpiar(bp); $("bp-vacio").hidden = misPre.length > 0;
+    misPre.forEach(function (p) {
+      bp.appendChild(el("tr", {}, [
+        el("td", { text: new Date(p.creada_en).toLocaleDateString("es-EC") }), el("td", { cls: "num", text: usd(p.monto) }),
+        el("td", { text: p.plazo_meses + " m" }), el("td", { cls: "num", text: usd(p.cuota) }),
+        el("td", {}, [el("span", { cls: "pill " + (p.estado === "solicitada" ? "pendiente" : p.estado === "rechazada" ? "rechazada" : "confirmada"), text: p.estado })])
+      ]));
+    });
+    pintarMov();
     $("l-mis-card").hidden = !misPre.length;
     var tb = $("l-mis"); limpiar(tb);
     misPre.forEach(function (p) {
@@ -283,7 +364,7 @@
   }
   $("f-pre").addEventListener("submit", function (ev) {
     ev.preventDefault();
-    if (!sesion) return aviso("l-msg", "err", "Primero ingresa en la pestaña Mi cuenta.");
+    if (!sesion) return aviso("l-msg", "err", "Primero entra a la Banca virtual con tu cuenta.");
     var m = Math.round(parseFloat($("l-monto").value) * 100) / 100, n = parseInt($("l-plazo").value, 10);
     var d = { nombre: $("l-nombre").value.trim(), contacto: $("l-contacto").value.trim(), monto: m, plazo_meses: n,
       tasa_anual: tasa, cuota: Math.round(cuotaFrancesa(m, n, tasa) * 100) / 100, destino: $("l-destino").value.trim() };
@@ -338,6 +419,28 @@
     });
   });
 
+  /* ---------- Perfil ---------- */
+  function cargarPerfil() {
+    return sb.from("inv_perfiles").select("*").eq("user_id", sesion.user.id).maybeSingle().then(function (r) {
+      var p = r.data || {};
+      var nombre = p.nombre || (sesion.user.user_metadata && sesion.user.user_metadata.full_name) || "";
+      $("p-nombre").value = nombre; $("p-tel").value = p.telefono || ""; $("p-ciudad").value = p.ciudad || "";
+      $("saludo").textContent = "Hola" + (nombre ? ", " + nombre.split(" ")[0] : "") + ". Este es el estado de tu cuenta.";
+      if (nombre) { $("f-nombre").value = nombre; $("l-nombre").value = nombre; }
+      if (p.telefono) { $("f-contacto").value = p.telefono; $("l-contacto").value = p.telefono; }
+    });
+  }
+  $("f-perfil").addEventListener("submit", function (ev) {
+    ev.preventDefault(); if (!sesion) return;
+    var d = { user_id: sesion.user.id, nombre: $("p-nombre").value.trim(), telefono: $("p-tel").value.trim(), ciudad: $("p-ciudad").value.trim(), actualizado_en: new Date().toISOString() };
+    sb.from("inv_perfiles").upsert(d).then(function (r) {
+      if (r.error) return aviso("p-msg", "err", "No se pudo guardar tu perfil.");
+      aviso("p-msg", "ok", "Perfil guardado."); cargarPerfil();
+    });
+  });
+  $("p-imprimir").addEventListener("click", function () { abrir("cuenta"); window.print(); });
+  $("p-salir").addEventListener("click", function () { sb.auth.signOut(); });
+
   /* ---------- Carga y sesión ---------- */
   function cargarPublico() {
     return Promise.all([
@@ -360,13 +463,13 @@
     $("salir").hidden = !s; $("quien").hidden = !s;
     $("t-admin").hidden = true;
     if (!s) { misPre = []; return; }
-    $("quien").textContent = s.user.email || "";
-    if (!$("f-contacto").value) $("f-contacto").value = s.user.email || ""; if (!$("l-contacto").value) $("l-contacto").value = s.user.email || "";
+    $("quien").textContent = usuarioDe(s.user.email); $("p-email").textContent = "Usuario: " + usuarioDe(s.user.email);
+
     if (!$("f-nombre").value && s.user.user_metadata) { $("f-nombre").value = s.user.user_metadata.full_name || ""; $("l-nombre").value = s.user.user_metadata.full_name || ""; }
     sb.from("inv_admins").select("user_id").eq("user_id", s.user.id).maybeSingle().then(function (r) {
       esAdmin = !!(r.data);
       $("t-admin").hidden = !esAdmin;
-      return Promise.all([cargarPublico(), cargarMis(), cargarPre(), esAdmin ? cargarAdmin() : null, esAdmin ? cargarAdminPre() : null]);
+      return Promise.all([cargarPerfil(), cargarPublico(), cargarMis(), cargarPre(), esAdmin ? cargarAdmin() : null, esAdmin ? cargarAdminPre() : null]);
     });
   }
 
@@ -377,6 +480,44 @@
       $("c-google").disabled = true; return;
     }
     sb = window.supabase.createClient(C.supabaseUrl, C.supabaseKey, { auth: { persistSession: true, detectSessionInUrl: true } });
+    var modo = "crear";
+    function ponerModo(m) {
+      modo = m;
+      $("m-crear").className = m === "crear" ? "on" : ""; $("m-entrar").className = m === "entrar" ? "on" : "";
+      $("g-nombre-w").hidden = m !== "crear"; $("a-user-ayuda").hidden = m !== "crear"; $("a-olvide").hidden = m !== "entrar";
+      $("a-enviar").textContent = m === "crear" ? "Crear mi cuenta" : "Ingresar";
+      $("a-pass").setAttribute("autocomplete", m === "crear" ? "new-password" : "current-password");
+      aviso("c-login-msg", "ok", "");
+    }
+    $("m-crear").addEventListener("click", function () { ponerModo("crear"); });
+    $("m-entrar").addEventListener("click", function () { ponerModo("entrar"); });
+    $("f-auth").addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var u = $("a-user").value.trim().toLowerCase(), pw = $("a-pass").value, nombre = $("a-nombre").value.trim();
+      if (!/^[a-z0-9._-]{3,20}$/.test(u)) return aviso("c-login-msg", "err", "El usuario debe tener de 3 a 20 caracteres: letras, números, punto, guion o guion bajo.");
+      if (pw.length < 8) return aviso("c-login-msg", "err", "La contraseña debe tener al menos 8 caracteres.");
+      var b = $("a-enviar"); b.disabled = true;
+      var p;
+      if (modo === "crear") {
+        if (nombre.length < 3) { b.disabled = false; return aviso("c-login-msg", "err", "Escribe tu nombre completo."); }
+        p = sb.auth.signUp({ email: correoDe(u), password: pw, options: { data: { full_name: nombre, usuario: u } } });
+      } else {
+        p = sb.auth.signInWithPassword({ email: correoDe(u), password: pw });
+      }
+      p.then(function (r) {
+        b.disabled = false;
+        if (r.error) {
+          var t = /already|registered/i.test(r.error.message) ? "Ese usuario ya existe. Elige otro o ingresa con tu contraseña."
+            : /invalid login|credentials/i.test(r.error.message) ? "Usuario o contraseña incorrectos."
+            : /confirm/i.test(r.error.message) ? "Tu cuenta aún no está activada. Escríbenos por WhatsApp."
+            : "No se pudo completar. Revisa los datos e inténtalo de nuevo.";
+          return aviso("c-login-msg", "err", t);
+        }
+        if (modo === "crear" && !r.data.session) aviso("c-login-msg", "info", "Cuenta creada. Si el sistema pide activarla, escríbenos por WhatsApp para habilitarla; luego ingresa con tu usuario.");
+        else if (modo === "crear") aviso("c-login-msg", "ok", "Cuenta creada. Bienvenido.");
+      });
+    });
+    ponerModo("crear");
     $("c-google").addEventListener("click", function () {
       sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.origin + location.pathname + "#cuenta" } });
     });

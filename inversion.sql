@@ -134,8 +134,26 @@ create policy pre_admin on public.inv_prestamos for update using (public.inv_es_
 grant select, insert, update on public.inv_prestamos to authenticated;
 grant update (tasa_prestamo_anual) on public.inv_config to authenticated;
 
+-- Perfil del cliente de la banca virtual
+create table if not exists public.inv_perfiles (
+  user_id uuid primary key default auth.uid() references auth.users(id) on delete cascade,
+  nombre text not null default '' check (char_length(nombre) <= 120),
+  telefono text not null default '' check (char_length(telefono) <= 30),
+  ciudad text not null default '' check (char_length(ciudad) <= 80),
+  actualizado_en timestamptz not null default now()
+);
+alter table public.inv_perfiles enable row level security;
+drop policy if exists perf_ver on public.inv_perfiles;
+create policy perf_ver on public.inv_perfiles for select using (user_id = auth.uid() or public.inv_es_admin());
+drop policy if exists perf_crear on public.inv_perfiles;
+create policy perf_crear on public.inv_perfiles for insert to authenticated with check (user_id = auth.uid());
+drop policy if exists perf_editar on public.inv_perfiles;
+create policy perf_editar on public.inv_perfiles for update to authenticated using (user_id = auth.uid()) with check (user_id = auth.uid());
+grant select, insert, update on public.inv_perfiles to authenticated;
+
 -- ADMINISTRADOR: entra una vez a inversion.html con tu Google, y luego ejecuta esto
 -- cambiando el correo por el tuyo:
 --   insert into public.inv_admins (user_id)
---   select id from auth.users where email = 'estalimm@gmail.com'
+--   select id from auth.users where email = 'estalimm@gmail.com'   -- si entras con Google
+--   -- o, si creaste tu cuenta con usuario (ej. admin): where email = 'estalimm+ci.admin@gmail.com'
 --   on conflict do nothing;
