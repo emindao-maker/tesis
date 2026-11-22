@@ -233,7 +233,7 @@
       }
       aviso("f-msg", "ok", "Inversión registrada. Queda pendiente hasta que confirmemos tu pago; te contactaremos para firmar el contrato.");
       $("f-monto").value = ""; $("f-ref").value = ""; $("f-acepto").checked = false;
-      cargarMis();
+      cargarMis(); if (esAdmin) cargarAdmin();
     });
   });
 
@@ -286,7 +286,7 @@
     sb.from("inv_inversiones").update(cambios).eq("id", i.id).then(function (r) {
       if (r.error) return aviso("a-msg", "err", "No se pudo actualizar.");
       aviso("a-msg", "ok", "Actualizado.");
-      cargarAdmin();
+      cargarAdmin(); cargarMis();
     });
   }
   function cargarAdmin() {
@@ -362,7 +362,7 @@
       b.disabled = false;
       if (r.error) return aviso("l-msg", "err", "No se pudo enviar. Revisa los datos e inténtalo de nuevo.");
       aviso("l-msg", "ok", "Solicitud enviada. Te contactaremos para evaluarla; no implica aprobación.");
-      $("l-acepto").checked = false; cargarPre();
+      $("l-acepto").checked = false; cargarPre(); if (esAdmin) cargarAdminPre();
     });
   });
   function cargarPre() {
@@ -378,7 +378,7 @@
         b.addEventListener("click", function () {
           sb.from("inv_prestamos").update({ estado: est }).eq("id", p.id).then(function (r) {
             if (r.error) return aviso("a-pre-msg", "err", "No se pudo actualizar.");
-            aviso("a-pre-msg", "ok", "Actualizado."); cargarAdminPre();
+            aviso("a-pre-msg", "ok", "Actualizado."); cargarAdminPre(); cargarPre();
           });
         });
         acc.appendChild(b);
