@@ -38,29 +38,31 @@
   /* ---------- Menú lateral ---------- */
   var TITULOS = { resumen: "Resumen", invertir: "Invertir", mis: "Mis inversiones", ganancias: "Ganancias", sim: "Simulador", prestamos: "Préstamos", resultados: "Resultados", publicidad: "Publicidad", perfil: "Mi perfil", admin: "Administración" };
   var subs = Array.prototype.slice.call(document.querySelectorAll("[data-sub]"));
-  function menu(abierto) {
-    document.body.classList.toggle("abierto", abierto);
-    $("burger").setAttribute("aria-expanded", abierto ? "true" : "false");
-  }
+  var raiz = document.documentElement;
+  function menu(abierto) { raiz.classList.toggle("layout-menu-expanded", abierto); }
   function abrirSub(n) {
     if (!TITULOS[n] || (n === "admin" && !esAdmin)) n = "resumen";
     subs.forEach(function (b) {
+      if (!b.classList.contains("menu-link")) return;
       var on = b.getAttribute("data-sub") === n;
+      b.parentNode.classList.toggle("active", on);
       if (on) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current");
-      $("sp-" + b.getAttribute("data-sub")).hidden = !on;
     });
+    Object.keys(TITULOS).forEach(function (k) { var p = $("sp-" + k); if (p) p.hidden = (k !== n); });
     $("titulo").textContent = TITULOS[n];
     document.title = TITULOS[n] + " · Capital Investment";
     if (location.hash !== "#" + n) history.replaceState(null, "", "#" + n);
     menu(false); window.scrollTo(0, 0);
   }
-  subs.forEach(function (b) { b.addEventListener("click", function () { abrirSub(b.getAttribute("data-sub")); }); });
+  subs.forEach(function (b) { b.addEventListener("click", function (e) { e.preventDefault(); abrirSub(b.getAttribute("data-sub")); }); });
   Array.prototype.slice.call(document.querySelectorAll("[data-ir]")).forEach(function (b) {
     b.addEventListener("click", function () { abrirSub(b.getAttribute("data-ir")); });
   });
-  $("burger").addEventListener("click", function () { menu(!document.body.classList.contains("abierto")); });
-  $("scrim").addEventListener("click", function () { menu(false); });
+  Array.prototype.slice.call(document.querySelectorAll(".layout-menu-toggle")).forEach(function (t) {
+    t.addEventListener("click", function (e) { e.preventDefault(); menu(!raiz.classList.contains("layout-menu-expanded")); });
+  });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") menu(false); });
+  if (window.Helpers && Helpers.scrollToActive) { try { Helpers.scrollToActive(false); } catch (x) {} }
 
   /* ---------- Cálculo ---------- */
   function sumaUtilidad(monto, desdeIso, hastaIso) {
@@ -255,7 +257,7 @@
     todas.forEach(function (i) {
       var acc = el("td", {});
       function boton(txt, estado, extra) {
-        var b = el("button", { cls: "btn small sec", type: "button", text: txt, style: "margin:0 4px 4px 0" });
+        var b = el("button", { cls: "btn btn-sm btn-outline-primary", type: "button", text: txt, style: "margin:0 4px 4px 0" });
         b.addEventListener("click", function () { cambiar(i, estado, extra); });
         acc.appendChild(b);
       }
@@ -374,7 +376,7 @@
     todasPre.forEach(function (p) {
       var acc = el("td", {});
       function bt(txt, est) {
-        var b = el("button", { cls: "btn small sec", type: "button", text: txt, style: "margin:0 4px 4px 0" });
+        var b = el("button", { cls: "btn btn-sm btn-outline-primary", type: "button", text: txt, style: "margin:0 4px 4px 0" });
         b.addEventListener("click", function () {
           sb.from("inv_prestamos").update({ estado: est }).eq("id", p.id).then(function (r) {
             if (r.error) return aviso("a-pre-msg", "err", "No se pudo actualizar.");
@@ -426,7 +428,8 @@
     });
   });
   $("p-imprimir").addEventListener("click", function () { window.print(); });
-  $("salir").addEventListener("click", cerrar);
+  $("salir").addEventListener("click", function (e) { e.preventDefault(); cerrar(); });
+  $("salir2").addEventListener("click", function (e) { e.preventDefault(); cerrar(); });
   $("p-salir").addEventListener("click", cerrar);
   function cerrar() { sb.auth.signOut().then(function () { location.replace("inversion.html#cuenta"); }); }
 
@@ -451,7 +454,7 @@
     if (!s) return irAIngreso();
     sesion = s; esAdmin = false;
     var usu = usuarioDe(s.user.email);
-    $("quien").textContent = usu; $("p-email").textContent = "Usuario: " + usu;
+    $("quien").textContent = usu; $("avatar-ini").textContent = (usu.charAt(0) || "·").toUpperCase(); $("p-email").textContent = "Usuario: " + usu;
     if (!$("f-nombre").value && s.user.user_metadata) { $("f-nombre").value = s.user.user_metadata.full_name || ""; $("l-nombre").value = s.user.user_metadata.full_name || ""; }
     sb.from("inv_admins").select("user_id").eq("user_id", s.user.id).maybeSingle().then(function (r) {
       esAdmin = !!(r.data);

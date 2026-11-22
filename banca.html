@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
+<!doctype html>
+<html lang="es" class="layout-menu-fixed layout-compact" data-assets-path="./" data-template="vertical-menu-template-free">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,409 +8,319 @@
 <link rel="icon" href="logo-ci.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sneat-icons.css">
+<link rel="stylesheet" href="sneat.css">
+<link rel="stylesheet" href="sneat-ps.css">
+<link rel="stylesheet" href="banca.css">
 <script src="escudo.js"></script>
-<style>
-:root{
-  --ink:#3B0A2E; --ink-2:#7A1B58; --gold:#E6197F; --gold-text:#B0125F;
-  --desk:#FFF5FA; --paper:#FFFFFF; --muted:#6F4A62; --line:#F3D7E6; --line-2:#E8BDD3;
-  --good:#12875A; --bad:#C0262F; --warn:#9A6A12; --focus:#7C3AED;
-  --max:1100px; color-scheme:light;
-}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--desk);color:#2B1424;font:16px/1.65 Poppins,system-ui,sans-serif}
-h1,h2,h3{font-family:"Playfair Display",Georgia,serif;font-weight:500;color:var(--ink);letter-spacing:-.015em;text-wrap:balance;margin:0}
-a{color:var(--ink-2)}
-:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
-header.top{background:var(--paper);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
-header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:64px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font:600 20px "Playfair Display",Georgia,serif}
-.brand img{width:40px;height:40px}
-.brand small{font:500 12px Poppins,sans-serif;color:var(--gold-text);letter-spacing:.08em;text-transform:uppercase;display:block;line-height:1}
-.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ink-2);background:var(--ink-2);color:#fff;padding:10px 18px;border-radius:8px;font:500 15px Poppins,sans-serif;cursor:pointer;text-decoration:none;min-height:44px}
-.btn:hover{background:var(--ink-2)}
-.btn.sec{background:var(--paper);color:var(--ink);border-color:var(--line-2)}
-.btn.sec:hover{background:var(--desk)}
-.btn.gold{background:linear-gradient(135deg,#FF4FA3,#D0147F);border-color:#D0147F;color:#fff}
-.btn:disabled{opacity:.55;cursor:not-allowed}
-.btn.small{padding:6px 12px;min-height:34px;font-size:14px}
-.hero{background:linear-gradient(120deg,#3B0A2E 0%,#A3126A 58%,#FF3D9A 100%);color:#fff;padding:46px 0 70px;position:relative;overflow:hidden}
-.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
-.hero img{width:100%;height:auto;border-radius:28px;box-shadow:0 30px 60px -30px rgba(42,6,32,.7)}
-.hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
-.hero .btn.sec{background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.5)}
-.hero .btn.sec:hover{background:rgba(255,255,255,.26)}
-.hero .btn.gold{background:#fff;color:#C2127A;border-color:#fff;font-weight:600}
-.hero h1{color:#fff;font-size:clamp(32px,5vw,54px);line-height:1.1;max-width:16ch}
-.hero p{max-width:56ch;color:#FFE3F1;margin:16px 0 0;font-size:17px}
-.hero .eyebrow{color:#FFD3E8;font:500 13px Poppins;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
-.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:-34px 0 0;position:relative}
-.facts div{background:var(--paper);padding:16px 18px}
-.facts b{display:block;font:500 26px "Playfair Display",Georgia,serif;color:var(--ink);font-variant-numeric:tabular-nums}
-.facts span{color:var(--muted);font-size:14px}
-.tabs{display:flex;gap:4px;margin:30px 0 0;border-bottom:1px solid var(--line-2);overflow-x:auto}
-.tabs button{background:none;border:0;border-bottom:3px solid transparent;padding:12px 16px;font:500 16px Poppins;color:var(--muted);cursor:pointer;white-space:nowrap;min-height:44px}
-.tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--gold)}
-.panel{padding:26px 0 60px}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:22px;margin-bottom:18px}
-.card h2{font-size:24px;margin-bottom:6px}
-.card h3{font-size:19px;margin-bottom:6px}
-.muted{color:var(--muted)}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-label{display:block;font-weight:500;font-size:15px;margin:14px 0 5px}
-input,select,textarea{width:100%;padding:11px 12px;border:1px solid var(--line-2);border-radius:8px;font:16px Poppins,sans-serif;background:#fff;color:#2B1424;min-height:44px}
-input[type=checkbox]{width:20px;height:20px;min-height:0;margin:3px 10px 0 0;flex:none}
-.check{display:flex;align-items:flex-start;margin-top:14px;font-size:15px}
-.check label{margin:0;font-weight:400}
-.risk{border-left:4px solid var(--warn);background:#FFF8E6;padding:14px 16px;border-radius:0 8px 8px 0;font-size:15px}
-.risk b{color:var(--warn)}
-.out{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
-.out div{border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--desk)}
-.out small{display:block;color:var(--muted);font-size:13px}
-.out b{font:500 24px "Playfair Display",Georgia,serif;font-variant-numeric:tabular-nums}
-.pos{color:var(--good)} .neg{color:var(--bad)}
-table{width:100%;border-collapse:collapse;font-size:15px}
-th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-weight:500;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.05em}
-td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
-.tw{overflow-x:auto}
-.pill{display:inline-block;padding:2px 10px;border-radius:99px;font-size:13px;font-weight:500;border:1px solid}
-.pill.pendiente{color:var(--warn);border-color:#E7CE98;background:#FFF9EC}
-.pill.confirmada{color:var(--good);border-color:#A9D9BF;background:#EFFAF4}
-.pill.liquidada{color:var(--ink-2);border-color:var(--line-2);background:var(--desk)}
-.pill.rechazada{color:var(--bad);border-color:#EBB5AF;background:#FDF1F0}
-.resumen{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#FFB3D6;border-radius:14px;overflow:hidden;margin-bottom:18px;box-shadow:0 18px 40px -26px rgba(15,30,58,.5)}
-.resumen div{background:linear-gradient(160deg,#C2127A,#7A1FA2);color:#fff;padding:18px 20px}
-.resumen small{display:block;color:#FFD9EB;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
-.resumen b{font:500 28px "Playfair Display",Georgia,serif;font-variant-numeric:tabular-nums}
-@media (max-width:820px){.resumen{grid-template-columns:1fr 1fr}}
-.feats{margin-top:18px}
-.feat{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:4px}
-.feat svg{color:var(--gold-text);margin-bottom:6px}
-.feat b{font:500 18px "Playfair Display",Georgia,serif;color:var(--ink)}
-.feat span{color:var(--muted);font-size:15px}
-.bars{display:flex;align-items:flex-end;gap:8px;height:190px;padding:10px 4px 0;border-bottom:1px solid var(--line-2);overflow-x:auto}
-.bar{flex:1 0 34px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;position:relative}
-.bar i{display:block;width:100%;max-width:46px;border-radius:5px 5px 0 0;background:var(--good)}
-.bar i.n{background:var(--bad);border-radius:0 0 5px 5px}
-.bar em{font:normal 12px Poppins;color:var(--muted);margin-top:6px;position:absolute;bottom:-24px;white-space:nowrap}
-.bar u{font:500 12px Poppins;text-decoration:none;font-variant-numeric:tabular-nums;margin-bottom:3px}
-.seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--desk);padding:4px;border-radius:10px;margin-bottom:6px}
-.seg button{border:0;background:transparent;padding:10px;border-radius:8px;font:500 15px Poppins;color:var(--muted);cursor:pointer;min-height:44px}
-.seg button.on{background:var(--paper);color:var(--ink);box-shadow:0 1px 3px rgba(15,30,58,.12)}
-.ticks{padding-left:20px;margin:8px 0 14px}.ticks li{margin:6px 0}
-.subnav{display:flex;gap:6px;overflow-x:auto;margin-bottom:18px;padding-bottom:2px}
-.subnav button{border:1px solid var(--line-2);background:var(--paper);color:var(--ink-2);padding:9px 16px;border-radius:99px;font:500 15px Poppins;cursor:pointer;white-space:nowrap;min-height:40px}
-.subnav button[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
-.saludo{font:500 22px "Playfair Display",Georgia,serif;color:var(--ink);margin:0 0 14px}
-.medidor{height:10px;border-radius:99px;background:var(--desk);margin-top:12px;overflow:hidden}
-.medidor i{display:block;height:100%;background:var(--gold);border-radius:99px}
-@media print{header.top,.hero,.facts,.tabs,.subnav,footer,.btn,.panel:not(#p-cuenta){display:none!important}body{background:#fff}.card{border:0;padding:0}}
-.galeria{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:12px}
-.galeria figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--paper)}
-.galeria img{display:block;width:100%;height:auto}
-.galeria figcaption{padding:10px 14px;font-weight:500;color:var(--ink-2);font-size:15px;display:flex;justify-content:space-between;align-items:center;gap:8px}
-.dl{font-size:14px;color:var(--gold-text);font-weight:600}
-@media (max-width:820px){.galeria{grid-template-columns:1fr}}
-.msg{padding:12px 14px;border-radius:8px;margin-top:14px;font-size:15px}
-.msg.ok{background:#EFFAF4;border:1px solid #A9D9BF;color:#14583A}
-.msg.err{background:#FDF1F0;border:1px solid #EBB5AF;color:#8C2B23}
-.msg.info{background:#F3EEFF;border:1px solid #D4C4FA;color:#4C2A99}
-.steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.steps li{counter-increment:s;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px}
-.steps li::before{content:counter(s);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#FF5CAA,#C2127A);color:#fff;font-weight:600;margin-bottom:10px}
-.steps b{display:block;font-family:"Playfair Display",Georgia,serif;font-weight:500;color:var(--ink);margin-bottom:2px}
-.steps span{font-size:15px;color:var(--muted)}
-dl.bank{display:grid;grid-template-columns:max-content 1fr;gap:6px 16px;margin:10px 0 0}
-dl.bank dt{color:var(--muted)} dl.bank dd{margin:0;font-weight:500;overflow-wrap:anywhere}
-footer{border-top:1px solid var(--line-2);padding:26px 0 90px;color:var(--muted);font-size:14px}
-[hidden]{display:none!important}
-@media (max-width:820px){
-  .facts{grid-template-columns:1fr 1fr}
-  .grid2,.grid3,.steps,.out{grid-template-columns:1fr}
-  .hero{padding:34px 0 60px}
-  .hero .wrap{grid-template-columns:1fr}
-}
-@media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth} }
-
-body{background:var(--desk)}
-.shell{display:grid;grid-template-columns:272px 1fr;min-height:100vh}
-.side{background:linear-gradient(175deg,#3B0A2E 0%,#7A1B58 60%,#B0125F 100%);color:#fff;display:flex;flex-direction:column;padding:18px 14px;position:sticky;top:0;height:100vh;overflow-y:auto;z-index:30}
-.side .brand{color:#fff;padding:4px 8px 16px}
-.side .brand small{color:#FFD3E8}
-.side .user{margin:0 6px 14px;padding:12px;border-radius:12px;background:rgba(255,255,255,.12);font-size:14px;overflow-wrap:anywhere}
-.side .user b{display:block;font-weight:600}
-.side .user span{color:#FFD9EB;font-size:13px}
-.menu{display:flex;flex-direction:column;gap:2px;margin:0;padding:0;list-style:none}
-.menu button{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:0;color:#FFE3F1;padding:11px 12px;border-radius:10px;font:500 15px Poppins,sans-serif;cursor:pointer;min-height:44px}
-.menu button svg{flex:none;opacity:.9}
-.menu button:hover{background:rgba(255,255,255,.12)}
-.menu button[aria-current="page"]{background:#fff;color:var(--ink-2)}
-.menu .sep{height:1px;background:rgba(255,255,255,.2);margin:10px 6px}
-.side .bottom{margin-top:auto;padding-top:14px}
-.side .bottom a{color:#FFD3E8;font-size:14px;display:block;padding:6px 12px}
-.main{min-width:0;display:flex;flex-direction:column}
-.topbar{display:flex;align-items:center;gap:12px;background:var(--paper);border-bottom:1px solid var(--line);padding:0 20px;height:64px;position:sticky;top:0;z-index:20}
-.topbar h1{font-size:22px;flex:1}
-.burger{display:none;background:var(--paper);border:1px solid var(--line-2);border-radius:10px;width:44px;height:44px;cursor:pointer;color:var(--ink);align-items:center;justify-content:center}
-.content{padding:24px 20px 60px;max-width:1100px;width:100%}
-.scrim{display:none}
-.sp[hidden]{display:none!important}
-@media (max-width:900px){
-  .shell{grid-template-columns:1fr}
-  .side{position:fixed;left:0;top:0;bottom:0;width:280px;max-width:86vw;transform:translateX(-102%);transition:transform .22s ease;box-shadow:0 0 40px rgba(0,0,0,.35)}
-  body.abierto .side{transform:none}
-  body.abierto .scrim{display:block;position:fixed;inset:0;background:rgba(40,5,30,.5);z-index:25}
-  .burger{display:inline-flex}
-  .topbar{padding:0 14px}
-}
-@media (prefers-reduced-motion:reduce){.side{transition:none}}
-@media print{.side,.topbar,.scrim{display:none!important}.shell{display:block}.sp:not(#sp-perfil):not(#sp-resumen):not(#sp-mis):not(#sp-ganancias){display:none!important}}
-</style>
+<script src="sneat-helpers.js"></script>
 </head>
 <body>
-<div class="shell">
-  <aside class="side" id="menu-lateral" aria-label="Menú de la banca virtual">
-    <a class="brand" href="inversion.html" aria-label="Capital Investment"><img src="logo-ci.svg" alt=""><span>Capital Investment<small>Banca virtual</small></span></a>
-    <div class="user"><span>Sesión iniciada como</span><b id="quien">…</b></div>
-    <ul class="menu" id="menu">
-      <li><button type="button" data-sub="resumen"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Resumen</span></button></li>
-      <li><button type="button" data-sub="invertir"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M17 7.5c0-1.7-2.2-3-5-3s-5 1.3-5 3 2.2 3 5 3 5 1.3 5 3-2.2 3-5 3-5-1.3-5-3"/></svg><span>Invertir</span></button></li>
-      <li><button type="button" data-sub="mis"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M8 6V4h8v2M3 12h18"/></svg><span>Mis inversiones</span></button></li>
-      <li><button type="button" data-sub="ganancias"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16M8 15l3.5-4 3 2.5L20 7"/></svg><span>Ganancias</span></button></li>
-      <li><button type="button" data-sub="sim"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M8 16h2M12 16h2"/></svg><span>Simulador</span></button></li>
-      <li><button type="button" data-sub="prestamos"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg><span>Préstamos</span></button></li>
-      <li><button type="button" data-sub="resultados"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V10M12 20V4M19 20v-7"/></svg><span>Resultados</span></button></li>
-      <li><button type="button" data-sub="publicidad"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4l12 5V5L4 10zM16 9a4 4 0 0 1 0 6"/></svg><span>Publicidad</span></button></li>
-      <li><button type="button" data-sub="perfil"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>Mi perfil</span></button></li>
-      <li class="sep" role="presentation"></li>
-      <li id="n-admin" hidden><button type="button" data-sub="admin"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.2 7.5-8 9-4.8-1.5-8-4.5-8-9V6l8-3z"/></svg><span>Administración</span></button></li>
-      
-      <li><button type="button" id="salir"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg><span>Cerrar sesión</span></button></li>
-    </ul>
-    <div class="bottom"><a href="inversion.html">← Volver a Capital Investment</a><a href="index.html">Sitio de Tesis</a></div>
-  </aside>
-  <div class="scrim" id="scrim"></div>
-  <div class="main">
-    <div class="topbar">
-      <button class="burger" id="burger" type="button" aria-label="Abrir menú" aria-controls="menu-lateral" aria-expanded="false"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
-      <h1 id="titulo">Resumen</h1>
-    </div>
-    <main class="content" id="contenido">
-<div id="c-cargando" class="card"><p class="muted" style="margin:0">Cargando tu banca virtual…</p></div>
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+
+    <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+      <div class="app-brand demo">
+        <a href="inversion.html" class="app-brand-link" aria-label="Capital Investment">
+          <img src="logo-ci.svg" alt="" width="34" height="34">
+          <span class="app-brand-text demo menu-text fw-bold ms-2">Capital Investment</span>
+        </a>
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto" aria-label="Cerrar menú"><i class="bx bx-chevron-left d-block d-xl-none align-middle"></i></a>
+      </div>
+      <div class="menu-divider mt-0"></div>
+      <div class="menu-inner-shadow"></div>
+      <ul class="menu-inner py-1">
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Mi cuenta</span></li>
+            <li class="menu-item"><a href="#resumen" class="menu-link" data-sub="resumen"><i class="menu-icon tf-icons bx bx-home-smile"></i><div class="text-truncate">Resumen</div></a></li>
+            <li class="menu-item"><a href="#invertir" class="menu-link" data-sub="invertir"><i class="menu-icon tf-icons bx bx-dollar-circle"></i><div class="text-truncate">Invertir</div></a></li>
+            <li class="menu-item"><a href="#mis" class="menu-link" data-sub="mis"><i class="menu-icon tf-icons bx bx-wallet"></i><div class="text-truncate">Mis inversiones</div></a></li>
+            <li class="menu-item"><a href="#ganancias" class="menu-link" data-sub="ganancias"><i class="menu-icon tf-icons bx bx-line-chart"></i><div class="text-truncate">Ganancias</div></a></li>
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Servicios</span></li>
+            <li class="menu-item"><a href="#prestamos" class="menu-link" data-sub="prestamos"><i class="menu-icon tf-icons bx bx-credit-card"></i><div class="text-truncate">Préstamos</div></a></li>
+            <li class="menu-item"><a href="#sim" class="menu-link" data-sub="sim"><i class="menu-icon tf-icons bx bx-calculator"></i><div class="text-truncate">Simulador</div></a></li>
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Información</span></li>
+            <li class="menu-item"><a href="#resultados" class="menu-link" data-sub="resultados"><i class="menu-icon tf-icons bx bx-bar-chart-alt-2"></i><div class="text-truncate">Resultados</div></a></li>
+            <li class="menu-item"><a href="#publicidad" class="menu-link" data-sub="publicidad"><i class="menu-icon tf-icons bx bx-broadcast"></i><div class="text-truncate">Publicidad</div></a></li>
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Configuración</span></li>
+            <li class="menu-item"><a href="#perfil" class="menu-link" data-sub="perfil"><i class="menu-icon tf-icons bx bx-user"></i><div class="text-truncate">Mi perfil</div></a></li>
+            <li class="menu-item" id="n-admin" hidden><a href="#admin" class="menu-link" data-sub="admin"><i class="menu-icon tf-icons bx bx-shield-quarter"></i><div class="text-truncate">Administración</div></a></li>
+            <li class="menu-item"><a href="#salir" class="menu-link" id="salir"><i class="menu-icon tf-icons bx bx-log-out"></i><div class="text-truncate">Cerrar sesión</div></a></li>
+      </ul>
+    </aside>
+
+    <div class="layout-page">
+      <nav class="layout-navbar container-xxl navbar-detached navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
+        <div class="layout-menu-toggle navbar-nav align-items-xl-center me-4 me-xl-0 d-xl-none">
+          <a class="nav-item nav-link px-0 me-xl-6" href="javascript:void(0)" aria-label="Abrir menú"><i class="bx bx-menu fs-3"></i></a>
+        </div>
+        <div class="navbar-nav-right d-flex align-items-center justify-content-end" id="navbar-collapse">
+          <div class="navbar-nav align-items-center me-auto"><h5 class="mb-0" id="titulo">Resumen</h5></div>
+          <ul class="navbar-nav flex-row align-items-center ms-md-auto">
+            <li class="nav-item me-3 d-none d-md-block"><a class="btn btn-sm btn-outline-primary" href="inversion.html">Capital Investment</a></li>
+            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+              <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown" aria-label="Menú de usuario">
+                <div class="avatar avatar-online"><span class="avatar-initial rounded-circle bg-label-primary fw-semibold" id="avatar-ini">·</span></div>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><div class="dropdown-item-text"><span class="d-block text-body-secondary small">Sesión iniciada como</span><b id="quien">…</b></div></li>
+                <li><div class="dropdown-divider my-1"></div></li>
+                <li><a class="dropdown-item" href="#perfil" data-sub="perfil"><i class="bx bx-user me-2"></i>Mi perfil</a></li>
+                <li><a class="dropdown-item" href="#salir" id="salir2"><i class="bx bx-log-out me-2"></i>Cerrar sesión</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+
+<div id="c-cargando" class="card"><div class="card-body text-body-secondary">Cargando tu banca virtual…</div></div>
 <div id="c-app" hidden>
-      <div class="sp" id="sp-resumen">
-        <p class="saludo" id="saludo"></p>
-        <div class="resumen" aria-label="Resumen de tu cuenta">
-          <div><small>Capital invertido</small><b id="rs-inv">$0.00</b></div>
-          <div><small>Ganancias acumuladas</small><b id="rs-util">$0.00</b></div>
-          <div><small>Valor actual</small><b id="rs-val">$0.00</b></div>
-          <div><small>Préstamos solicitados</small><b id="rs-pre">0</b></div>
-        </div>
-        <div class="grid2">
-          <div class="card">
-            <h3>Movimientos recientes</h3>
-            <div class="tw"><table><thead><tr><th>Fecha</th><th>Detalle</th><th class="num">Monto</th></tr></thead><tbody id="mov"></tbody></table></div>
-            <p class="muted" id="mov-vacio" hidden>Aún no tienes movimientos. Empieza en la pestaña Invertir.</p>
-          </div>
-          <div class="card">
-            <h3>Cupo disponible</h3>
-            <p style="margin:0"><b id="cupo" style="font:500 28px "Playfair Display",Georgia,serif">–</b> <span class="muted">de $10.000</span></p>
-            <div class="medidor" aria-hidden="true"><i id="cupo-b" style="width:0"></i></div>
-            <div style="margin-top:16px"><button class="btn gold" type="button" data-ir="invertir">Nueva inversión</button></div>
-          </div>
-        </div>
-      </div>
-      <div class="sp" id="sp-invertir" hidden>
-        <div class="grid2">
-          <form class="card" id="f-inv" novalidate>
-            <h2>Nueva inversión</h2>
-            <label for="f-nombre">Nombre completo</label>
-            <input id="f-nombre" autocomplete="name" maxlength="120" required>
-            <label for="f-contacto">WhatsApp o correo de contacto</label>
-            <input id="f-contacto" autocomplete="email" maxlength="120" required>
-            <div class="grid2" style="gap:12px">
-              <div><label for="f-monto">Monto (USD)</label><input id="f-monto" type="number" min="10" max="10000" step="0.01" inputmode="decimal" required></div>
-              <div><label for="f-meses">Plazo hasta liquidar</label><select id="f-meses"></select></div>
-            </div>
-            <p class="muted" id="f-fecha" style="margin:6px 0 0;font-size:14px"></p>
-            <label for="f-metodo">Forma de pago</label>
-            <select id="f-metodo"><option value="transferencia">Transferencia bancaria</option><option value="deposito">Depósito en ventanilla</option><option value="paypal">PayPal</option></select>
-            <label for="f-ref">Número de comprobante o referencia</label>
-            <input id="f-ref" maxlength="80" required placeholder="Lo registras después de pagar">
-            <div class="check"><input type="checkbox" id="f-renovar"><label for="f-renovar">Al terminar el plazo, renovar por otro periodo igual</label></div>
-            <div class="check"><input type="checkbox" id="f-acepto" required><label for="f-acepto">Entiendo que la utilidad es variable, que no hay rendimiento garantizado y que puedo perder parte o todo lo aportado. Acepto firmar el contrato de participación.</label></div>
-            <div style="margin-top:18px"><button class="btn gold" id="f-enviar" type="submit">Registrar inversión</button></div>
-            <div id="f-msg" aria-live="polite"></div>
-          </form>
-          <div class="card">
-            <h2>Dónde pagar</h2>
-            <p class="muted" style="margin:0">Paga primero y luego registra el comprobante en el formulario.</p>
-            <dl class="bank" id="banco"><dt>Cargando</dt><dd>…</dd></dl>
-            <p class="muted" id="banco-aviso" style="font-size:14px;margin-top:12px"></p>
-          </div>
-        </div>
-      </div>
-      <div class="sp" id="sp-mis" hidden>
-        <div class="card">
-          <h2>Mis inversiones</h2>
-          <div class="tw"><table><thead><tr><th>Fecha</th><th class="num">Monto</th><th>Plazo</th><th>Estado</th><th class="num">Ganancia real</th><th class="num">Valor actual</th></tr></thead><tbody id="mis"></tbody></table></div>
-          <p class="muted" id="mis-vacio" hidden>Todavía no has registrado inversiones.</p>
-          <p class="muted" style="font-size:14px;margin-top:10px">La ganancia real se calcula con los resultados mensuales publicados, desde el mes en que se confirma tu pago. Puede ser negativa.</p>
-        </div>
-      </div>
-      <div class="sp" id="sp-ganancias" hidden>
-        <div class="card">
-          <h2>Ganancias mes a mes</h2>
-          <p class="muted">Resultado publicado de cada mes aplicado a tu capital confirmado en ese momento.</p>
-          <div class="tw"><table><thead><tr><th>Mes</th><th class="num">Capital activo</th><th class="num">Resultado</th><th class="num">Ganancia</th><th class="num">Acumulado</th></tr></thead><tbody id="gan"></tbody></table></div>
-          <p class="muted" id="gan-vacio" hidden>Todavía no hay ganancias que mostrar. Aparecen cuando confirmemos tu pago y se publique el resultado del mes.</p>
-        </div>
-      </div>
-<div class="sp" id="sp-sim" hidden>
-    <div class="card">
-      <h2>Simulador de escenarios</h2>
-      <p class="muted">Son ejemplos para que veas cómo cambia tu resultado. Tú eliges la utilidad mensual hipotética; no es una oferta ni una promesa.</p>
-      <div class="grid3">
-        <div><label for="s-monto">Monto a aportar (USD)</label><input id="s-monto" type="number" min="10" max="10000" step="1" value="500" inputmode="decimal"></div>
-        <div><label for="s-meses">Plazo (meses)</label><input id="s-meses" type="number" min="1" max="24" step="1" value="3" inputmode="numeric"></div>
-        <div><label for="s-pct">Utilidad mensual hipotética (%)</label><input id="s-pct" type="number" min="-100" max="100" step="0.5" value="4" inputmode="decimal"></div>
-      </div>
-      <div class="out" aria-live="polite">
-        <div><small>Utilidad acumulada</small><b id="o-util">–</b></div>
-        <div><small>Total a liquidar</small><b id="o-total">–</b></div>
-        <div><small>Rendimiento del periodo</small><b id="o-pct">–</b></div>
-      </div>
-      <div class="tw" style="margin-top:18px"><table><thead><tr><th>Escenario</th><th class="num">% mensual</th><th class="num">Utilidad</th><th class="num">Total</th></tr></thead><tbody id="s-tabla"></tbody></table></div>
-      <p class="muted" style="font-size:14px;margin-top:12px">Cálculo simple, sin reinversión de utilidades. Los escenarios (−5%, 0%, 3%, 8%) son solo ilustrativos.</p>
-    </div>
-</div>
-<div class="sp" id="sp-prestamos" hidden>
-    <div class="grid2">
-      <div class="card">
-        <h2>Simulador de préstamo</h2>
-        <p class="muted">Calcula tu cuota mensual fija (sistema francés). Es una simulación: la aprobación depende de la evaluación de Tesis.</p>
-        <label for="l-monto">Monto (USD, de $50 a $5.000)</label><input id="l-monto" type="number" min="50" max="5000" step="10" value="1000" inputmode="decimal">
-        <label for="l-plazo">Plazo (meses, hasta 36)</label><input id="l-plazo" type="number" min="1" max="36" step="1" value="12" inputmode="numeric">
-        <div class="out" aria-live="polite">
-          <div><small>Cuota mensual</small><b id="l-cuota">–</b></div>
-          <div><small>Total a pagar</small><b id="l-total">–</b></div>
-          <div><small>Intereses</small><b id="l-int">–</b></div>
-        </div>
-        <details style="margin-top:14px"><summary style="cursor:pointer;font-weight:500">Ver tabla de pagos</summary><div class="tw" style="max-height:280px;overflow:auto"><table><thead><tr><th>Cuota</th><th class="num">Capital</th><th class="num">Interés</th><th class="num">Saldo</th></tr></thead><tbody id="l-amort"></tbody></table></div></details>
-        <p class="muted" style="font-size:14px;margin-top:10px">Tasa de referencia: <b id="l-tasa">18</b>% anual. La tasa final queda fijada en el contrato.</p>
-      </div>
-      <div>
-        <form class="card" id="f-pre" novalidate>
-          <h2>Solicitar préstamo</h2>
-          <div id="l-form">
-            <label for="l-nombre">Nombre completo</label><input id="l-nombre" maxlength="120" autocomplete="name">
-            <label for="l-contacto">WhatsApp o correo</label><input id="l-contacto" maxlength="120">
-            <label for="l-destino">¿Para qué usarás el dinero?</label><input id="l-destino" maxlength="200">
-            <div class="check"><input type="checkbox" id="l-acepto"><label for="l-acepto">Entiendo que esto es una solicitud, que no garantiza la aprobación y que el préstamo se formaliza con un contrato.</label></div>
-            <div style="margin-top:16px"><button class="btn gold" type="submit" id="l-enviar">Enviar solicitud</button></div>
-          </div>
-          <div id="l-msg" aria-live="polite"></div>
-        </form>
-        <div class="card" id="l-mis-card" hidden>
-          <h3>Mis solicitudes</h3>
-          <div class="tw"><table><thead><tr><th>Fecha</th><th class="num">Monto</th><th class="num">Cuota</th><th>Estado</th></tr></thead><tbody id="l-mis"></tbody></table></div>
-        </div>
-      </div>
-    </div>
-</div>
-<div class="sp" id="sp-resultados" hidden>
-    <div class="card">
-      <h2>Resultados mensuales publicados</h2>
-      <p class="muted">Es la utilidad (o pérdida) real que se aplica a las inversiones confirmadas en ese mes.</p>
-      <div class="bars" id="grafico" role="img" aria-label="Gráfico de resultados mensuales" hidden></div>
-      <div style="height:30px"></div>
-      <div class="tw"><table><thead><tr><th>Mes</th><th class="num">Resultado</th><th>Nota</th></tr></thead><tbody id="res"></tbody></table></div>
-      <p class="muted" id="res-vacio" hidden>Aún no hay resultados publicados.</p>
-    </div>
-</div>
-<div class="sp" id="sp-publicidad" hidden>
-    <div class="card">
-      <h2>Publicidad de Capital Investment</h2>
-      <p class="muted">Descarga los anuncios y compártelos en tus redes. Para informes y consultas, el contacto es el WhatsApp corporativo <b>098 556 8519</b>.</p>
-      <div class="galeria">
-        <figure><img loading="lazy" src="ci-anuncio-invierte.webp" width="1080" height="1080" alt="Anuncio: invierte desde $10 con Capital Investment"><figcaption>Invierte desde $10<a class="dl" href="ci-anuncio-invierte.webp" download="capital-investment-invierte.webp">Descargar</a></figcaption></figure>
-        <figure><img loading="lazy" src="ci-anuncio-prestamos.webp" width="1080" height="1080" alt="Anuncio: préstamos de $50 a $5.000 con cuota fija"><figcaption>Préstamos de $50 a $5.000<a class="dl" href="ci-anuncio-prestamos.webp" download="capital-investment-prestamos.webp">Descargar</a></figcaption></figure>
-        <figure><img loading="lazy" src="ci-anuncio-banca.webp" width="1080" height="1350" alt="Anuncio: tu banca virtual en tu bolsillo"><figcaption>Tu banca virtual<a class="dl" href="ci-anuncio-banca.webp" download="capital-investment-banca.webp">Descargar</a></figcaption></figure>
-      </div>
-      <p style="margin-top:16px"><a class="btn gold" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Capital%20Investment." target="_blank" rel="noopener noreferrer">Escribir al WhatsApp corporativo</a></p>
-    </div>
-</div>
-      <div class="sp" id="sp-perfil" hidden>
-        <div class="grid2">
-          <form class="card" id="f-perfil" novalidate>
-            <h2>Mi perfil</h2>
-            <p class="muted" id="p-email" style="margin:0"></p>
-            <label for="p-nombre">Nombre completo</label><input id="p-nombre" maxlength="120" autocomplete="name">
-            <label for="p-tel">Teléfono / WhatsApp</label><input id="p-tel" maxlength="30" autocomplete="tel" inputmode="tel">
-            <label for="p-ciudad">Ciudad</label><input id="p-ciudad" maxlength="80" autocomplete="address-level2">
-            <div style="margin-top:18px"><button class="btn" type="submit">Guardar perfil</button></div>
-            <div id="p-msg" aria-live="polite"></div>
-          </form>
-          <div class="card">
-            <h2>Estado de cuenta</h2>
-            <p class="muted">Imprime o guarda en PDF un resumen con tus inversiones, ganancias y préstamos.</p>
-            <button class="btn sec" type="button" id="p-imprimir">Imprimir estado de cuenta</button>
-            <hr style="border:0;border-top:1px solid var(--line);margin:20px 0">
-            <button class="btn sec" type="button" id="p-salir">Cerrar sesión</button>
-          </div>
-        </div>
-      </div>
-<div class="sp" id="sp-admin" hidden>
-    <div class="grid3" style="margin-bottom:18px">
-      <div class="card" style="margin:0"><small class="muted">Capital confirmado</small><div id="a-cap" style="font:500 26px "Playfair Display",Georgia,serif">–</div></div>
-      <div class="card" style="margin:0"><small class="muted">Pendientes de confirmar</small><div id="a-pend" style="font:500 26px "Playfair Display",Georgia,serif">–</div></div>
-      <div class="card" style="margin:0"><small class="muted">Inversionistas</small><div id="a-inv" style="font:500 26px "Playfair Display",Georgia,serif">–</div></div>
-    </div>
-    <div class="card">
-      <h2>Inversiones</h2>
-      <div class="tw"><table><thead><tr><th>Inversionista</th><th class="num">Monto</th><th>Pago</th><th>Plazo</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="a-tabla"></tbody></table></div>
-      <div id="a-msg" aria-live="polite"></div>
-    </div>
-    <div class="card">
-      <h2>Solicitudes de préstamo</h2>
-      <div class="tw"><table><thead><tr><th>Solicitante</th><th class="num">Monto</th><th>Plazo</th><th>Destino</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="a-pre"></tbody></table></div>
-      <div id="a-pre-msg" aria-live="polite"></div>
-      <label for="g-tasa" style="max-width:260px">Tasa anual de referencia (%)</label>
-      <div style="display:flex;gap:8px;max-width:260px"><input id="g-tasa" type="number" min="0" max="100" step="0.5" inputmode="decimal"><button class="btn small" type="button" id="g-tasa-b">Guardar</button></div>
-    </div>
-    <div class="grid2">
-      <form class="card" id="f-res" novalidate>
-        <h3>Publicar resultado del mes</h3>
-        <label for="r-mes">Mes</label><input id="r-mes" type="month" required>
-        <label for="r-pct">Utilidad del mes (%), negativa si hubo pérdida</label><input id="r-pct" type="number" step="0.001" min="-100" max="1000" inputmode="decimal" required>
-        <label for="r-nota">Nota para los inversionistas</label><input id="r-nota" maxlength="200">
-        <div style="margin-top:16px"><button class="btn" type="submit">Publicar</button></div>
-        <div id="r-msg" aria-live="polite"></div>
-      </form>
-      <form class="card" id="f-cfg" novalidate>
-        <h3>Datos de pago</h3>
-        <label for="g-banco">Banco</label><input id="g-banco" maxlength="80">
-        <label for="g-tipo">Tipo de cuenta</label><input id="g-tipo" maxlength="30">
-        <label for="g-num">Número de cuenta</label><input id="g-num" maxlength="40">
-        <label for="g-tit">Titular</label><input id="g-tit" maxlength="100">
-        <label for="g-id">Cédula o RUC</label><input id="g-id" maxlength="20">
-        <label for="g-pp">PayPal</label><input id="g-pp" maxlength="100">
-        <div style="margin-top:16px"><button class="btn" type="submit">Guardar</button></div>
-        <div id="g-msg" aria-live="polite"></div>
-      </form>
-    </div>
-</div>
-</div>
-      <p class="muted" style="font-size:13px;margin-top:30px"><b>Aviso.</b> Capital Investment no es un banco: es una invitación a participar en un negocio. Los aportes no son depósitos ni están garantizados; la utilidad es variable y puede ser negativa. <a href="terminos.html">Contrato y términos</a> · <a href="privacidad.html">Privacidad</a></p>
-    </main>
+
+<!-- RESUMEN -->
+<div class="sp" id="sp-resumen">
+  <p class="saludo" id="saludo"></p>
+  <div class="row g-4 mb-4" aria-label="Resumen de tu cuenta">
+        <div class="col-6 col-xl-3"><div class="card h-100"><div class="card-body">
+          <div class="avatar mb-3"><span class="avatar-initial rounded bg-label-primary"><i class="bx bx-wallet"></i></span></div>
+          <span class="d-block text-body-secondary mb-1">Capital invertido</span><h4 class="card-title mb-0" id="rs-inv">$0.00</h4></div></div></div>
+        <div class="col-6 col-xl-3"><div class="card h-100"><div class="card-body">
+          <div class="avatar mb-3"><span class="avatar-initial rounded bg-label-success"><i class="bx bx-trending-up"></i></span></div>
+          <span class="d-block text-body-secondary mb-1">Ganancias acumuladas</span><h4 class="card-title mb-0" id="rs-util">$0.00</h4></div></div></div>
+        <div class="col-6 col-xl-3"><div class="card h-100"><div class="card-body">
+          <div class="avatar mb-3"><span class="avatar-initial rounded bg-label-info"><i class="bx bx-coin-stack"></i></span></div>
+          <span class="d-block text-body-secondary mb-1">Valor actual</span><h4 class="card-title mb-0" id="rs-val">$0.00</h4></div></div></div>
+        <div class="col-6 col-xl-3"><div class="card h-100"><div class="card-body">
+          <div class="avatar mb-3"><span class="avatar-initial rounded bg-label-warning"><i class="bx bx-credit-card"></i></span></div>
+          <span class="d-block text-body-secondary mb-1">Préstamos solicitados</span><h4 class="card-title mb-0" id="rs-pre">0</h4></div></div></div>
   </div>
+  <div class="row g-4">
+    <div class="col-lg-8"><div class="card h-100">
+      <h5 class="card-header">Movimientos recientes</h5>
+      <div class="table-responsive text-nowrap"><table class="table"><thead><tr><th>Fecha</th><th>Detalle</th><th class="num">Monto</th></tr></thead><tbody id="mov" class="table-border-bottom-0"></tbody></table></div>
+      <p class="muted px-4 pb-3 mb-0" id="mov-vacio" hidden>Aún no tienes movimientos. Empieza en Invertir.</p>
+    </div></div>
+    <div class="col-lg-4"><div class="card h-100"><div class="card-body">
+      <h5 class="card-title">Cupo disponible</h5>
+      <p class="mb-2"><b id="cupo" class="h3 text-primary">–</b> <span class="muted">de $10.000</span></p>
+      <div class="progress mb-4" style="height:10px"><div class="progress-bar" id="cupo-b" role="progressbar" style="width:0" aria-label="Cupo usado"></div></div>
+      <button class="btn btn-primary" type="button" data-ir="invertir"><i class="bx bx-plus-circle me-1"></i>Nueva inversión</button>
+    </div></div></div>
+  </div>
+</div>
+
+<!-- INVERTIR -->
+<div class="sp" id="sp-invertir" hidden>
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <form class="card" id="f-inv" novalidate><div class="card-body">
+        <h5 class="card-title">Nueva inversión</h5>
+        <div class="row g-3">
+          <div class="col-12"><label class="form-label" for="f-nombre">Nombre completo</label><input class="form-control" id="f-nombre" autocomplete="name" maxlength="120" required></div>
+          <div class="col-12"><label class="form-label" for="f-contacto">WhatsApp o correo de contacto</label><input class="form-control" id="f-contacto" autocomplete="email" maxlength="120" required></div>
+          <div class="col-md-6"><label class="form-label" for="f-monto">Monto (USD)</label><input class="form-control" id="f-monto" type="number" min="10" max="10000" step="0.01" inputmode="decimal" required></div>
+          <div class="col-md-6"><label class="form-label" for="f-meses">Plazo hasta liquidar</label><select class="form-select" id="f-meses"></select></div>
+          <div class="col-12"><p class="muted mb-0 small" id="f-fecha"></p></div>
+          <div class="col-md-6"><label class="form-label" for="f-metodo">Forma de pago</label><select class="form-select" id="f-metodo"><option value="transferencia">Transferencia bancaria</option><option value="deposito">Depósito en ventanilla</option><option value="paypal">PayPal</option></select></div>
+          <div class="col-md-6"><label class="form-label" for="f-ref">Comprobante o referencia</label><input class="form-control" id="f-ref" maxlength="80" required placeholder="Lo registras después de pagar"></div>
+          <div class="col-12"><div class="form-check"><input class="form-check-input" type="checkbox" id="f-renovar"><label class="form-check-label" for="f-renovar">Al terminar el plazo, renovar por otro periodo igual</label></div></div>
+          <div class="col-12"><div class="form-check"><input class="form-check-input" type="checkbox" id="f-acepto" required><label class="form-check-label" for="f-acepto">Entiendo que la utilidad es variable, que no hay rendimiento garantizado y que puedo perder parte o todo lo aportado. Acepto firmar el contrato de participación.</label></div></div>
+        </div>
+        <div class="mt-4"><button class="btn btn-primary" id="f-enviar" type="submit">Registrar inversión</button></div>
+        <div id="f-msg" aria-live="polite"></div>
+      </div></form>
+    </div>
+    <div class="col-lg-5"><div class="card"><div class="card-body">
+      <h5 class="card-title">Dónde pagar</h5>
+      <p class="muted">Paga primero y luego registra el comprobante en el formulario.</p>
+      <dl class="bank" id="banco"><dt>Cargando</dt><dd>…</dd></dl>
+      <p class="muted small mt-3 mb-0" id="banco-aviso"></p>
+    </div></div></div>
+  </div>
+</div>
+
+<!-- MIS INVERSIONES -->
+<div class="sp" id="sp-mis" hidden>
+  <div class="card">
+    <h5 class="card-header">Mis inversiones</h5>
+    <div class="table-responsive text-nowrap"><table class="table"><thead><tr><th>Fecha</th><th class="num">Monto</th><th>Plazo</th><th>Estado</th><th class="num">Ganancia real</th><th class="num">Valor actual</th></tr></thead><tbody id="mis" class="table-border-bottom-0"></tbody></table></div>
+    <div class="card-body pt-3"><p class="muted mb-1" id="mis-vacio" hidden>Todavía no has registrado inversiones.</p>
+    <p class="muted small mb-0">La ganancia real se calcula con los resultados mensuales publicados, desde el mes en que se confirma tu pago. Puede ser negativa.</p></div>
+  </div>
+</div>
+
+<!-- GANANCIAS -->
+<div class="sp" id="sp-ganancias" hidden>
+  <div class="card">
+    <h5 class="card-header">Ganancias mes a mes</h5>
+    <div class="card-body pb-0"><p class="muted">Resultado publicado de cada mes aplicado a tu capital confirmado en ese momento.</p></div>
+    <div class="table-responsive text-nowrap"><table class="table"><thead><tr><th>Mes</th><th class="num">Capital activo</th><th class="num">Resultado</th><th class="num">Ganancia</th><th class="num">Acumulado</th></tr></thead><tbody id="gan" class="table-border-bottom-0"></tbody></table></div>
+    <div class="card-body pt-3"><p class="muted mb-0" id="gan-vacio" hidden>Todavía no hay ganancias que mostrar. Aparecen cuando confirmemos tu pago y se publique el resultado del mes.</p></div>
+  </div>
+</div>
+
+<!-- SIMULADOR -->
+<div class="sp" id="sp-sim" hidden>
+  <div class="card"><div class="card-body">
+    <h5 class="card-title">Simulador de escenarios</h5>
+    <p class="muted">Son ejemplos para que veas cómo cambia tu resultado. Tú eliges la utilidad mensual hipotética; no es una oferta ni una promesa.</p>
+    <div class="row g-3">
+      <div class="col-md-4"><label class="form-label" for="s-monto">Monto a aportar (USD)</label><input class="form-control" id="s-monto" type="number" min="10" max="10000" step="1" value="500" inputmode="decimal"></div>
+      <div class="col-md-4"><label class="form-label" for="s-meses">Plazo (meses)</label><input class="form-control" id="s-meses" type="number" min="1" max="24" step="1" value="3" inputmode="numeric"></div>
+      <div class="col-md-4"><label class="form-label" for="s-pct">Utilidad mensual hipotética (%)</label><input class="form-control" id="s-pct" type="number" min="-100" max="100" step="0.5" value="4" inputmode="decimal"></div>
+    </div>
+    <div class="row g-3 mt-1" aria-live="polite">
+      <div class="col-md-4"><div class="out"><small>Utilidad acumulada</small><b id="o-util">–</b></div></div>
+      <div class="col-md-4"><div class="out"><small>Total a liquidar</small><b id="o-total">–</b></div></div>
+      <div class="col-md-4"><div class="out"><small>Rendimiento del periodo</small><b id="o-pct">–</b></div></div>
+    </div>
+    <div class="table-responsive mt-4"><table class="table"><thead><tr><th>Escenario</th><th class="num">% mensual</th><th class="num">Utilidad</th><th class="num">Total</th></tr></thead><tbody id="s-tabla"></tbody></table></div>
+    <p class="muted small mb-0">Cálculo simple, sin reinversión de utilidades. Los escenarios (−5%, 0%, 3%, 8%) son solo ilustrativos.</p>
+  </div></div>
+</div>
+
+<!-- PRÉSTAMOS -->
+<div class="sp" id="sp-prestamos" hidden>
+  <div class="row g-4">
+    <div class="col-lg-6"><div class="card h-100"><div class="card-body">
+      <h5 class="card-title">Simulador de préstamo</h5>
+      <p class="muted">Calcula tu cuota mensual fija (sistema francés). Es una simulación: la aprobación depende de la evaluación de Tesis.</p>
+      <label class="form-label" for="l-monto">Monto (USD, de $50 a $5.000)</label><input class="form-control mb-3" id="l-monto" type="number" min="50" max="5000" step="10" value="1000" inputmode="decimal">
+      <label class="form-label" for="l-plazo">Plazo (meses, hasta 36)</label><input class="form-control mb-3" id="l-plazo" type="number" min="1" max="36" step="1" value="12" inputmode="numeric">
+      <div class="row g-3" aria-live="polite">
+        <div class="col-4"><div class="out"><small>Cuota mensual</small><b id="l-cuota">–</b></div></div>
+        <div class="col-4"><div class="out"><small>Total a pagar</small><b id="l-total">–</b></div></div>
+        <div class="col-4"><div class="out"><small>Intereses</small><b id="l-int">–</b></div></div>
+      </div>
+      <details class="mt-3"><summary class="fw-medium" style="cursor:pointer">Ver tabla de pagos</summary><div class="table-responsive" style="max-height:280px;overflow:auto"><table class="table table-sm"><thead><tr><th>Cuota</th><th class="num">Capital</th><th class="num">Interés</th><th class="num">Saldo</th></tr></thead><tbody id="l-amort"></tbody></table></div></details>
+      <p class="muted small mt-3 mb-0">Tasa de referencia: <b id="l-tasa">18</b>% anual. La tasa final queda fijada en el contrato.</p>
+    </div></div></div>
+    <div class="col-lg-6">
+      <form class="card mb-4" id="f-pre" novalidate><div class="card-body">
+        <h5 class="card-title">Solicitar préstamo</h5>
+        <div id="l-form">
+          <label class="form-label" for="l-nombre">Nombre completo</label><input class="form-control mb-3" id="l-nombre" maxlength="120" autocomplete="name">
+          <label class="form-label" for="l-contacto">WhatsApp o correo</label><input class="form-control mb-3" id="l-contacto" maxlength="120">
+          <label class="form-label" for="l-destino">¿Para qué usarás el dinero?</label><input class="form-control mb-3" id="l-destino" maxlength="200">
+          <div class="form-check"><input class="form-check-input" type="checkbox" id="l-acepto"><label class="form-check-label" for="l-acepto">Entiendo que esto es una solicitud, que no garantiza la aprobación y que el préstamo se formaliza con un contrato.</label></div>
+          <div class="mt-4"><button class="btn btn-primary" type="submit" id="l-enviar">Enviar solicitud</button></div>
+        </div>
+        <div id="l-msg" aria-live="polite"></div>
+      </div></form>
+      <div class="card" id="l-mis-card" hidden>
+        <h5 class="card-header">Mis solicitudes</h5>
+        <div class="table-responsive text-nowrap"><table class="table"><thead><tr><th>Fecha</th><th class="num">Monto</th><th class="num">Cuota</th><th>Estado</th></tr></thead><tbody id="l-mis" class="table-border-bottom-0"></tbody></table></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTADOS -->
+<div class="sp" id="sp-resultados" hidden>
+  <div class="card"><div class="card-body">
+    <h5 class="card-title">Resultados mensuales publicados</h5>
+    <p class="muted">Es la utilidad (o pérdida) real que se aplica a las inversiones confirmadas en ese mes.</p>
+    <div class="bars" id="grafico" role="img" aria-label="Gráfico de resultados mensuales" hidden></div>
+    <div style="height:30px"></div>
+    <div class="table-responsive"><table class="table"><thead><tr><th>Mes</th><th class="num">Resultado</th><th>Nota</th></tr></thead><tbody id="res"></tbody></table></div>
+    <p class="muted mb-0" id="res-vacio" hidden>Aún no hay resultados publicados.</p>
+  </div></div>
+</div>
+
+<!-- PUBLICIDAD -->
+<div class="sp" id="sp-publicidad" hidden>
+  <div class="card"><div class="card-body">
+    <h5 class="card-title">Publicidad de Capital Investment</h5>
+    <p class="muted">Descarga los anuncios y compártelos en tus redes. Para informes y consultas, el contacto es el WhatsApp corporativo <b>098 556 8519</b>.</p>
+    <div class="row g-4">
+      <div class="col-md-4"><figure class="galeria"><img loading="lazy" src="ci-anuncio-invierte.webp" width="1080" height="1080" alt="Anuncio: invierte desde $10 con Capital Investment"><figcaption>Invierte desde $10<a class="dl" href="ci-anuncio-invierte.webp" download="capital-investment-invierte.webp"><i class="bx bx-download"></i> Descargar</a></figcaption></figure></div>
+      <div class="col-md-4"><figure class="galeria"><img loading="lazy" src="ci-anuncio-prestamos.webp" width="1080" height="1080" alt="Anuncio: préstamos de $50 a $5.000 con cuota fija"><figcaption>Préstamos de $50 a $5.000<a class="dl" href="ci-anuncio-prestamos.webp" download="capital-investment-prestamos.webp"><i class="bx bx-download"></i> Descargar</a></figcaption></figure></div>
+      <div class="col-md-4"><figure class="galeria"><img loading="lazy" src="ci-anuncio-banca.webp" width="1080" height="1350" alt="Anuncio: tu banca virtual en tu bolsillo"><figcaption>Tu banca virtual<a class="dl" href="ci-anuncio-banca.webp" download="capital-investment-banca.webp"><i class="bx bx-download"></i> Descargar</a></figcaption></figure></div>
+    </div>
+    <p class="mt-4 mb-0"><a class="btn btn-primary" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Capital%20Investment." target="_blank" rel="noopener noreferrer">Escribir al WhatsApp corporativo</a></p>
+  </div></div>
+</div>
+
+<!-- PERFIL -->
+<div class="sp" id="sp-perfil" hidden>
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <form class="card" id="f-perfil" novalidate><div class="card-body">
+        <h5 class="card-title">Mi perfil</h5>
+        <p class="muted" id="p-email"></p>
+        <label class="form-label" for="p-nombre">Nombre completo</label><input class="form-control mb-3" id="p-nombre" maxlength="120" autocomplete="name">
+        <label class="form-label" for="p-tel">Teléfono / WhatsApp</label><input class="form-control mb-3" id="p-tel" maxlength="30" autocomplete="tel" inputmode="tel">
+        <label class="form-label" for="p-ciudad">Ciudad</label><input class="form-control mb-3" id="p-ciudad" maxlength="80" autocomplete="address-level2">
+        <button class="btn btn-primary" type="submit">Guardar perfil</button>
+        <div id="p-msg" aria-live="polite"></div>
+      </div></form>
+    </div>
+    <div class="col-lg-5"><div class="card"><div class="card-body">
+      <h5 class="card-title">Estado de cuenta</h5>
+      <p class="muted">Imprime o guarda en PDF un resumen con tus inversiones, ganancias y préstamos.</p>
+      <button class="btn btn-outline-primary" type="button" id="p-imprimir"><i class="bx bx-printer me-1"></i>Imprimir estado de cuenta</button>
+      <hr>
+      <button class="btn btn-outline-secondary" type="button" id="p-salir"><i class="bx bx-log-out me-1"></i>Cerrar sesión</button>
+    </div></div></div>
+  </div>
+</div>
+
+<!-- ADMINISTRACIÓN -->
+<div class="sp" id="sp-admin" hidden>
+  <div class="row g-4 mb-4">
+    <div class="col-md-4"><div class="card"><div class="card-body"><small class="muted">Capital confirmado</small><h4 class="mb-0" id="a-cap">–</h4></div></div></div>
+    <div class="col-md-4"><div class="card"><div class="card-body"><small class="muted">Pendientes de confirmar</small><h4 class="mb-0" id="a-pend">–</h4></div></div></div>
+    <div class="col-md-4"><div class="card"><div class="card-body"><small class="muted">Inversionistas</small><h4 class="mb-0" id="a-inv">–</h4></div></div></div>
+  </div>
+  <div class="card mb-4">
+    <h5 class="card-header">Inversiones</h5>
+    <div class="table-responsive"><table class="table"><thead><tr><th>Inversionista</th><th class="num">Monto</th><th>Pago</th><th>Plazo</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="a-tabla"></tbody></table></div>
+    <div class="px-4 pb-3" id="a-msg" aria-live="polite"></div>
+  </div>
+  <div class="card mb-4">
+    <h5 class="card-header">Solicitudes de préstamo</h5>
+    <div class="table-responsive"><table class="table"><thead><tr><th>Solicitante</th><th class="num">Monto</th><th>Plazo</th><th>Destino</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="a-pre"></tbody></table></div>
+    <div class="px-4" id="a-pre-msg" aria-live="polite"></div>
+    <div class="card-body"><label class="form-label" for="g-tasa">Tasa anual de referencia (%)</label>
+      <div class="input-group" style="max-width:260px"><input class="form-control" id="g-tasa" type="number" min="0" max="100" step="0.5" inputmode="decimal"><button class="btn btn-primary" type="button" id="g-tasa-b">Guardar</button></div></div>
+  </div>
+  <div class="row g-4">
+    <div class="col-lg-6"><form class="card h-100" id="f-res" novalidate><div class="card-body">
+      <h5 class="card-title">Publicar resultado del mes</h5>
+      <label class="form-label" for="r-mes">Mes</label><input class="form-control mb-3" id="r-mes" type="month" required>
+      <label class="form-label" for="r-pct">Utilidad del mes (%), negativa si hubo pérdida</label><input class="form-control mb-3" id="r-pct" type="number" step="0.001" min="-100" max="1000" inputmode="decimal" required>
+      <label class="form-label" for="r-nota">Nota para los inversionistas</label><input class="form-control mb-3" id="r-nota" maxlength="200">
+      <button class="btn btn-primary" type="submit">Publicar</button><div id="r-msg" aria-live="polite"></div>
+    </div></form></div>
+    <div class="col-lg-6"><form class="card h-100" id="f-cfg" novalidate><div class="card-body">
+      <h5 class="card-title">Datos de pago</h5>
+      <label class="form-label" for="g-banco">Banco</label><input class="form-control mb-3" id="g-banco" maxlength="80">
+      <label class="form-label" for="g-tipo">Tipo de cuenta</label><input class="form-control mb-3" id="g-tipo" maxlength="30">
+      <label class="form-label" for="g-num">Número de cuenta</label><input class="form-control mb-3" id="g-num" maxlength="40">
+      <label class="form-label" for="g-tit">Titular</label><input class="form-control mb-3" id="g-tit" maxlength="100">
+      <label class="form-label" for="g-id">Cédula o RUC</label><input class="form-control mb-3" id="g-id" maxlength="20">
+      <label class="form-label" for="g-pp">PayPal</label><input class="form-control mb-3" id="g-pp" maxlength="100">
+      <button class="btn btn-primary" type="submit">Guardar</button><div id="g-msg" aria-live="polite"></div>
+    </div></form></div>
+  </div>
+</div>
+
+</div>
+          <p class="muted small mt-5"><b>Aviso.</b> Capital Investment no es un banco: es una invitación a participar en un negocio. Los aportes no son depósitos ni están garantizados; la utilidad es variable y puede ser negativa. <a href="terminos.html">Contrato y términos</a> · <a href="privacidad.html">Privacidad</a> · Diseño basado en <a href="https://github.com/themeselection/sneat-bootstrap-html-admin-template-free" target="_blank" rel="noopener noreferrer">Sneat</a> (MIT).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js" integrity="sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="trabajos-config.js"></script>
+<script src="sneat-popper.js"></script>
+<script src="sneat-bootstrap.js"></script>
+<script src="sneat-ps.js"></script>
+<script src="sneat-menu.js"></script>
 <script src="banca.js"></script>
 </body>
 </html>
