@@ -108,8 +108,14 @@
   var token = 0;
 
   /* ---------- Acceso a la base de datos ---------- */
+  /* Las consultas de solo lectura van por GET: el filtro anti-abuso del proyecto
+     solo registra POST y las funciones STABLE no pueden escribir. */
+  var LECTURA = { dir_resumen: 1, dir_buscar: 1 };
   function rpc(nombre, args) {
-    return sb.rpc(nombre, args || {}).then(function (r) { if (r.error) throw r.error; return r.data; });
+    var a = {};
+    Object.keys(args || {}).forEach(function (k) { if (args[k] !== null && args[k] !== undefined) a[k] = args[k]; });
+    var opc = LECTURA[nombre] ? { get: true } : undefined;
+    return sb.rpc(nombre, a, opc).then(function (r) { if (r.error) throw r.error; return r.data; });
   }
   function mensajeError(e) {
     var m = (e && e.message) || "", c = e && e.code;
