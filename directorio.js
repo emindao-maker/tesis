@@ -344,7 +344,7 @@
       el("p", "dir-sub", "Abogados con matrícula, ordenados por provincia y materia, con calificaciones y comentarios de sus clientes."),
       formBusqueda({}, false));
     hero.appendChild(heroTxt);
-    hero.appendChild(el("img", "dir-hero-img", null, { src: "directorio-hero.svg", alt: "", width: "680", height: "400", decoding: "async" }));
+    hero.appendChild(el("img", "dir-hero-img", null, { src: "directorio-abogada.webp", alt: "Abogada sonriendo en su despacho, con libros de derecho y una balanza de la justicia", width: "1100", height: "619", decoding: "async" }));
     cuerpo.appendChild(hero);
 
     var stats = el("ul", "dir-stats"); stats.hidden = true;
@@ -394,6 +394,7 @@
     var txt = el("div");
     add(txt, el("h3", null, "¿Eres abogado? Aparece en el directorio, gratis"),
       el("p", null, "Registra tu matrícula, tu especialidad y tus datos de contacto para que tus futuros clientes te encuentren por provincia."));
+    cta.appendChild(el("img", "dir-cta-img", null, { src: "directorio-consulta.webp", alt: "Abogado explicando un documento a una pareja de clientes", width: "1100", height: "619", loading: "lazy", decoding: "async" }));
     cta.appendChild(txt);
     cta.appendChild(boton("Registrar mi perfil", "dir-btn dir-btn-white", function () { if (est.user) ir("#directorio/registro"); else { try { sessionStorage.setItem("dir-volver", "#directorio/registro"); } catch (e) {} iniciarSesion(); } }));
     cuerpo.appendChild(cta);
@@ -484,7 +485,8 @@
           if (cargados < r.total) mas.appendChild(boton("Mostrar más abogados", "dir-btn dir-btn-line", cargar));
           if (!r.total) {
             var vacio = el("div", "dir-vacio");
-            add(vacio, el("h3", null, "Aún no hay abogados con esos criterios"),
+            add(vacio, el("img", "dir-vacio-img", null, { src: "directorio-hero.svg", alt: "", width: "680", height: "400", loading: "lazy", decoding: "async" }),
+              el("h3", null, "Aún no hay abogados con esos criterios"),
               el("p", null, "Prueba con otra especialidad o provincia, o sé el primero en registrarte."),
               boton("Registrar mi perfil", "dir-btn dir-btn-red", function () { if (est.user) ir("#directorio/registro"); else { try { sessionStorage.setItem("dir-volver", "#directorio/registro"); } catch (e) {} iniciarSesion(); } }));
             mas.appendChild(vacio);
