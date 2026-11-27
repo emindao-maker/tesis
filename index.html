@@ -1037,7 +1037,8 @@ html:has(.cz-dlg[open]){overflow:hidden}
 .video-frame.wide{aspect-ratio:16/9;max-width:none;width:100%}
 @media (max-width:860px){.video-3{grid-template-columns:1fr}.video-frame.wide{max-width:none}}
 </style>
-<link rel="stylesheet" href="book.css"></head>
+<link rel="stylesheet" href="book.css">
+<link rel="stylesheet" href="directorio.css"></head>
 <body>
 <div class="backdrop" aria-hidden="true"></div>
 <a class="skip" href="#contenido">Saltar al contenido</a>
@@ -1088,6 +1089,7 @@ html:has(.cz-dlg[open]){overflow:hidden}
     </nav>
     <div class="top-actions">
     <button class="btn btn-menu" type="button" aria-haspopup="dialog" aria-controls="menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Índice</span></button>
+    <button class="btn btn-dir" type="button" data-dir-abrir aria-haspopup="dialog" aria-controls="dir-dlg" title="Directorio de Abogados del Ecuador"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v17M7.5 20.5h9M4.5 7h15M4.5 7l-3 7a3.2 3.2 0 0 0 6 0ZM19.5 7l-3 7a3.2 3.2 0 0 0 6 0Z"/></svg><span class="lg">Directorio de Abogados</span><span class="sm">Directorio</span></button>
     <a class="btn btn-aula" href="https://tesis.gnomio.com" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-cap"/></svg><span class="lg">Aula virtual</span><span class="sm">Aula</span></a>
 
 
@@ -1103,6 +1105,7 @@ html:has(.cz-dlg[open]){overflow:hidden}
   <div class="menu-head"><b id="menu-t">Índice</b><button class="trd-close" type="button" data-cerrar-menu aria-label="Cerrar índice">×</button></div>
   <nav aria-label="Secciones de la página">
     <ol class="menu-toc">
+          <li><a href="#directorio" data-dir-abrir><span>Directorio de Abogados</span></a></li>
           <li><a href="#servicios"><span>Servicios</span></a></li>
           <li><a href="#video"><span>Servicios académicos en video</span></a></li>
           <li><a href="#proceso"><span>Cómo trabajamos</span></a></li>
@@ -1122,6 +1125,7 @@ html:has(.cz-dlg[open]){overflow:hidden}
         </ol>
   </nav>
   <div class="menu-actions">
+    <button class="btn btn-dir" type="button" data-dir-abrir aria-haspopup="dialog" aria-controls="dir-dlg"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v17M7.5 20.5h9M4.5 7h15M4.5 7l-3 7a3.2 3.2 0 0 0 6 0ZM19.5 7l-3 7a3.2 3.2 0 0 0 6 0Z"/></svg>Directorio de Abogados</button>
     <a class="btn btn-aula" href="https://tesis.gnomio.com" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-cap"/></svg>Entrar al aula virtual</a>
     <a class="btn btn-wa" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg>Escribir por WhatsApp</a>
   </div>
@@ -1990,6 +1994,22 @@ html:has(.cz-dlg[open]){overflow:hidden}
   <button class="close" type="button" id="viewer-close" aria-label="Cerrar">×</button>
 </dialog>
 
+<dialog class="dir-dlg" id="dir-dlg" aria-labelledby="dir-titulo">
+  <div class="dir-shell">
+    <header class="dir-top">
+      <button class="dir-home" type="button" id="dir-inicio" aria-label="Ir al inicio del directorio">
+        <i class="dir-logo"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v17M7.5 20.5h9M4.5 7h15M4.5 7l-3 7a3.2 3.2 0 0 0 6 0ZM19.5 7l-3 7a3.2 3.2 0 0 0 6 0Z"/></svg></i>
+        <span><small>Tesis presenta</small><b id="dir-titulo"><span class="dir-t-l">Directorio de Abogados Ecuador</span><span class="dir-t-s">Directorio</span></b></span>
+      </button>
+      <div class="dir-top-actions">
+        <div id="dir-cuenta"></div>
+        <button class="dir-cerrar" type="button" id="dir-cerrar" aria-label="Cerrar el directorio">×</button>
+      </div>
+    </header>
+    <div class="dir-body" id="dir-body" tabindex="-1" aria-live="polite"></div>
+  </div>
+</dialog>
+
 <nav class="barra-movil" aria-label="Acciones rápidas">
   <a class="btn btn-primary" href="#contacto">Cotizar mi trabajo</a>
   <a class="btn btn-wa" data-chat aria-controls="ch" href="https://wa.me/593985568519?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20la%20asesor%C3%ADa%20de%20Tesis." target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
@@ -2036,5 +2056,7 @@ html:has(.cz-dlg[open]){overflow:hidden}
 <script src="escaneo.js"></script>
 <script src="trabajos.js"></script>
 <script src="resenas.js"></script>
+<script src="directorio-datos.js"></script>
+<script src="directorio.js"></script>
 </body>
 </html>

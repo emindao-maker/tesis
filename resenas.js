@@ -12,6 +12,8 @@
       });
     } catch (e) { listo = false; }
   }
+  /* El Directorio de Abogados reutiliza este mismo cliente (misma sesión de Google). */
+  if (sb) window.TESIS_SB = sb;
 
   var $ = function (id) { return document.getElementById(id); };
   var form = $("rv-form"), fuera = $("rv-out"), estado = $("rv-status");
