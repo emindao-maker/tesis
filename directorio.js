@@ -100,6 +100,10 @@
       '<symbol id="d-check" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.6l2.3 1.6 2.8-.1 1 2.6 2.3 1.6-.9 2.7.9 2.7-2.3 1.6-1 2.6-2.8-.1L12 21.4l-2.3-1.6-2.8.1-1-2.6-2.3-1.6.9-2.7-.9-2.7 2.3-1.6 1-2.6 2.8.1Z"/><path d="m8.4 12.2 2.4 2.4 4.8-5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>' +
       '<symbol id="d-flag" viewBox="0 0 24 24"><g ' + st + '><path d="M5 21V4M5 4.5h11l-2 4 2 4H5"/></g></symbol>' +
       '<symbol id="d-edit" viewBox="0 0 24 24"><g ' + st + '><path d="M4 20h4L19.5 8.5a2.1 2.1 0 0 0-3-3L5 17Z"/></g></symbol>';
+    var ic = window.DIR_ICONOS || {};
+    Object.keys(ic).forEach(function (k) {
+      s.innerHTML += '<symbol id="m-' + k + '" viewBox="0 0 24 24"><g ' + st + '>' + ic[k] + '</g></symbol>';
+    });
     document.body.appendChild(s);
   })();
 
@@ -333,11 +337,14 @@
   /* ---------- Vista: inicio ---------- */
   function vistaInicio(t) {
     var hero = el("section", "dir-hero");
-    add(hero,
+    var heroTxt = el("div", "dir-hero-txt");
+    add(heroTxt,
       el("p", "dir-kicker", "Directorio nacional"),
       el("h2", null, "Encuentra a tu abogado en las 24 provincias del Ecuador"),
-      el("p", "dir-sub", "Abogados con matrícula, ordenados por provincia y especialidad, con calificaciones y comentarios de sus clientes."),
+      el("p", "dir-sub", "Abogados con matrícula, ordenados por provincia y materia, con calificaciones y comentarios de sus clientes."),
       formBusqueda({}, false));
+    hero.appendChild(heroTxt);
+    hero.appendChild(el("img", "dir-hero-img", null, { src: "directorio-hero.svg", alt: "", width: "680", height: "400", decoding: "async" }));
     cuerpo.appendChild(hero);
 
     var stats = el("ul", "dir-stats"); stats.hidden = true;
@@ -355,6 +362,34 @@
     sec.appendChild(grid);
     cuerpo.appendChild(sec);
 
+    var secM = el("section", "dir-sec");
+    add(secM, el("h3", null, "Buscar por materia"));
+    var cuentasM = {};
+    (window.DIR_MATERIAS || []).forEach(function (gr) {
+      var bloque = el("div", "dir-grupo");
+      bloque.appendChild(el("h4", null, gr.g));
+      var ul = el("ul", "dir-mat");
+      gr.items.forEach(function (m) {
+        var li = el("li"), a = el("a", "dir-mat-b", null, { href: hashBusqueda({ e: m.n }) });
+        var ic = el("span", "dir-mat-ic"); ic.setAttribute("aria-hidden", "true"); ic.appendChild(icono("m-" + m.i));
+        var tx = el("span", "dir-mat-tx"), n = el("small", null, "");
+        add(tx, el("b", null, m.n), n); cuentasM[m.n] = n;
+        add(a, ic, tx); li.appendChild(a); ul.appendChild(li);
+      });
+      bloque.appendChild(ul); secM.appendChild(bloque);
+    });
+    cuerpo.appendChild(secM);
+
+    var como = el("section", "dir-como");
+    [["d-search", "Busca", "Filtra por provincia, cantón y materia o escribe un nombre o matrícula."],
+     ["d-check", "Compara", "Revisa calificaciones, comentarios y la insignia de matrícula verificada."],
+     ["d-phone", "Contacta", "Escribe por WhatsApp, llama o envía un correo directamente al abogado."]].forEach(function (x, i) {
+      var d = el("div", "dir-como-i"), ic = el("span", "dir-como-ic"); ic.setAttribute("aria-hidden", "true"); ic.appendChild(icono(x[0]));
+      var tx = el("div"); add(tx, el("b", null, (i + 1) + ". " + x[1]), el("p", null, x[2]));
+      add(d, ic, tx); como.appendChild(d);
+    });
+    cuerpo.appendChild(como);
+
     var cta = el("section", "dir-cta");
     var txt = el("div");
     add(txt, el("h3", null, "¿Eres abogado? Aparece en el directorio, gratis"),
@@ -370,6 +405,8 @@
       if (t !== token) return;
       est.resumen = r;
       var pr = r.provincias || {};
+      var em = r.especialidades || {};
+      Object.keys(cuentasM).forEach(function (k) { var n = em[k] || 0; cuentasM[k].textContent = n ? plural(n, "abogado", "abogados") : "Sin registros"; });
       PROVINCIAS.forEach(function (p) { var n = pr[p] || 0; cuentas[p].textContent = n ? plural(n, "abogado", "abogados") : "Sin registros"; });
       vaciar(stats);
       [[r.abogados, "abogados registrados"], [r.verificados, "con matrícula verificada"], [r.calificaciones, "calificaciones"]].forEach(function (x) {
@@ -381,7 +418,9 @@
 
   function pie() {
     var p = el("p", "dir-pie");
-    p.textContent = "El Directorio de Abogados Ecuador es una guía informativa de Tesis. No presta asesoría legal ni garantiza resultados; los datos y las opiniones son responsabilidad de quienes los publican. La insignia “Matrícula verificada” indica que se comprobó la matrícula del abogado.";
+    p.appendChild(document.createTextNode("El Directorio de Abogados Ecuador es una guía informativa de Tesis, sin vínculo con entidades públicas. No presta asesoría legal ni garantiza resultados; los datos y las opiniones son responsabilidad de quienes los publican. La insignia “Matrícula verificada” indica que se comprobó la matrícula del abogado. Consulta oficial del Foro de Abogados: "));
+    var a = el("a", null, "funcionjudicial.gob.ec", { href: "https://www.funcionjudicial.gob.ec", target: "_blank", rel: "noopener noreferrer" });
+    p.appendChild(a); p.appendChild(document.createTextNode("."));
     return p;
   }
 
